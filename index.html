@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Entrenamientos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-dark bg-dark sticky-top">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">💪 Gestor de Entrenamientos</span>
+            <div id="unsavedIndicator" style="display: none; color: #ffc107; font-weight: bold; margin-right: 20px;">
+                ⚠️ Cambios sin guardar
+            </div>
+            <div>
+                <a href="entrenamiento-dia.html" class="btn btn-sm btn-outline-light">🎯 Hoy</a>
+                <a href="running.html" class="btn btn-sm btn-outline-light ms-2">🏃 Running</a>
+                <a href="pierna.html" class="btn btn-sm btn-outline-light ms-2">🦵 Pierna</a>
+                <a href="pesado-vs-hipertrofia.html" class="btn btn-sm btn-outline-light ms-2">💪 Pesado vs Hipertrofia</a>
+                <a href="plan-semanal.html" class="btn btn-sm btn-outline-light ms-2">📋 Plan</a>
+                <a href="periodizacion-analisis.html" class="btn btn-sm btn-outline-light ms-2">🎯 Periodización</a>
+                <a href="graficos.html" class="btn btn-sm btn-outline-light ms-2">📊 Gráficos</a>
+                <button class="btn btn-sm btn-outline-light ms-2" id="exportBtn">📥 Exportar</button>
+                <button class="btn btn-sm btn-outline-light ms-2" id="importBtn">📤 Importar</button>
+                <input type="file" id="importFile" accept=".json" style="display: none;">
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-4">
+        <div class="row g-4">
+            <!-- FORMULARIO -->
+            <div class="col-lg-4" id="formCard">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-dark text-white">
+                        <h5 class="mb-0">📝 Registrar Entrenamiento</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="trainingForm">
+                            <!-- Fecha -->
+                            <div class="mb-3">
+                                <label for="date" class="form-label">Fecha</label>
+                                <input type="date" class="form-control" id="date" required>
+                            </div>
+
+                            <!-- Día de semana -->
+                            <div class="mb-3">
+                                <label for="dayOfWeek" class="form-label">Día de Semana</label>
+                                <select class="form-select" id="dayOfWeek" required>
+                                    <option value="">Selecciona un día</option>
+                                    <option value="Lunes">Lunes (Torso - Fuerza)</option>
+                                    <option value="Martes">Martes (Running)</option>
+                                    <option value="Miércoles">Miércoles (Pierna)</option>
+                                    <option value="Jueves">Jueves (Running)</option>
+                                    <option value="Viernes">Viernes (Torso - Hipertrofia)</option>
+                                    <option value="Sábado">Sábado (Running)</option>
+                                </select>
+                            </div>
+
+                            <!-- Tipo de entrenamiento -->
+                            <div class="mb-3">
+                                <label for="trainingType" class="form-label">Tipo de Entrenamiento</label>
+                                <select class="form-select" id="trainingType" required>
+                                    <option value="">Selecciona un tipo</option>
+                                    <option value="Torso Pesado">Torso Pesado (Lunes)</option>
+                                    <option value="Torso Hipertrofia">Torso Hipertrofia (Viernes)</option>
+                                    <option value="Pierna">Pierna (Miércoles)</option>
+                                </select>
+                            </div>
+
+                            <!-- Ejercicio -->
+                            <div class="mb-3">
+                                <label for="exercise" class="form-label">Ejercicio</label>
+                                <input type="text" class="form-control" id="exercise" placeholder="ej: Press Banca" required>
+                            </div>
+
+                            <!-- Grupo Muscular -->
+                            <div class="mb-3">
+                                <label for="muscleGroup" class="form-label">Grupo Muscular</label>
+                                <select class="form-select" id="muscleGroup" required>
+                                    <option value="">Selecciona grupo muscular</option>
+                                    <option value="Pecho">Pecho</option>
+                                    <option value="Espalda">Espalda</option>
+                                    <option value="Hombros">Hombros</option>
+                                    <option value="Tríceps">Tríceps</option>
+                                    <option value="Bíceps">Bíceps</option>
+                                    <option value="Pierna">Pierna</option>
+                                    <option value="Glúteos">Glúteos</option>
+                                    <option value="Core">Core</option>
+                                </select>
+                            </div>
+
+                            <!-- Series (dinámicas) -->
+                            <div class="mb-3">
+                                <label class="form-label">Series (Reps por serie)</label>
+                                <div id="seriesContainer">
+                                    <div class="input-group mb-2">
+                                        <input type="number" class="form-control series-input" placeholder="Reps" min="1" required>
+                                        <button type="button" class="btn btn-danger btn-sm remove-series" style="display: none;">✕</button>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-sm btn-outline-primary w-100" id="addSeriesBtn">+ Añadir serie</button>
+                            </div>
+
+                            <!-- Peso (kg) -->
+                            <div class="mb-3">
+                                <label for="weight" class="form-label">Peso (kg)</label>
+                                <input type="number" class="form-control" id="weight" step="0.5" placeholder="ej: 50" required>
+                            </div>
+
+                            <!-- Botón Guardar -->
+                            <button type="submit" class="btn btn-success w-100">💾 Guardar Entrenamiento</button>
+                            <button type="reset" class="btn btn-secondary w-100 mt-2">🔄 Limpiar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HISTÓRICO Y RESUMEN -->
+            <div class="col-12">
+                <!-- TABLA DE ENTRENAMIENTOS -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">📋 Histórico de Entrenamientos</h5>
+                        <button class="btn btn-sm btn-danger" id="deleteAllBtn">🗑 Limpiar Todo</button>
+                    </div>
+                    <div class="card-body" style="max-height: 600px; overflow-x: auto; overflow-y: auto;">
+                        <table class="table table-striped table-hover table-sm compact-table" id="trainingTable" style="white-space: nowrap;">
+                            <thead class="table-dark position-sticky" style="top: 0;">
+                                <tr id="tableHeaderRow">
+                                    <th style="width: 120px; min-width: 120px;">Fecha</th>
+                                    <th style="width: 100px; min-width: 100px;">Tipo</th>
+                                    <!-- Ejercicios se agregan dinámicamente aquí -->
+                                    <th style="width: 60px; min-width: 60px;">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody">
+                            </tbody>
+                        </table>
+                        <p id="emptyMessage" class="text-muted text-center">No hay entrenamientos registrados aún.</p>
+                    </div>
+                </div>
+
+                <!-- FILTROS -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-secondary text-white">
+                        <h5 class="mb-0">🔍 Filtros</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-2">
+                            <div class="col-md-4">
+                                <label for="filterExercise" class="form-label">Ejercicio</label>
+                                <input type="text" class="form-control form-control-sm" id="filterExercise" placeholder="Buscar ejercicio...">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="filterMuscle" class="form-label">Grupo Muscular</label>
+                                <select class="form-select form-select-sm" id="filterMuscle">
+                                    <option value="">Todos</option>
+                                    <option value="Pecho">Pecho</option>
+                                    <option value="Espalda">Espalda</option>
+                                    <option value="Hombros">Hombros</option>
+                                    <option value="Tríceps">Tríceps</option>
+                                    <option value="Bíceps">Bíceps</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="filterType" class="form-label">Tipo</label>
+                                <select class="form-select form-select-sm" id="filterType">
+                                    <option value="">Todos</option>
+                                    <option value="Torso Pesado">Torso Pesado</option>
+                                    <option value="Torso Hipertrofia">Torso Hipertrofia</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RESUMEN SEMANAL -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="mb-0">📊 Resumen Semanal de Series</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="weeklySummary" class="row text-center">
+                            <p class="text-muted">Cargando datos...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0">📈 Progreso</h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- Stats Cards -->
+                        <div class="row mb-4" id="statsCards">
+                            <div class="col-md-3">
+                                <div class="card bg-light border-0">
+                                    <div class="card-body text-center">
+                                        <h6 class="text-muted mb-2">Mejor Lift (1RM)</h6>
+                                        <h3 id="bestLift" class="text-success fw-bold">-</h3>
+                                        <small id="bestLiftExercise" class="text-muted"></small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-light border-0">
+                                    <div class="card-body text-center">
+                                        <h6 class="text-muted mb-2">Volumen Promedio</h6>
+                                        <h3 id="avgVolume" class="text-primary fw-bold">-</h3>
+                                        <small class="text-muted">kg×reps</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-light border-0">
+                                    <div class="card-body text-center">
+                                        <h6 class="text-muted mb-2">Pesado vs Hipertrofia</h6>
+                                        <h5 id="trainingComparison" class="fw-bold">-</h5>
+                                        <small class="text-muted">Vol promedio</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-light border-0">
+                                    <div class="card-body text-center">
+                                        <h6 class="text-muted mb-2">Ejercicios</h6>
+                                        <h3 id="totalExercises" class="text-warning fw-bold">-</h3>
+                                        <small class="text-muted">tipos únicos</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MODAL DETALLES -->
+                <div class="modal fade" id="detailsModal" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header bg-dark text-white">
+                                <h5 class="modal-title" id="modalTitle">Detalles del Entrenamiento</h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body" id="modalBody">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,4008 @@
+[
+  {
+    "id": 1723000800000,
+    "date": "2025-08-25",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Normal",
+    "exercise": "Press",
+    "muscleGroup": "Pecho",
+    "weight": 20,
+    "series": [
+      10,
+      10,
+      10
+    ],
+    "totalReps": 30,
+    "volume": 600,
+    "oneRM": 103.2,
+    "timestamp": "25/08/2025"
+  },
+  {
+    "id": 1725364800000,
+    "date": "2025-09-08",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Normal",
+    "exercise": "Press",
+    "muscleGroup": "Pecho",
+    "weight": 28,
+    "series": [
+      10,
+      10,
+      10
+    ],
+    "totalReps": 30,
+    "volume": 840,
+    "oneRM": 144.48,
+    "timestamp": "08/09/2025"
+  },
+  {
+    "id": 1725364800001,
+    "date": "2025-09-08",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Normal",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 36,
+    "series": [
+      10,
+      10,
+      10
+    ],
+    "totalReps": 30,
+    "volume": 1080,
+    "oneRM": 185.76,
+    "timestamp": "08/09/2025"
+  },
+  {
+    "id": 1725364800002,
+    "date": "2025-09-08",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Normal",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 35,
+    "series": [
+      10,
+      10,
+      10
+    ],
+    "totalReps": 30,
+    "volume": 1050,
+    "oneRM": 180.6,
+    "timestamp": "08/09/2025"
+  },
+  {
+    "id": 1725364800003,
+    "date": "2025-09-08",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Normal",
+    "exercise": "Bíceps",
+    "muscleGroup": "Bíceps",
+    "weight": 8,
+    "series": [
+      10,
+      10,
+      10
+    ],
+    "totalReps": 30,
+    "volume": 240,
+    "oneRM": 41.28,
+    "timestamp": "08/09/2025"
+  },
+  {
+    "id": 1725364800004,
+    "date": "2025-09-08",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Normal",
+    "exercise": "Tríceps",
+    "muscleGroup": "Tríceps",
+    "weight": 23,
+    "series": [
+      10,
+      10,
+      10
+    ],
+    "totalReps": 30,
+    "volume": 690,
+    "oneRM": 118.68,
+    "timestamp": "08/09/2025"
+  },
+  {
+    "id": 1726052400000,
+    "date": "2025-09-29",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Normal",
+    "exercise": "Press",
+    "muscleGroup": "Pecho",
+    "weight": 28,
+    "series": [
+      12,
+      12,
+      12
+    ],
+    "totalReps": 36,
+    "volume": 1008,
+    "oneRM": 1037.04,
+    "timestamp": "29/09/2025"
+  },
+  {
+    "id": 1726052400001,
+    "date": "2025-09-29",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Normal",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 50,
+    "series": [
+      10,
+      10,
+      10
+    ],
+    "totalReps": 30,
+    "volume": 1500,
+    "oneRM": 258.0,
+    "timestamp": "29/09/2025"
+  },
+  {
+    "id": 1726052400002,
+    "date": "2025-09-29",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Normal",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 45,
+    "series": [
+      10,
+      10,
+      10
+    ],
+    "totalReps": 30,
+    "volume": 1350,
+    "oneRM": 232.2,
+    "timestamp": "29/09/2025"
+  },
+  {
+    "id": 1726052400003,
+    "date": "2025-09-29",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Normal",
+    "exercise": "Bíceps",
+    "muscleGroup": "Bíceps",
+    "weight": 8,
+    "series": [
+      12,
+      8,
+      8
+    ],
+    "totalReps": 28,
+    "volume": 224,
+    "oneRM": 32.08,
+    "timestamp": "29/09/2025"
+  },
+  {
+    "id": 1726052400004,
+    "date": "2025-09-29",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Normal",
+    "exercise": "Tríceps",
+    "muscleGroup": "Tríceps",
+    "weight": 23,
+    "series": [
+      10,
+      10
+    ],
+    "totalReps": 20,
+    "volume": 460,
+    "oneRM": 48.75,
+    "timestamp": "29/09/2025"
+  },
+  {
+    "id": 1726657200000,
+    "date": "2025-10-06",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Normal",
+    "exercise": "Press",
+    "muscleGroup": "Pecho",
+    "weight": 32,
+    "series": [
+      9,
+      9,
+      9
+    ],
+    "totalReps": 27,
+    "volume": 864,
+    "oneRM": 115.44,
+    "timestamp": "06/10/2025"
+  },
+  {
+    "id": 1726657200001,
+    "date": "2025-10-06",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Normal",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 50,
+    "series": [
+      8,
+      8,
+      8
+    ],
+    "totalReps": 24,
+    "volume": 1200,
+    "oneRM": 138.66,
+    "timestamp": "06/10/2025"
+  },
+  {
+    "id": 1726657200002,
+    "date": "2025-10-06",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Normal",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 50,
+    "series": [
+      10,
+      10,
+      10
+    ],
+    "totalReps": 30,
+    "volume": 1500,
+    "oneRM": 258.0,
+    "timestamp": "06/10/2025"
+  },
+  {
+    "id": 1726657200003,
+    "date": "2025-10-06",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Normal",
+    "exercise": "Bíceps",
+    "muscleGroup": "Bíceps",
+    "weight": 12,
+    "series": [
+      8,
+      10
+    ],
+    "totalReps": 18,
+    "volume": 216,
+    "oneRM": 22.75,
+    "timestamp": "06/10/2025"
+  },
+  {
+    "id": 1726657200004,
+    "date": "2025-10-06",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Normal",
+    "exercise": "Tríceps",
+    "muscleGroup": "Tríceps",
+    "weight": 23,
+    "series": [
+      12,
+      12
+    ],
+    "totalReps": 24,
+    "volume": 552,
+    "oneRM": 63.78,
+    "timestamp": "06/10/2025"
+  },
+  {
+    "id": 1735033200000,
+    "date": "2025-12-26",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Normal",
+    "exercise": "Press",
+    "muscleGroup": "Pecho",
+    "weight": 32,
+    "series": [
+      8,
+      8,
+      9
+    ],
+    "totalReps": 25,
+    "volume": 800,
+    "oneRM": 96.15,
+    "timestamp": "26/12/2025"
+  },
+  {
+    "id": 1735033200001,
+    "date": "2025-12-26",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Normal",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 50,
+    "series": [
+      10,
+      9,
+      8
+    ],
+    "totalReps": 27,
+    "volume": 1350,
+    "oneRM": 180.38,
+    "timestamp": "26/12/2025"
+  },
+  {
+    "id": 1735033200002,
+    "date": "2025-12-26",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Normal",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 45,
+    "series": [
+      11,
+      11,
+      10
+    ],
+    "totalReps": 32,
+    "volume": 1440,
+    "oneRM": 325.62,
+    "timestamp": "26/12/2025"
+  },
+  {
+    "id": 1735033200003,
+    "date": "2025-12-26",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Normal",
+    "exercise": "Bíceps",
+    "muscleGroup": "Bíceps",
+    "weight": 18,
+    "series": [
+      10,
+      10,
+      10
+    ],
+    "totalReps": 30,
+    "volume": 540,
+    "oneRM": 92.88,
+    "timestamp": "26/12/2025"
+  },
+  {
+    "id": 1735033200004,
+    "date": "2025-12-26",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Normal",
+    "exercise": "Tríceps",
+    "muscleGroup": "Tríceps",
+    "weight": 12,
+    "series": [
+      8,
+      8
+    ],
+    "totalReps": 16,
+    "volume": 192,
+    "oneRM": 20.58,
+    "timestamp": "26/12/2025"
+  },
+  {
+    "id": 1735638000000,
+    "date": "2026-01-02",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Normal",
+    "exercise": "Press",
+    "muscleGroup": "Pecho",
+    "weight": 32,
+    "series": [
+      8,
+      10,
+      10
+    ],
+    "totalReps": 28,
+    "volume": 896,
+    "oneRM": 128.31,
+    "timestamp": "02/01/2026"
+  },
+  {
+    "id": 1735638000001,
+    "date": "2026-01-02",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Normal",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 50,
+    "series": [
+      11,
+      11,
+      10
+    ],
+    "totalReps": 32,
+    "volume": 1600,
+    "oneRM": 361.79,
+    "timestamp": "02/01/2026"
+  },
+  {
+    "id": 1735638000002,
+    "date": "2026-01-02",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Normal",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 45,
+    "series": [
+      11,
+      11,
+      11
+    ],
+    "totalReps": 33,
+    "volume": 1485,
+    "oneRM": 407.61,
+    "timestamp": "02/01/2026"
+  },
+  {
+    "id": 1735638000003,
+    "date": "2026-01-02",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Normal",
+    "exercise": "Bíceps",
+    "muscleGroup": "Bíceps",
+    "weight": 20,
+    "series": [
+      8,
+      8,
+      9
+    ],
+    "totalReps": 25,
+    "volume": 500,
+    "oneRM": 60.1,
+    "timestamp": "02/01/2026"
+  },
+  {
+    "id": 1735638000004,
+    "date": "2026-01-02",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Normal",
+    "exercise": "Tríceps",
+    "muscleGroup": "Tríceps",
+    "weight": 18,
+    "series": [
+      8,
+      8
+    ],
+    "totalReps": 16,
+    "volume": 288,
+    "oneRM": 30.87,
+    "timestamp": "02/01/2026"
+  },
+  {
+    "id": 1736243200000,
+    "date": "2026-01-05",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Normal",
+    "exercise": "Press",
+    "muscleGroup": "Pecho",
+    "weight": 32,
+    "series": [
+      10,
+      10,
+      11
+    ],
+    "totalReps": 31,
+    "volume": 992,
+    "oneRM": 192.77,
+    "timestamp": "05/01/2026"
+  },
+  {
+    "id": 1736243200001,
+    "date": "2026-01-05",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Normal",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 50,
+    "series": [
+      11,
+      11,
+      11
+    ],
+    "totalReps": 33,
+    "volume": 1650,
+    "oneRM": 452.9,
+    "timestamp": "05/01/2026"
+  },
+  {
+    "id": 1736243200002,
+    "date": "2026-01-05",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Normal",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 45,
+    "series": [
+      11,
+      11,
+      10
+    ],
+    "totalReps": 32,
+    "volume": 1440,
+    "oneRM": 325.62,
+    "timestamp": "05/01/2026"
+  },
+  {
+    "id": 1736243200003,
+    "date": "2026-01-05",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Normal",
+    "exercise": "Bíceps",
+    "muscleGroup": "Bíceps",
+    "weight": 20,
+    "series": [
+      9,
+      9,
+      9
+    ],
+    "totalReps": 27,
+    "volume": 540,
+    "oneRM": 72.15,
+    "timestamp": "05/01/2026"
+  },
+  {
+    "id": 1736243200004,
+    "date": "2026-01-05",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Normal",
+    "exercise": "Tríceps",
+    "muscleGroup": "Tríceps",
+    "weight": 23,
+    "series": [
+      12,
+      12
+    ],
+    "totalReps": 24,
+    "volume": 552,
+    "oneRM": 63.78,
+    "timestamp": "05/01/2026"
+  },
+  {
+    "id": 1736848200000,
+    "date": "2026-01-09",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Normal",
+    "exercise": "Press",
+    "muscleGroup": "Pecho",
+    "weight": 32,
+    "series": [
+      10,
+      10,
+      10
+    ],
+    "totalReps": 30,
+    "volume": 960,
+    "oneRM": 165.12,
+    "timestamp": "09/01/2026"
+  },
+  {
+    "id": 1736848200001,
+    "date": "2026-01-09",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Normal",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 50,
+    "series": [
+      10,
+      10,
+      10,
+      10
+    ],
+    "totalReps": 40,
+    "volume": 2000,
+    "oneRM": -593.82,
+    "timestamp": "09/01/2026"
+  },
+  {
+    "id": 1736848200002,
+    "date": "2026-01-09",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Normal",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 45,
+    "series": [
+      10,
+      10,
+      10,
+      10
+    ],
+    "totalReps": 40,
+    "volume": 1800,
+    "oneRM": -534.44,
+    "timestamp": "09/01/2026"
+  },
+  {
+    "id": 1736848200003,
+    "date": "2026-01-09",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Normal",
+    "exercise": "Bíceps",
+    "muscleGroup": "Bíceps",
+    "weight": 20,
+    "series": [
+      12,
+      12,
+      12,
+      12
+    ],
+    "totalReps": 48,
+    "volume": 960,
+    "oneRM": -65.23,
+    "timestamp": "09/01/2026"
+  },
+  {
+    "id": 1736848200004,
+    "date": "2026-01-09",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Normal",
+    "exercise": "Tríceps",
+    "muscleGroup": "Tríceps",
+    "weight": 18,
+    "series": [
+      10,
+      10,
+      10,
+      10
+    ],
+    "totalReps": 40,
+    "volume": 720,
+    "oneRM": -213.78,
+    "timestamp": "09/01/2026"
+  },
+  {
+    "id": 1737453200000,
+    "date": "2026-01-12",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Press",
+    "muscleGroup": "Pecho",
+    "weight": 36,
+    "series": [
+      8,
+      8,
+      6,
+      6
+    ],
+    "totalReps": 28,
+    "volume": 1008,
+    "oneRM": 144.35,
+    "timestamp": "12/01/2026"
+  },
+  {
+    "id": 1737453200001,
+    "date": "2026-01-12",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 57,
+    "series": [
+      8,
+      8,
+      7,
+      7
+    ],
+    "totalReps": 30,
+    "volume": 1710,
+    "oneRM": 294.12,
+    "timestamp": "12/01/2026"
+  },
+  {
+    "id": 1737453200002,
+    "date": "2026-01-12",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 50,
+    "series": [
+      8,
+      8,
+      8
+    ],
+    "totalReps": 24,
+    "volume": 1200,
+    "oneRM": 138.66,
+    "timestamp": "12/01/2026"
+  },
+  {
+    "id": 1737453200003,
+    "date": "2026-01-12",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Bíceps",
+    "muscleGroup": "Bíceps",
+    "weight": 20,
+    "series": [
+      12,
+      12,
+      10
+    ],
+    "totalReps": 34,
+    "volume": 680,
+    "oneRM": 242.13,
+    "timestamp": "12/01/2026"
+  },
+  {
+    "id": 1737453200004,
+    "date": "2026-01-12",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Tríceps",
+    "muscleGroup": "Tríceps",
+    "weight": 23,
+    "series": [
+      10,
+      10,
+      10
+    ],
+    "totalReps": 30,
+    "volume": 690,
+    "oneRM": 118.68,
+    "timestamp": "12/01/2026"
+  },
+  {
+    "id": 1738058000000,
+    "date": "2026-01-16",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Press",
+    "muscleGroup": "Pecho",
+    "weight": 32,
+    "series": [
+      10,
+      10,
+      10
+    ],
+    "totalReps": 30,
+    "volume": 960,
+    "oneRM": 165.12,
+    "timestamp": "16/01/2026"
+  },
+  {
+    "id": 1738058000001,
+    "date": "2026-01-16",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 50,
+    "series": [
+      10,
+      10,
+      10
+    ],
+    "totalReps": 30,
+    "volume": 1500,
+    "oneRM": 258.0,
+    "timestamp": "16/01/2026"
+  },
+  {
+    "id": 1738058000002,
+    "date": "2026-01-16",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 45,
+    "series": [
+      10,
+      10,
+      10
+    ],
+    "totalReps": 30,
+    "volume": 1350,
+    "oneRM": 232.2,
+    "timestamp": "16/01/2026"
+  },
+  {
+    "id": 1738058000003,
+    "date": "2026-01-16",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Bíceps",
+    "muscleGroup": "Bíceps",
+    "weight": 20,
+    "series": [
+      12,
+      12,
+      10
+    ],
+    "totalReps": 34,
+    "volume": 680,
+    "oneRM": 242.13,
+    "timestamp": "16/01/2026"
+  },
+  {
+    "id": 1738058000004,
+    "date": "2026-01-16",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Tríceps",
+    "muscleGroup": "Tríceps",
+    "weight": 18,
+    "series": [
+      15,
+      13,
+      12
+    ],
+    "totalReps": 40,
+    "volume": 720,
+    "oneRM": -213.78,
+    "timestamp": "16/01/2026"
+  },
+  {
+    "id": 1738663200000,
+    "date": "2026-01-19",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Press",
+    "muscleGroup": "Pecho",
+    "weight": 36,
+    "series": [
+      8,
+      8,
+      8,
+      8
+    ],
+    "totalReps": 32,
+    "volume": 1152,
+    "oneRM": 260.49,
+    "timestamp": "19/01/2026"
+  },
+  {
+    "id": 1738663200001,
+    "date": "2026-01-19",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 57,
+    "series": [
+      8,
+      8,
+      8,
+      8
+    ],
+    "totalReps": 32,
+    "volume": 1824,
+    "oneRM": 412.45,
+    "timestamp": "19/01/2026"
+  },
+  {
+    "id": 1738663200002,
+    "date": "2026-01-19",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 50,
+    "series": [
+      8,
+      8,
+      9
+    ],
+    "totalReps": 25,
+    "volume": 1250,
+    "oneRM": 150.24,
+    "timestamp": "19/01/2026"
+  },
+  {
+    "id": 1738663200003,
+    "date": "2026-01-19",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Bíceps",
+    "muscleGroup": "Bíceps",
+    "weight": 20,
+    "series": [
+      12,
+      10,
+      10
+    ],
+    "totalReps": 32,
+    "volume": 640,
+    "oneRM": 144.72,
+    "timestamp": "19/01/2026"
+  },
+  {
+    "id": 1738663200004,
+    "date": "2026-01-19",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Tríceps",
+    "muscleGroup": "Tríceps",
+    "weight": 23,
+    "series": [
+      10,
+      10,
+      11
+    ],
+    "totalReps": 31,
+    "volume": 713,
+    "oneRM": 138.55,
+    "timestamp": "19/01/2026"
+  },
+  {
+    "id": 1739268000000,
+    "date": "2026-01-23",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Press",
+    "muscleGroup": "Pecho",
+    "weight": 32,
+    "series": [
+      10,
+      10,
+      10,
+      10
+    ],
+    "totalReps": 40,
+    "volume": 1280,
+    "oneRM": -380.05,
+    "timestamp": "23/01/2026"
+  },
+  {
+    "id": 1739268000001,
+    "date": "2026-01-23",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 50,
+    "series": [
+      10,
+      10,
+      10,
+      10
+    ],
+    "totalReps": 40,
+    "volume": 2000,
+    "oneRM": -593.82,
+    "timestamp": "23/01/2026"
+  },
+  {
+    "id": 1739268000002,
+    "date": "2026-01-23",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 45,
+    "series": [
+      10,
+      10,
+      10,
+      10
+    ],
+    "totalReps": 40,
+    "volume": 1800,
+    "oneRM": -534.44,
+    "timestamp": "23/01/2026"
+  },
+  {
+    "id": 1739268000003,
+    "date": "2026-01-23",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Bíceps",
+    "muscleGroup": "Bíceps",
+    "weight": 18,
+    "series": [
+      12,
+      12,
+      12,
+      12
+    ],
+    "totalReps": 48,
+    "volume": 864,
+    "oneRM": -58.71,
+    "timestamp": "23/01/2026"
+  },
+  {
+    "id": 1739268000004,
+    "date": "2026-01-23",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Tríceps",
+    "muscleGroup": "Tríceps",
+    "weight": 18,
+    "series": [
+      12,
+      14,
+      15
+    ],
+    "totalReps": 41,
+    "volume": 738,
+    "oneRM": -160.71,
+    "timestamp": "23/01/2026"
+  },
+  {
+    "id": 1739872800000,
+    "date": "2026-01-26",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Press",
+    "muscleGroup": "Pecho",
+    "weight": 36,
+    "series": [
+      8,
+      8,
+      9,
+      8
+    ],
+    "totalReps": 33,
+    "volume": 1188,
+    "oneRM": 326.09,
+    "timestamp": "26/01/2026"
+  },
+  {
+    "id": 1739872800001,
+    "date": "2026-01-26",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 57,
+    "series": [
+      8,
+      8,
+      8,
+      8
+    ],
+    "totalReps": 32,
+    "volume": 1824,
+    "oneRM": 412.45,
+    "timestamp": "26/01/2026"
+  },
+  {
+    "id": 1739872800002,
+    "date": "2026-01-26",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 50,
+    "series": [
+      8,
+      8,
+      8
+    ],
+    "totalReps": 24,
+    "volume": 1200,
+    "oneRM": 138.66,
+    "timestamp": "26/01/2026"
+  },
+  {
+    "id": 1739872800003,
+    "date": "2026-01-26",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Bíceps",
+    "muscleGroup": "Bíceps",
+    "weight": 14,
+    "series": [
+      6
+    ],
+    "totalReps": 6,
+    "volume": 84,
+    "oneRM": 16.26,
+    "timestamp": "26/01/2026"
+  },
+  {
+    "id": 1739872800004,
+    "date": "2026-01-26",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Tríceps",
+    "muscleGroup": "Tríceps",
+    "weight": 23,
+    "series": [
+      12,
+      12
+    ],
+    "totalReps": 24,
+    "volume": 552,
+    "oneRM": 63.78,
+    "timestamp": "26/01/2026"
+  },
+  {
+    "id": 1740477600000,
+    "date": "2026-01-30",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Press",
+    "muscleGroup": "Pecho",
+    "weight": 32,
+    "series": [
+      10,
+      10,
+      10,
+      10
+    ],
+    "totalReps": 40,
+    "volume": 1280,
+    "oneRM": -380.05,
+    "timestamp": "30/01/2026"
+  },
+  {
+    "id": 1740477600001,
+    "date": "2026-01-30",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 50,
+    "series": [
+      10,
+      10,
+      10,
+      10
+    ],
+    "totalReps": 40,
+    "volume": 2000,
+    "oneRM": -593.82,
+    "timestamp": "30/01/2026"
+  },
+  {
+    "id": 1740477600002,
+    "date": "2026-01-30",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 45,
+    "series": [
+      10,
+      10,
+      10,
+      10
+    ],
+    "totalReps": 40,
+    "volume": 1800,
+    "oneRM": -534.44,
+    "timestamp": "30/01/2026"
+  },
+  {
+    "id": 1740477600003,
+    "date": "2026-01-30",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Bíceps",
+    "muscleGroup": "Bíceps",
+    "weight": 20,
+    "series": [
+      10,
+      12,
+      10,
+      10
+    ],
+    "totalReps": 42,
+    "volume": 840,
+    "oneRM": -143.06,
+    "timestamp": "30/01/2026"
+  },
+  {
+    "id": 1740477600004,
+    "date": "2026-01-30",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Tríceps",
+    "muscleGroup": "Tríceps",
+    "weight": 18,
+    "series": [
+      12,
+      14,
+      14
+    ],
+    "totalReps": 40,
+    "volume": 720,
+    "oneRM": -213.78,
+    "timestamp": "30/01/2026"
+  },
+  {
+    "id": 1741082400000,
+    "date": "2026-02-02",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Press",
+    "muscleGroup": "Pecho",
+    "weight": 40,
+    "series": [
+      6,
+      6,
+      6,
+      7
+    ],
+    "totalReps": 25,
+    "volume": 1000,
+    "oneRM": 120.19,
+    "timestamp": "02/02/2026"
+  },
+  {
+    "id": 1741082400001,
+    "date": "2026-02-02",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Press Inclinado",
+    "muscleGroup": "Pecho",
+    "weight": 28,
+    "series": [
+      10,
+      9,
+      7,
+      6
+    ],
+    "totalReps": 32,
+    "volume": 896,
+    "oneRM": 202.6,
+    "timestamp": "02/02/2026"
+  },
+  {
+    "id": 1741082400002,
+    "date": "2026-02-02",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 64,
+    "series": [
+      5,
+      5,
+      5,
+      6
+    ],
+    "totalReps": 21,
+    "volume": 1344,
+    "oneRM": 144.14,
+    "timestamp": "02/02/2026"
+  },
+  {
+    "id": 1741082400003,
+    "date": "2026-02-02",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 60,
+    "series": [
+      6,
+      6,
+      7
+    ],
+    "totalReps": 19,
+    "volume": 1140,
+    "oneRM": 120.1,
+    "timestamp": "02/02/2026"
+  },
+  {
+    "id": 1741082400004,
+    "date": "2026-02-02",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Tríceps",
+    "muscleGroup": "Tríceps",
+    "weight": 25.3,
+    "series": [
+      10,
+      10
+    ],
+    "totalReps": 20,
+    "volume": 506,
+    "oneRM": 53.62,
+    "timestamp": "02/02/2026"
+  },
+  {
+    "id": 1741687200000,
+    "date": "2026-02-06",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Press Inclinado",
+    "muscleGroup": "Pecho",
+    "weight": 28,
+    "series": [
+      10,
+      10,
+      8
+    ],
+    "totalReps": 28,
+    "volume": 784,
+    "oneRM": 112.27,
+    "timestamp": "06/02/2026"
+  },
+  {
+    "id": 1741687200001,
+    "date": "2026-02-06",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 50,
+    "series": [
+      10,
+      11,
+      11,
+      11
+    ],
+    "totalReps": 43,
+    "volume": 2150,
+    "oneRM": -298.33,
+    "timestamp": "06/02/2026"
+  },
+  {
+    "id": 1741687200002,
+    "date": "2026-02-06",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 45,
+    "series": [
+      10,
+      12,
+      12
+    ],
+    "totalReps": 34,
+    "volume": 1530,
+    "oneRM": 544.79,
+    "timestamp": "06/02/2026"
+  },
+  {
+    "id": 1741687200003,
+    "date": "2026-02-06",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Bíceps",
+    "muscleGroup": "Bíceps",
+    "weight": 20,
+    "series": [
+      10,
+      10,
+      10
+    ],
+    "totalReps": 30,
+    "volume": 600,
+    "oneRM": 103.2,
+    "timestamp": "06/02/2026"
+  },
+  {
+    "id": 1741687200004,
+    "date": "2026-02-06",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Tríceps",
+    "muscleGroup": "Tríceps",
+    "weight": 18,
+    "series": [
+      15,
+      15,
+      15
+    ],
+    "totalReps": 45,
+    "volume": 810,
+    "oneRM": -80.65,
+    "timestamp": "06/02/2026"
+  },
+  {
+    "id": 1742292000000,
+    "date": "2026-02-09",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Press",
+    "muscleGroup": "Pecho",
+    "weight": 40,
+    "series": [
+      6,
+      6,
+      6,
+      7
+    ],
+    "totalReps": 25,
+    "volume": 1000,
+    "oneRM": 120.19,
+    "timestamp": "09/02/2026"
+  },
+  {
+    "id": 1742292000001,
+    "date": "2026-02-09",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 59.3,
+    "series": [
+      6,
+      7,
+      7,
+      9
+    ],
+    "totalReps": 29,
+    "volume": 1720,
+    "oneRM": 267.6,
+    "timestamp": "09/02/2026"
+  },
+  {
+    "id": 1742292000002,
+    "date": "2026-02-09",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 55,
+    "series": [
+      7,
+      7,
+      7
+    ],
+    "totalReps": 21,
+    "volume": 1155,
+    "oneRM": 123.87,
+    "timestamp": "09/02/2026"
+  },
+  {
+    "id": 1742292000003,
+    "date": "2026-02-09",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Bíceps",
+    "muscleGroup": "Bíceps",
+    "weight": 22,
+    "series": [
+      8,
+      8
+    ],
+    "totalReps": 16,
+    "volume": 352,
+    "oneRM": 37.74,
+    "timestamp": "09/02/2026"
+  },
+  {
+    "id": 1742896800000,
+    "date": "2026-02-13",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Press Inclinado",
+    "muscleGroup": "Pecho",
+    "weight": 28,
+    "series": [
+      10,
+      8,
+      8
+    ],
+    "totalReps": 26,
+    "volume": 728,
+    "oneRM": 91.8,
+    "timestamp": "13/02/2026"
+  },
+  {
+    "id": 1742896800001,
+    "date": "2026-02-13",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 50,
+    "series": [
+      12,
+      12,
+      10,
+      10
+    ],
+    "totalReps": 44,
+    "volume": 2200,
+    "oneRM": -255.89,
+    "timestamp": "13/02/2026"
+  },
+  {
+    "id": 1742896800002,
+    "date": "2026-02-13",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 50,
+    "series": [
+      8,
+      8,
+      8
+    ],
+    "totalReps": 24,
+    "volume": 1200,
+    "oneRM": 138.66,
+    "timestamp": "13/02/2026"
+  },
+  {
+    "id": 1742896800003,
+    "date": "2026-02-13",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Bíceps",
+    "muscleGroup": "Bíceps",
+    "weight": 20,
+    "series": [
+      12,
+      12,
+      8,
+      10
+    ],
+    "totalReps": 42,
+    "volume": 840,
+    "oneRM": -143.06,
+    "timestamp": "13/02/2026"
+  },
+  {
+    "id": 1742896800004,
+    "date": "2026-02-13",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Tríceps",
+    "muscleGroup": "Tríceps",
+    "weight": 20.3,
+    "series": [
+      10,
+      11,
+      13
+    ],
+    "totalReps": 34,
+    "volume": 690.2,
+    "oneRM": 245.76,
+    "timestamp": "13/02/2026"
+  },
+  {
+    "id": 1743501600000,
+    "date": "2026-02-16",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Press",
+    "muscleGroup": "Pecho",
+    "weight": 45,
+    "series": [
+      4,
+      6,
+      6,
+      7
+    ],
+    "totalReps": 23,
+    "volume": 1035,
+    "oneRM": 115.86,
+    "timestamp": "16/02/2026"
+  },
+  {
+    "id": 1743501600001,
+    "date": "2026-02-16",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 64,
+    "series": [
+      5,
+      5,
+      5,
+      6
+    ],
+    "totalReps": 21,
+    "volume": 1344,
+    "oneRM": 144.14,
+    "timestamp": "16/02/2026"
+  },
+  {
+    "id": 1743501600002,
+    "date": "2026-02-16",
+    "trainingType": "Torso Pesado",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 60,
+    "series": [
+      6,
+      6,
+      7
+    ],
+    "totalReps": 19,
+    "volume": 1140,
+    "oneRM": 120.1,
+    "timestamp": "16/02/2026"
+  },
+  {
+    "id": 1743501600003,
+    "date": "2026-02-16",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Tríceps",
+    "muscleGroup": "Tríceps",
+    "weight": 25.3,
+    "series": [
+      12,
+      12,
+      12
+    ],
+    "totalReps": 36,
+    "volume": 910.8,
+    "oneRM": 937.04,
+    "timestamp": "16/02/2026"
+  },
+  {
+    "id": 1744106400000,
+    "date": "2026-02-20",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Press",
+    "muscleGroup": "Pecho",
+    "weight": 24,
+    "series": [
+      11,
+      12
+    ],
+    "totalReps": 23,
+    "volume": 552,
+    "oneRM": 61.79,
+    "timestamp": "20/02/2026"
+  },
+  {
+    "id": 1744106400001,
+    "date": "2026-02-20",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Press Inclinado",
+    "muscleGroup": "Pecho",
+    "weight": 28,
+    "series": [
+      9,
+      9,
+      9
+    ],
+    "totalReps": 27,
+    "volume": 756,
+    "oneRM": 101.01,
+    "timestamp": "20/02/2026"
+  },
+  {
+    "id": 1744106400002,
+    "date": "2026-02-20",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 52.5,
+    "series": [
+      8,
+      8,
+      8,
+      8
+    ],
+    "totalReps": 32,
+    "volume": 1680,
+    "oneRM": 379.88,
+    "timestamp": "20/02/2026"
+  },
+  {
+    "id": 1744106400003,
+    "date": "2026-02-20",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 50,
+    "series": [
+      9,
+      9,
+      9,
+      8
+    ],
+    "totalReps": 35,
+    "volume": 1750,
+    "oneRM": 912.41,
+    "timestamp": "20/02/2026"
+  },
+  {
+    "id": 1744106400004,
+    "date": "2026-02-20",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Bíceps",
+    "muscleGroup": "Bíceps",
+    "weight": 20,
+    "series": [
+      13,
+      12,
+      10
+    ],
+    "totalReps": 35,
+    "volume": 700,
+    "oneRM": 364.96,
+    "timestamp": "20/02/2026"
+  },
+  {
+    "id": 1744106400005,
+    "date": "2026-02-20",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Tríceps",
+    "muscleGroup": "Tríceps",
+    "weight": 20.3,
+    "series": [
+      13,
+      13,
+      12
+    ],
+    "totalReps": 38,
+    "volume": 771.4,
+    "oneRM": -709.79,
+    "timestamp": "20/02/2026"
+  },
+  {
+    "id": 1744711200000,
+    "date": "2026-02-23",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Press",
+    "muscleGroup": "Pecho",
+    "weight": 45,
+    "series": [
+      7,
+      6,
+      6,
+      8
+    ],
+    "totalReps": 27,
+    "volume": 1215,
+    "oneRM": 162.34,
+    "timestamp": "23/02/2026"
+  },
+  {
+    "id": 1744711200001,
+    "date": "2026-02-23",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 64,
+    "series": [
+      6,
+      7,
+      6,
+      5
+    ],
+    "totalReps": 24,
+    "volume": 1536,
+    "oneRM": 177.48,
+    "timestamp": "23/02/2026"
+  },
+  {
+    "id": 1744711200002,
+    "date": "2026-02-23",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 60,
+    "series": [
+      6,
+      7,
+      6
+    ],
+    "totalReps": 19,
+    "volume": 1140,
+    "oneRM": 120.1,
+    "timestamp": "23/02/2026"
+  },
+  {
+    "id": 1744711200003,
+    "date": "2026-02-23",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Tríceps",
+    "muscleGroup": "Tríceps",
+    "weight": 25.3,
+    "series": [
+      10,
+      10
+    ],
+    "totalReps": 20,
+    "volume": 506,
+    "oneRM": 53.62,
+    "timestamp": "23/02/2026"
+  },
+  {
+    "id": 1745316000000,
+    "date": "2026-02-27",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Press",
+    "muscleGroup": "Pecho",
+    "weight": 20,
+    "series": [
+      12
+    ],
+    "totalReps": 12,
+    "volume": 240,
+    "oneRM": 28.81,
+    "timestamp": "27/02/2026"
+  },
+  {
+    "id": 1745316000001,
+    "date": "2026-02-27",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Press Inclinado",
+    "muscleGroup": "Pecho",
+    "weight": 28,
+    "series": [
+      10,
+      10,
+      8
+    ],
+    "totalReps": 28,
+    "volume": 784,
+    "oneRM": 112.27,
+    "timestamp": "27/02/2026"
+  },
+  {
+    "id": 1745316000002,
+    "date": "2026-02-27",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 52.5,
+    "series": [
+      10,
+      10,
+      10,
+      9
+    ],
+    "totalReps": 39,
+    "volume": 2047.5,
+    "oneRM": -930.85,
+    "timestamp": "27/02/2026"
+  },
+  {
+    "id": 1745316000003,
+    "date": "2026-02-27",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 50,
+    "series": [
+      10,
+      8,
+      10
+    ],
+    "totalReps": 28,
+    "volume": 1400,
+    "oneRM": 200.48,
+    "timestamp": "27/02/2026"
+  },
+  {
+    "id": 1745316000004,
+    "date": "2026-02-27",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Bíceps",
+    "muscleGroup": "Bíceps",
+    "weight": 20,
+    "series": [
+      12,
+      12,
+      12
+    ],
+    "totalReps": 36,
+    "volume": 720,
+    "oneRM": 740.74,
+    "timestamp": "27/02/2026"
+  },
+  {
+    "id": 1745316000005,
+    "date": "2026-02-27",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Tríceps",
+    "muscleGroup": "Tríceps",
+    "weight": 20.3,
+    "series": [
+      15,
+      14,
+      13
+    ],
+    "totalReps": 42,
+    "volume": 852.6,
+    "oneRM": -145.21,
+    "timestamp": "27/02/2026"
+  },
+  {
+    "id": 1745920800000,
+    "date": "2026-03-03",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Press",
+    "muscleGroup": "Pecho",
+    "weight": 45,
+    "series": [
+      8,
+      8,
+      8,
+      8
+    ],
+    "totalReps": 32,
+    "volume": 1440,
+    "oneRM": 325.62,
+    "timestamp": "03/03/2026"
+  },
+  {
+    "id": 1745920800001,
+    "date": "2026-03-03",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Press Inclinado",
+    "muscleGroup": "Pecho",
+    "weight": 37.5,
+    "series": [
+      12,
+      12,
+      12
+    ],
+    "totalReps": 36,
+    "volume": 1350,
+    "oneRM": 1388.89,
+    "timestamp": "03/03/2026"
+  },
+  {
+    "id": 1745920800002,
+    "date": "2026-03-03",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 64,
+    "series": [
+      8,
+      7,
+      6
+    ],
+    "totalReps": 21,
+    "volume": 1344,
+    "oneRM": 144.14,
+    "timestamp": "03/03/2026"
+  },
+  {
+    "id": 1745920800003,
+    "date": "2026-03-03",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 60,
+    "series": [
+      8,
+      7,
+      7
+    ],
+    "totalReps": 22,
+    "volume": 1320,
+    "oneRM": 144.16,
+    "timestamp": "03/03/2026"
+  },
+  {
+    "id": 1745920800004,
+    "date": "2026-03-03",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Bíceps",
+    "muscleGroup": "Bíceps",
+    "weight": 24,
+    "series": [
+      10,
+      10,
+      10
+    ],
+    "totalReps": 30,
+    "volume": 720,
+    "oneRM": 123.84,
+    "timestamp": "03/03/2026"
+  },
+  {
+    "id": 1745920800005,
+    "date": "2026-03-03",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Tríceps",
+    "muscleGroup": "Tríceps",
+    "weight": 25.3,
+    "series": [
+      10,
+      10,
+      9
+    ],
+    "totalReps": 29,
+    "volume": 733.7,
+    "oneRM": 114.17,
+    "timestamp": "03/03/2026"
+  },
+  {
+    "id": 1746525600000,
+    "date": "2026-03-06",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Press",
+    "muscleGroup": "Pecho",
+    "weight": 28,
+    "series": [
+      10,
+      10,
+      10
+    ],
+    "totalReps": 30,
+    "volume": 840,
+    "oneRM": 144.48,
+    "timestamp": "06/03/2026"
+  },
+  {
+    "id": 1746525600001,
+    "date": "2026-03-06",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Press Inclinado",
+    "muscleGroup": "Pecho",
+    "weight": 41,
+    "series": [
+      11,
+      11,
+      11,
+      11
+    ],
+    "totalReps": 44,
+    "volume": 1804,
+    "oneRM": -209.83,
+    "timestamp": "06/03/2026"
+  },
+  {
+    "id": 1746525600002,
+    "date": "2026-03-06",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 52.5,
+    "series": [
+      11,
+      11,
+      10
+    ],
+    "totalReps": 32,
+    "volume": 1680,
+    "oneRM": 379.88,
+    "timestamp": "06/03/2026"
+  },
+  {
+    "id": 1746525600003,
+    "date": "2026-03-06",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 50,
+    "series": [
+      11,
+      11,
+      8
+    ],
+    "totalReps": 30,
+    "volume": 1500,
+    "oneRM": 258.0,
+    "timestamp": "06/03/2026"
+  },
+  {
+    "id": 1746525600004,
+    "date": "2026-03-06",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Bíceps",
+    "muscleGroup": "Bíceps",
+    "weight": 20,
+    "series": [],
+    "totalReps": 0,
+    "volume": 0,
+    "oneRM": 0,
+    "timestamp": "06/03/2026"
+  },
+  {
+    "id": 1746525600005,
+    "date": "2026-03-06",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Tríceps",
+    "muscleGroup": "Tríceps",
+    "weight": 23,
+    "series": [
+      12,
+      12,
+      12
+    ],
+    "totalReps": 36,
+    "volume": 828,
+    "oneRM": 851.85,
+    "timestamp": "06/03/2026"
+  },
+  {
+    "id": 1747130400000,
+    "date": "2026-03-09",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Press",
+    "muscleGroup": "Pecho",
+    "weight": 50,
+    "series": [
+      5,
+      4,
+      5,
+      5
+    ],
+    "totalReps": 19,
+    "volume": 950,
+    "oneRM": 100.08,
+    "timestamp": "09/03/2026"
+  },
+  {
+    "id": 1747130400001,
+    "date": "2026-03-09",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 64,
+    "series": [
+      6,
+      7,
+      7,
+      9
+    ],
+    "totalReps": 29,
+    "volume": 1856,
+    "oneRM": 288.81,
+    "timestamp": "09/03/2026"
+  },
+  {
+    "id": 1747130400002,
+    "date": "2026-03-09",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 65,
+    "series": [
+      5,
+      5,
+      6,
+      6
+    ],
+    "totalReps": 22,
+    "volume": 1430,
+    "oneRM": 156.17,
+    "timestamp": "09/03/2026"
+  },
+  {
+    "id": 1747130400003,
+    "date": "2026-03-09",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Bíceps",
+    "muscleGroup": "Bíceps",
+    "weight": 14,
+    "series": [
+      6,
+      6,
+      7
+    ],
+    "totalReps": 19,
+    "volume": 266,
+    "oneRM": 28.02,
+    "timestamp": "09/03/2026"
+  },
+  {
+    "id": 1747130400004,
+    "date": "2026-03-09",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Tríceps",
+    "muscleGroup": "Tríceps",
+    "weight": 23,
+    "series": [
+      12,
+      12,
+      12
+    ],
+    "totalReps": 36,
+    "volume": 828,
+    "oneRM": 851.85,
+    "timestamp": "09/03/2026"
+  },
+  {
+    "id": 1747735200000,
+    "date": "2026-03-13",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Press",
+    "muscleGroup": "Pecho",
+    "weight": 28,
+    "series": [
+      9,
+      8,
+      7
+    ],
+    "totalReps": 24,
+    "volume": 672,
+    "oneRM": 77.65,
+    "timestamp": "13/03/2026"
+  },
+  {
+    "id": 1747735200001,
+    "date": "2026-03-13",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Press Inclinado",
+    "muscleGroup": "Pecho",
+    "weight": 32,
+    "series": [
+      8,
+      8,
+      8,
+      6
+    ],
+    "totalReps": 30,
+    "volume": 960,
+    "oneRM": 165.12,
+    "timestamp": "13/03/2026"
+  },
+  {
+    "id": 1747735200002,
+    "date": "2026-03-13",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 52.5,
+    "series": [
+      12,
+      12,
+      10
+    ],
+    "totalReps": 34,
+    "volume": 1785,
+    "oneRM": 635.59,
+    "timestamp": "13/03/2026"
+  },
+  {
+    "id": 1747735200003,
+    "date": "2026-03-13",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 50,
+    "series": [
+      12,
+      12,
+      12
+    ],
+    "totalReps": 36,
+    "volume": 1800,
+    "oneRM": 1851.85,
+    "timestamp": "13/03/2026"
+  },
+  {
+    "id": 1747735200004,
+    "date": "2026-03-13",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Bíceps",
+    "muscleGroup": "Bíceps",
+    "weight": 12,
+    "series": [
+      9,
+      8,
+      8
+    ],
+    "totalReps": 25,
+    "volume": 300,
+    "oneRM": 36.06,
+    "timestamp": "13/03/2026"
+  },
+  {
+    "id": 1747735200005,
+    "date": "2026-03-13",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Tríceps",
+    "muscleGroup": "Tríceps",
+    "weight": 23,
+    "series": [
+      13,
+      13,
+      12
+    ],
+    "totalReps": 38,
+    "volume": 874,
+    "oneRM": -804.2,
+    "timestamp": "13/03/2026"
+  },
+  {
+    "id": 1748340000000,
+    "date": "2026-03-16",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Press",
+    "muscleGroup": "Pecho",
+    "weight": 50,
+    "series": [
+      5,
+      5,
+      5,
+      7
+    ],
+    "totalReps": 22,
+    "volume": 1100,
+    "oneRM": 120.13,
+    "timestamp": "16/03/2026"
+  },
+  {
+    "id": 1748340000001,
+    "date": "2026-03-16",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 66.3,
+    "series": [
+      5,
+      5,
+      5,
+      5
+    ],
+    "totalReps": 20,
+    "volume": 1326,
+    "oneRM": 140.53,
+    "timestamp": "16/03/2026"
+  },
+  {
+    "id": 1748340000002,
+    "date": "2026-03-16",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 65,
+    "series": [
+      6,
+      6,
+      6,
+      6
+    ],
+    "totalReps": 24,
+    "volume": 1560,
+    "oneRM": 180.26,
+    "timestamp": "16/03/2026"
+  },
+  {
+    "id": 1748340000003,
+    "date": "2026-03-16",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Tríceps",
+    "muscleGroup": "Tríceps",
+    "weight": 23,
+    "series": [
+      10,
+      10,
+      10
+    ],
+    "totalReps": 30,
+    "volume": 690,
+    "oneRM": 118.68,
+    "timestamp": "16/03/2026"
+  },
+  {
+    "id": 1748340000004,
+    "date": "2026-03-16",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Bíceps",
+    "muscleGroup": "Bíceps",
+    "weight": 14,
+    "series": [
+      6,
+      6
+    ],
+    "totalReps": 12,
+    "volume": 168,
+    "oneRM": 20.17,
+    "timestamp": "16/03/2026"
+  },
+  {
+    "id": 1748944800000,
+    "date": "2026-03-23",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Press",
+    "muscleGroup": "Pecho",
+    "weight": 50,
+    "series": [
+      6,
+      6,
+      6,
+      6
+    ],
+    "totalReps": 24,
+    "volume": 1200,
+    "oneRM": 138.66,
+    "timestamp": "23/03/2026"
+  },
+  {
+    "id": 1748944800001,
+    "date": "2026-03-23",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Press Inclinado",
+    "muscleGroup": "Pecho",
+    "weight": 59,
+    "series": [
+      6,
+      6,
+      5
+    ],
+    "totalReps": 17,
+    "volume": 1003,
+    "oneRM": 106.27,
+    "timestamp": "23/03/2026"
+  },
+  {
+    "id": 1748944800002,
+    "date": "2026-03-23",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 66.3,
+    "series": [
+      6,
+      6,
+      7,
+      6
+    ],
+    "totalReps": 25,
+    "volume": 1658,
+    "oneRM": 199.22,
+    "timestamp": "23/03/2026"
+  },
+  {
+    "id": 1748944800003,
+    "date": "2026-03-23",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 67.3,
+    "series": [
+      4,
+      4,
+      4,
+      5
+    ],
+    "totalReps": 17,
+    "volume": 1144,
+    "oneRM": 121.22,
+    "timestamp": "23/03/2026"
+  },
+  {
+    "id": 1748944800004,
+    "date": "2026-03-23",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Bíceps",
+    "muscleGroup": "Bíceps",
+    "weight": 14,
+    "series": [
+      6,
+      6
+    ],
+    "totalReps": 12,
+    "volume": 168,
+    "oneRM": 20.17,
+    "timestamp": "23/03/2026"
+  },
+  {
+    "id": 1748944800005,
+    "date": "2026-03-23",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Tríceps",
+    "muscleGroup": "Tríceps",
+    "weight": 23,
+    "series": [
+      6,
+      6
+    ],
+    "totalReps": 12,
+    "volume": 276,
+    "oneRM": 33.13,
+    "timestamp": "23/03/2026"
+  },
+  {
+    "id": 1749549600000,
+    "date": "2026-03-27",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Press",
+    "muscleGroup": "Pecho",
+    "weight": 40,
+    "series": [
+      10,
+      10,
+      10,
+      8
+    ],
+    "totalReps": 38,
+    "volume": 1520,
+    "oneRM": -1398.6,
+    "timestamp": "27/03/2026"
+  },
+  {
+    "id": 1749549600001,
+    "date": "2026-03-27",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Press Inclinado",
+    "muscleGroup": "Pecho",
+    "weight": 41,
+    "series": [
+      8,
+      8,
+      7
+    ],
+    "totalReps": 23,
+    "volume": 943,
+    "oneRM": 105.56,
+    "timestamp": "27/03/2026"
+  },
+  {
+    "id": 1749549600002,
+    "date": "2026-03-27",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 52.5,
+    "series": [
+      12,
+      10,
+      10,
+      8
+    ],
+    "totalReps": 40,
+    "volume": 2100,
+    "oneRM": -623.52,
+    "timestamp": "27/03/2026"
+  },
+  {
+    "id": 1749549600003,
+    "date": "2026-03-27",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 50,
+    "series": [
+      10,
+      10,
+      8
+    ],
+    "totalReps": 28,
+    "volume": 1400,
+    "oneRM": 200.48,
+    "timestamp": "27/03/2026"
+  },
+  {
+    "id": 1749549600004,
+    "date": "2026-03-27",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Bíceps",
+    "muscleGroup": "Bíceps",
+    "weight": 10,
+    "series": [
+      10,
+      10
+    ],
+    "totalReps": 20,
+    "volume": 200,
+    "oneRM": 21.2,
+    "timestamp": "27/03/2026"
+  },
+  {
+    "id": 1749549600005,
+    "date": "2026-03-27",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Tríceps",
+    "muscleGroup": "Tríceps",
+    "weight": 23,
+    "series": [
+      13,
+      13
+    ],
+    "totalReps": 26,
+    "volume": 598,
+    "oneRM": 75.41,
+    "timestamp": "27/03/2026"
+  },
+  {
+    "id": 1750154400000,
+    "date": "2026-03-30",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Press",
+    "muscleGroup": "Pecho",
+    "weight": 50,
+    "series": [
+      6,
+      6,
+      6,
+      6
+    ],
+    "totalReps": 24,
+    "volume": 1200,
+    "oneRM": 138.66,
+    "timestamp": "30/03/2026"
+  },
+  {
+    "id": 1750154400001,
+    "date": "2026-03-30",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Press Inclinado",
+    "muscleGroup": "Pecho",
+    "weight": 59,
+    "series": [
+      6,
+      6,
+      5
+    ],
+    "totalReps": 17,
+    "volume": 1003,
+    "oneRM": 106.27,
+    "timestamp": "30/03/2026"
+  },
+  {
+    "id": 1750154400002,
+    "date": "2026-03-30",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 66.3,
+    "series": [
+      6,
+      6,
+      7,
+      6
+    ],
+    "totalReps": 25,
+    "volume": 1658,
+    "oneRM": 199.22,
+    "timestamp": "30/03/2026"
+  },
+  {
+    "id": 1750154400003,
+    "date": "2026-03-30",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 67.3,
+    "series": [
+      4,
+      4,
+      4,
+      5
+    ],
+    "totalReps": 17,
+    "volume": 1144,
+    "oneRM": 121.22,
+    "timestamp": "30/03/2026"
+  },
+  {
+    "id": 1750154400004,
+    "date": "2026-03-30",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Bíceps",
+    "muscleGroup": "Bíceps",
+    "weight": 14,
+    "series": [
+      6,
+      6
+    ],
+    "totalReps": 12,
+    "volume": 168,
+    "oneRM": 20.17,
+    "timestamp": "30/03/2026"
+  },
+  {
+    "id": 1750154400005,
+    "date": "2026-03-30",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Tríceps",
+    "muscleGroup": "Tríceps",
+    "weight": 23,
+    "series": [
+      6,
+      6
+    ],
+    "totalReps": 12,
+    "volume": 276,
+    "oneRM": 33.13,
+    "timestamp": "30/03/2026"
+  },
+  {
+    "id": 1723000800001,
+    "date": "2025-08-25",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Normal",
+    "exercise": "Face Pull",
+    "muscleGroup": "Hombros",
+    "weight": 14,
+    "series": [
+      10,
+      10,
+      10
+    ],
+    "totalReps": 30,
+    "volume": 420,
+    "oneRM": 72.24,
+    "timestamp": "25/08/2025"
+  },
+  {
+    "id": 1735033200005,
+    "date": "2025-12-26",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Normal",
+    "exercise": "Face Pull",
+    "muscleGroup": "Hombros",
+    "weight": 9,
+    "series": [
+      12,
+      12,
+      7
+    ],
+    "totalReps": 31,
+    "volume": 279,
+    "oneRM": 54.22,
+    "timestamp": "26/12/2025"
+  },
+  {
+    "id": 1735638000005,
+    "date": "2026-01-02",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Normal",
+    "exercise": "Face Pull",
+    "muscleGroup": "Hombros",
+    "weight": 9,
+    "series": [
+      15,
+      15,
+      11
+    ],
+    "totalReps": 41,
+    "volume": 369,
+    "oneRM": -80.36,
+    "timestamp": "02/01/2026"
+  },
+  {
+    "id": 1736243200005,
+    "date": "2026-01-05",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Normal",
+    "exercise": "Face Pull",
+    "muscleGroup": "Hombros",
+    "weight": 9,
+    "series": [
+      12,
+      12,
+      12
+    ],
+    "totalReps": 36,
+    "volume": 324,
+    "oneRM": 333.33,
+    "timestamp": "05/01/2026"
+  },
+  {
+    "id": 1736848200005,
+    "date": "2026-01-09",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Normal",
+    "exercise": "Face Pull",
+    "muscleGroup": "Hombros",
+    "weight": 9,
+    "series": [
+      15,
+      15,
+      15
+    ],
+    "totalReps": 45,
+    "volume": 405,
+    "oneRM": -40.32,
+    "timestamp": "09/01/2026"
+  },
+  {
+    "id": 1737453200005,
+    "date": "2026-01-12",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Face Pull",
+    "muscleGroup": "Hombros",
+    "weight": 9,
+    "series": [
+      15,
+      15,
+      15
+    ],
+    "totalReps": 45,
+    "volume": 405,
+    "oneRM": -40.32,
+    "timestamp": "12/01/2026"
+  },
+  {
+    "id": 1738058000005,
+    "date": "2026-01-16",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Face Pull",
+    "muscleGroup": "Hombros",
+    "weight": 9,
+    "series": [
+      15,
+      12,
+      13
+    ],
+    "totalReps": 40,
+    "volume": 360,
+    "oneRM": -106.89,
+    "timestamp": "16/01/2026"
+  },
+  {
+    "id": 1738663200005,
+    "date": "2026-01-19",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Face Pull",
+    "muscleGroup": "Hombros",
+    "weight": 9,
+    "series": [
+      12,
+      12,
+      14
+    ],
+    "totalReps": 38,
+    "volume": 342,
+    "oneRM": -314.69,
+    "timestamp": "19/01/2026"
+  },
+  {
+    "id": 1740477600005,
+    "date": "2026-01-30",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Face Pull",
+    "muscleGroup": "Hombros",
+    "weight": 14,
+    "series": [
+      12,
+      12,
+      12
+    ],
+    "totalReps": 36,
+    "volume": 504,
+    "oneRM": 518.52,
+    "timestamp": "30/01/2026"
+  },
+  {
+    "id": 1741082400005,
+    "date": "2026-02-02",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Face Pull",
+    "muscleGroup": "Hombros",
+    "weight": 14,
+    "series": [
+      12,
+      12,
+      12
+    ],
+    "totalReps": 36,
+    "volume": 504,
+    "oneRM": 518.52,
+    "timestamp": "02/02/2026"
+  },
+  {
+    "id": 1741687200005,
+    "date": "2026-02-06",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Face Pull",
+    "muscleGroup": "Hombros",
+    "weight": 9,
+    "series": [
+      12,
+      12
+    ],
+    "totalReps": 24,
+    "volume": 216,
+    "oneRM": 24.96,
+    "timestamp": "06/02/2026"
+  },
+  {
+    "id": 1741687200006,
+    "date": "2026-02-06",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Elevaciones",
+    "muscleGroup": "Hombros",
+    "weight": 7,
+    "series": [
+      8,
+      8
+    ],
+    "totalReps": 16,
+    "volume": 112,
+    "oneRM": 12.01,
+    "timestamp": "06/02/2026"
+  },
+  {
+    "id": 1742896800005,
+    "date": "2026-02-13",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Face Pull",
+    "muscleGroup": "Hombros",
+    "weight": 14,
+    "series": [
+      12,
+      12,
+      12
+    ],
+    "totalReps": 36,
+    "volume": 504,
+    "oneRM": 518.52,
+    "timestamp": "13/02/2026"
+  },
+  {
+    "id": 1742896800006,
+    "date": "2026-02-13",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Elevaciones",
+    "muscleGroup": "Hombros",
+    "weight": 7,
+    "series": [
+      8,
+      8,
+      8
+    ],
+    "totalReps": 24,
+    "volume": 168,
+    "oneRM": 19.41,
+    "timestamp": "13/02/2026"
+  },
+  {
+    "id": 1743501600004,
+    "date": "2026-02-16",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Face Pull",
+    "muscleGroup": "Hombros",
+    "weight": 14,
+    "series": [
+      12,
+      12,
+      12
+    ],
+    "totalReps": 36,
+    "volume": 504,
+    "oneRM": 518.52,
+    "timestamp": "16/02/2026"
+  },
+  {
+    "id": 1743501600005,
+    "date": "2026-02-16",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Elevaciones",
+    "muscleGroup": "Hombros",
+    "weight": 7,
+    "series": [
+      8,
+      8,
+      8
+    ],
+    "totalReps": 24,
+    "volume": 168,
+    "oneRM": 19.41,
+    "timestamp": "16/02/2026"
+  },
+  {
+    "id": 1744106400006,
+    "date": "2026-02-20",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Face Pull",
+    "muscleGroup": "Hombros",
+    "weight": 14,
+    "series": [
+      13,
+      13
+    ],
+    "totalReps": 26,
+    "volume": 364,
+    "oneRM": 45.9,
+    "timestamp": "20/02/2026"
+  },
+  {
+    "id": 1744106400007,
+    "date": "2026-02-20",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Elevaciones",
+    "muscleGroup": "Hombros",
+    "weight": 7,
+    "series": [
+      9,
+      9,
+      10
+    ],
+    "totalReps": 28,
+    "volume": 196,
+    "oneRM": 28.07,
+    "timestamp": "20/02/2026"
+  },
+  {
+    "id": 1744711200005,
+    "date": "2026-02-23",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Face Pull",
+    "muscleGroup": "Hombros",
+    "weight": 14,
+    "series": [
+      12,
+      10,
+      10
+    ],
+    "totalReps": 32,
+    "volume": 448,
+    "oneRM": 101.3,
+    "timestamp": "23/02/2026"
+  },
+  {
+    "id": 1744711200006,
+    "date": "2026-02-23",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Elevaciones",
+    "muscleGroup": "Hombros",
+    "weight": 7,
+    "series": [
+      9,
+      9,
+      9
+    ],
+    "totalReps": 27,
+    "volume": 189,
+    "oneRM": 25.25,
+    "timestamp": "23/02/2026"
+  },
+  {
+    "id": 1745316000006,
+    "date": "2026-02-27",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Face Pull",
+    "muscleGroup": "Hombros",
+    "weight": 14,
+    "series": [
+      10,
+      10,
+      10
+    ],
+    "totalReps": 30,
+    "volume": 420,
+    "oneRM": 72.24,
+    "timestamp": "27/02/2026"
+  },
+  {
+    "id": 1745316000007,
+    "date": "2026-02-27",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Elevaciones",
+    "muscleGroup": "Hombros",
+    "weight": 7,
+    "series": [
+      10,
+      10,
+      8
+    ],
+    "totalReps": 28,
+    "volume": 196,
+    "oneRM": 28.07,
+    "timestamp": "27/02/2026"
+  },
+  {
+    "id": 1745920800006,
+    "date": "2026-03-03",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Face Pull",
+    "muscleGroup": "Hombros",
+    "weight": 14,
+    "series": [
+      12,
+      12,
+      10
+    ],
+    "totalReps": 34,
+    "volume": 476,
+    "oneRM": 169.49,
+    "timestamp": "03/03/2026"
+  },
+  {
+    "id": 1745920800007,
+    "date": "2026-03-03",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Elevaciones",
+    "muscleGroup": "Hombros",
+    "weight": 7,
+    "series": [
+      10,
+      10,
+      7
+    ],
+    "totalReps": 27,
+    "volume": 189,
+    "oneRM": 25.25,
+    "timestamp": "03/03/2026"
+  },
+  {
+    "id": 1746525600006,
+    "date": "2026-03-06",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Face Pull",
+    "muscleGroup": "Hombros",
+    "weight": 14,
+    "series": [
+      12,
+      10,
+      10
+    ],
+    "totalReps": 32,
+    "volume": 448,
+    "oneRM": 101.3,
+    "timestamp": "06/03/2026"
+  },
+  {
+    "id": 1746525600007,
+    "date": "2026-03-06",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Elevaciones",
+    "muscleGroup": "Hombros",
+    "weight": 7,
+    "series": [
+      8,
+      8,
+      8,
+      10
+    ],
+    "totalReps": 34,
+    "volume": 238,
+    "oneRM": 84.75,
+    "timestamp": "06/03/2026"
+  },
+  {
+    "id": 1747130400005,
+    "date": "2026-03-09",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Face Pull",
+    "muscleGroup": "Hombros",
+    "weight": 14,
+    "series": [
+      12,
+      12,
+      12
+    ],
+    "totalReps": 36,
+    "volume": 504,
+    "oneRM": 518.52,
+    "timestamp": "09/03/2026"
+  },
+  {
+    "id": 1747130400006,
+    "date": "2026-03-09",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Elevaciones",
+    "muscleGroup": "Hombros",
+    "weight": 7,
+    "series": [
+      10,
+      10,
+      10
+    ],
+    "totalReps": 30,
+    "volume": 210,
+    "oneRM": 36.12,
+    "timestamp": "09/03/2026"
+  },
+  {
+    "id": 1747735200006,
+    "date": "2026-03-13",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Face Pull",
+    "muscleGroup": "Hombros",
+    "weight": 14,
+    "series": [
+      12,
+      12,
+      12
+    ],
+    "totalReps": 36,
+    "volume": 504,
+    "oneRM": 518.52,
+    "timestamp": "13/03/2026"
+  },
+  {
+    "id": 1747735200007,
+    "date": "2026-03-13",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Elevaciones",
+    "muscleGroup": "Hombros",
+    "weight": 7,
+    "series": [
+      11,
+      11,
+      11,
+      9
+    ],
+    "totalReps": 42,
+    "volume": 294,
+    "oneRM": -50.07,
+    "timestamp": "13/03/2026"
+  },
+  {
+    "id": 1748340000005,
+    "date": "2026-03-16",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Face Pull",
+    "muscleGroup": "Hombros",
+    "weight": 16.4,
+    "series": [
+      10,
+      10,
+      10
+    ],
+    "totalReps": 30,
+    "volume": 492,
+    "oneRM": 84.62,
+    "timestamp": "16/03/2026"
+  },
+  {
+    "id": 1748340000006,
+    "date": "2026-03-16",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Elevaciones",
+    "muscleGroup": "Hombros",
+    "weight": 7,
+    "series": [
+      11,
+      11,
+      10
+    ],
+    "totalReps": 32,
+    "volume": 224,
+    "oneRM": 50.65,
+    "timestamp": "16/03/2026"
+  },
+  {
+    "id": 1748944800006,
+    "date": "2026-03-23",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Face Pull",
+    "muscleGroup": "Hombros",
+    "weight": 16.4,
+    "series": [
+      10,
+      10,
+      10
+    ],
+    "totalReps": 30,
+    "volume": 492,
+    "oneRM": 84.62,
+    "timestamp": "23/03/2026"
+  },
+  {
+    "id": 1748944800007,
+    "date": "2026-03-23",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Elevaciones",
+    "muscleGroup": "Hombros",
+    "weight": 7,
+    "series": [
+      12,
+      11,
+      11
+    ],
+    "totalReps": 34,
+    "volume": 238,
+    "oneRM": 84.75,
+    "timestamp": "23/03/2026"
+  },
+  {
+    "id": 1749549600006,
+    "date": "2026-03-27",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Face Pull",
+    "muscleGroup": "Hombros",
+    "weight": 14,
+    "series": [
+      12,
+      12,
+      10
+    ],
+    "totalReps": 34,
+    "volume": 476,
+    "oneRM": 169.49,
+    "timestamp": "27/03/2026"
+  },
+  {
+    "id": 1749549600007,
+    "date": "2026-03-27",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Elevaciones",
+    "muscleGroup": "Hombros",
+    "weight": 7,
+    "series": [
+      11,
+      11,
+      11
+    ],
+    "totalReps": 33,
+    "volume": 231,
+    "oneRM": 63.41,
+    "timestamp": "27/03/2026"
+  },
+  {
+    "id": 1750154400006,
+    "date": "2026-03-30",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Face Pull",
+    "muscleGroup": "Hombros",
+    "weight": 16.4,
+    "series": [
+      10,
+      10,
+      10
+    ],
+    "totalReps": 30,
+    "volume": 492,
+    "oneRM": 84.62,
+    "timestamp": "30/03/2026"
+  },
+  {
+    "id": 1750154400007,
+    "date": "2026-03-30",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Elevaciones",
+    "muscleGroup": "Hombros",
+    "weight": 7,
+    "series": [
+      12,
+      11,
+      11
+    ],
+    "totalReps": 34,
+    "volume": 238,
+    "oneRM": 84.75,
+    "timestamp": "30/03/2026"
+  },
+  {
+    "id": 1750759200000,
+    "date": "2026-04-07",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Press",
+    "muscleGroup": "Pecho",
+    "weight": 50,
+    "series": [
+      5,
+      5,
+      5,
+      5
+    ],
+    "totalReps": 20,
+    "volume": 1000,
+    "oneRM": 105.98,
+    "timestamp": "07/04/2026"
+  },
+  {
+    "id": 1750759200001,
+    "date": "2026-04-07",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 67.3,
+    "series": [
+      5,
+      5,
+      5,
+      6
+    ],
+    "totalReps": 21,
+    "volume": 1413.3,
+    "oneRM": 151.58,
+    "timestamp": "07/04/2026"
+  },
+  {
+    "id": 1750759200002,
+    "date": "2026-04-07",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 66.3,
+    "series": [
+      5,
+      6,
+      6,
+      5
+    ],
+    "totalReps": 22,
+    "volume": 1458.6,
+    "oneRM": 159.3,
+    "timestamp": "07/04/2026"
+  },
+  {
+    "id": 1750759200003,
+    "date": "2026-04-07",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Press Inclinado",
+    "muscleGroup": "Pecho",
+    "weight": 54.5,
+    "series": [
+      5,
+      5,
+      6,
+      5
+    ],
+    "totalReps": 21,
+    "volume": 1144.5,
+    "oneRM": 122.75,
+    "timestamp": "07/04/2026"
+  },
+  {
+    "id": 1750759200004,
+    "date": "2026-04-07",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Elevaciones",
+    "muscleGroup": "Hombros",
+    "weight": 7,
+    "series": [
+      11,
+      11,
+      10
+    ],
+    "totalReps": 32,
+    "volume": 224,
+    "oneRM": 50.65,
+    "timestamp": "07/04/2026"
+  },
+  {
+    "id": 1750759200005,
+    "date": "2026-04-07",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Face Pull",
+    "muscleGroup": "Hombros",
+    "weight": 14,
+    "series": [
+      12,
+      10,
+      12
+    ],
+    "totalReps": 34,
+    "volume": 476,
+    "oneRM": 169.49,
+    "timestamp": "07/04/2026"
+  },
+  {
+    "id": 1750759200006,
+    "date": "2026-04-07",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Tríceps",
+    "muscleGroup": "Tríceps",
+    "weight": 25.3,
+    "series": [
+      10,
+      10,
+      10
+    ],
+    "totalReps": 30,
+    "volume": 759,
+    "oneRM": 130.55,
+    "timestamp": "07/04/2026"
+  },
+  {
+    "id": 1750759200007,
+    "date": "2026-04-07",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Bíceps",
+    "muscleGroup": "Bíceps",
+    "weight": 12,
+    "series": [
+      8,
+      8,
+      6
+    ],
+    "totalReps": 22,
+    "volume": 264,
+    "oneRM": 28.83,
+    "timestamp": "07/04/2026"
+  },
+  {
+    "id": 1749844800000,
+    "date": "2026-04-10",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Press",
+    "muscleGroup": "Pecho",
+    "weight": 40,
+    "series": [10, 10, 9, 7],
+    "totalReps": 36,
+    "volume": 1440,
+    "oneRM": 0,
+    "timestamp": "10/04/2026"
+  },
+  {
+    "id": 1749844800001,
+    "date": "2026-04-10",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Press Inclinado",
+    "muscleGroup": "Pecho",
+    "weight": 36.5,
+    "series": [8, 8, 8, 9],
+    "totalReps": 33,
+    "volume": 1204.5,
+    "oneRM": 0,
+    "timestamp": "10/04/2026"
+  },
+  {
+    "id": 1749844800002,
+    "date": "2026-04-10",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 52.5,
+    "series": [11, 10, 10, 9],
+    "totalReps": 40,
+    "volume": 2100,
+    "oneRM": 0,
+    "timestamp": "10/04/2026"
+  },
+  {
+    "id": 1749844800003,
+    "date": "2026-04-10",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Elevaciones",
+    "muscleGroup": "Hombros",
+    "weight": 7,
+    "series": [11, 11, 11],
+    "totalReps": 33,
+    "volume": 231,
+    "oneRM": 0,
+    "timestamp": "10/04/2026"
+  },
+  {
+    "id": 1749844800004,
+    "date": "2026-04-10",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 50,
+    "series": [9, 9, 9, 7],
+    "totalReps": 34,
+    "volume": 1700,
+    "oneRM": 0,
+    "timestamp": "10/04/2026"
+  },
+  {
+    "id": 1749844800005,
+    "date": "2026-04-10",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Tríceps",
+    "muscleGroup": "Tríceps",
+    "weight": 23,
+    "series": [10, 9, 8],
+    "totalReps": 27,
+    "volume": 621,
+    "oneRM": 0,
+    "timestamp": "10/04/2026"
+  },
+  {
+    "id": 1749844800006,
+    "date": "2026-04-10",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Bíceps",
+    "muscleGroup": "Bíceps",
+    "weight": 10,
+    "series": [10, 8, 7],
+    "totalReps": 25,
+    "volume": 250,
+    "oneRM": 0,
+    "timestamp": "10/04/2026"
+  },
+  {
+    "id": 1749844800007,
+    "date": "2026-04-10",
+    "dayOfWeek": "Viernes",
+    "trainingType": "Torso Hipertrofia",
+    "exercise": "Face Pull",
+    "muscleGroup": "Espalda",
+    "weight": 14,
+    "series": [12, 12, 12],
+    "totalReps": 36,
+    "volume": 504,
+    "oneRM": 0,
+    "timestamp": "10/04/2026"
+  },
+  {
+    "id": 1733011200000,
+    "date": "2025-12-01",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Normal",
+    "exercise": "Face Pull",
+    "muscleGroup": "Hombros",
+    "weight": 7.5,
+    "series": [10, 10, 10],
+    "totalReps": 30,
+    "volume": 225,
+    "oneRM": 0,
+    "timestamp": "01/12/2025"
+  },
+  {
+    "id": 1733011200001,
+    "date": "2025-12-01",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Normal",
+    "exercise": "Press",
+    "muscleGroup": "Pecho",
+    "weight": 20,
+    "series": [10, 10, 10, 9],
+    "totalReps": 39,
+    "volume": 780,
+    "oneRM": 0,
+    "timestamp": "01/12/2025"
+  },
+  {
+    "id": 1733011200002,
+    "date": "2025-12-01",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Normal",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 43,
+    "series": [10, 10, 10, 10],
+    "totalReps": 40,
+    "volume": 1720,
+    "oneRM": 0,
+    "timestamp": "01/12/2025"
+  },
+  {
+    "id": 1733011200003,
+    "date": "2025-12-01",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Normal",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 43,
+    "series": [10, 10, 10],
+    "totalReps": 30,
+    "volume": 1290,
+    "oneRM": 0,
+    "timestamp": "01/12/2025"
+  },
+  {
+    "id": 1733011200004,
+    "date": "2025-12-01",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Normal",
+    "exercise": "Tríceps",
+    "muscleGroup": "Tríceps",
+    "weight": 18,
+    "series": [10, 10, 10],
+    "totalReps": 30,
+    "volume": 540,
+    "oneRM": 0,
+    "timestamp": "01/12/2025"
+  },
+  {
+    "id": 1733011200005,
+    "date": "2025-12-01",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Normal",
+    "exercise": "Bíceps",
+    "muscleGroup": "Bíceps",
+    "weight": 10,
+    "series": [10, 10, 10],
+    "totalReps": 30,
+    "volume": 300,
+    "oneRM": 0,
+    "timestamp": "01/12/2025"
+  },
+  {
+    "id": 1723392000000,
+    "date": "2025-08-11",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Normal",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 30,
+    "series": [25, 25, 30],
+    "totalReps": 80,
+    "volume": 2400,
+    "oneRM": 0,
+    "timestamp": "11/08/2025"
+  },
+  {
+    "id": 1723392000001,
+    "date": "2025-08-11",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Normal",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 30,
+    "series": [10, 10, 10],
+    "totalReps": 30,
+    "volume": 900,
+    "oneRM": 0,
+    "timestamp": "11/08/2025"
+  },
+  {
+    "id": 1723392000002,
+    "date": "2025-08-11",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Normal",
+    "exercise": "Tríceps",
+    "muscleGroup": "Tríceps",
+    "weight": 18,
+    "series": [10, 10, 10],
+    "totalReps": 30,
+    "volume": 540,
+    "oneRM": 0,
+    "timestamp": "11/08/2025"
+  },
+  {
+    "id": 1723392000003,
+    "date": "2025-08-11",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Normal",
+    "exercise": "Bíceps",
+    "muscleGroup": "Bíceps",
+    "weight": 10,
+    "series": [10, 10, 10],
+    "totalReps": 30,
+    "volume": 300,
+    "oneRM": 0,
+    "timestamp": "11/08/2025"
+  },
+  {
+    "id": 1723564800000,
+    "date": "2025-08-13",
+    "dayOfWeek": "Miércoles",
+    "trainingType": "Torso Normal",
+    "exercise": "Tríceps",
+    "muscleGroup": "Tríceps",
+    "weight": 14,
+    "series": [10, 10, 10],
+    "totalReps": 30,
+    "volume": 420,
+    "oneRM": 0,
+    "timestamp": "13/08/2025"
+  },
+  {
+    "id": 1723564800001,
+    "date": "2025-08-13",
+    "dayOfWeek": "Miércoles",
+    "trainingType": "Torso Normal",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 30,
+    "series": [25, 25, 30],
+    "totalReps": 80,
+    "volume": 2400,
+    "oneRM": 0,
+    "timestamp": "13/08/2025"
+  },
+  {
+    "id": 1723564800002,
+    "date": "2025-08-13",
+    "dayOfWeek": "Miércoles",
+    "trainingType": "Torso Normal",
+    "exercise": "Bíceps",
+    "muscleGroup": "Bíceps",
+    "weight": 10,
+    "series": [10, 10, 10],
+    "totalReps": 30,
+    "volume": 300,
+    "oneRM": 0,
+    "timestamp": "13/08/2025"
+  },
+  {
+    "id": 1723564800003,
+    "date": "2025-08-13",
+    "dayOfWeek": "Miércoles",
+    "trainingType": "Torso Normal",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 30,
+    "series": [10, 10, 10],
+    "totalReps": 30,
+    "volume": 900,
+    "oneRM": 0,
+    "timestamp": "13/08/2025"
+  },
+  {
+    "id": 1723564800004,
+    "date": "2025-08-13",
+    "dayOfWeek": "Miércoles",
+    "trainingType": "Torso Normal",
+    "exercise": "Press",
+    "muscleGroup": "Pecho",
+    "weight": 20,
+    "series": [10, 10, 10],
+    "totalReps": 30,
+    "volume": 600,
+    "oneRM": 0,
+    "timestamp": "13/08/2025"
+  },
+  {
+    "id": 1744468800000,
+    "date": "2026-04-13",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Press",
+    "muscleGroup": "Pecho",
+    "weight": 50,
+    "series": [5, 5, 5, 5],
+    "totalReps": 20,
+    "volume": 1000,
+    "oneRM": 56.25,
+    "timestamp": "13/04/2026"
+  },
+  {
+    "id": 1744468800001,
+    "date": "2026-04-13",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Jalón",
+    "muscleGroup": "Espalda",
+    "weight": 66.3,
+    "series": [5, 6, 7, 6],
+    "totalReps": 24,
+    "volume": 1591.2,
+    "oneRM": 74.59,
+    "timestamp": "13/04/2026"
+  },
+  {
+    "id": 1744468800002,
+    "date": "2026-04-13",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Remo",
+    "muscleGroup": "Espalda",
+    "weight": 67.3,
+    "series": [5, 5, 5, 5],
+    "totalReps": 20,
+    "volume": 1346,
+    "oneRM": 75.71,
+    "timestamp": "13/04/2026"
+  },
+  {
+    "id": 1744468800003,
+    "date": "2026-04-13",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Press Inclinado",
+    "muscleGroup": "Pecho",
+    "weight": 41,
+    "series": [7, 7, 8, 6],
+    "totalReps": 28,
+    "volume": 1148,
+    "oneRM": 47.63,
+    "timestamp": "13/04/2026"
+  },
+  {
+    "id": 1744468800004,
+    "date": "2026-04-13",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Bíceps",
+    "muscleGroup": "Bíceps",
+    "weight": 12,
+    "series": [8, 8, 8],
+    "totalReps": 24,
+    "volume": 288,
+    "oneRM": 14.90,
+    "timestamp": "13/04/2026"
+  },
+  {
+    "id": 1744468800005,
+    "date": "2026-04-13",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Tríceps",
+    "muscleGroup": "Tríceps",
+    "weight": 25.3,
+    "series": [11, 12, 11],
+    "totalReps": 34,
+    "volume": 860.2,
+    "oneRM": 35.03,
+    "timestamp": "13/04/2026"
+  },
+  {
+    "id": 1744468800006,
+    "date": "2026-04-13",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Face Pull",
+    "muscleGroup": "Hombros",
+    "weight": 16.3,
+    "series": [10, 10, 8],
+    "totalReps": 28,
+    "volume": 475.8,
+    "oneRM": 20.23,
+    "timestamp": "13/04/2026"
+  },
+  {
+    "id": 1744468800007,
+    "date": "2026-04-13",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso Pesado",
+    "exercise": "Elevaciones",
+    "muscleGroup": "Hombros",
+    "weight": 7,
+    "series": [11, 11, 12],
+    "totalReps": 34,
+    "volume": 238,
+    "oneRM": 9.69,
+    "timestamp": "13/04/2026"
+  }
+]

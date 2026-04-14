@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis de Entrenamiento</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-dark bg-primary mb-4">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">🏃 Análisis Detallado de Entrenamiento</span>
+            <a href="running.html" class="btn btn-sm btn-outline-light">← Volver a Running</a>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <!-- CARGA DE ARCHIVO -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">📁 Cargar Archivo TCX</h5>
+            </div>
+            <div class="card-body">
+                <div class="input-group">
+                    <input type="file" class="form-control" id="tcxFile" accept=".tcx">
+                    <button class="btn btn-primary" id="loadBtn">Cargar</button>
+                </div>
+                <small class="text-muted d-block mt-2">Selecciona un archivo TCX exportado de tu reloj Garmin</small>
+            </div>
+        </div>
+
+        <!-- INFORMACIÓN GENERAL -->
+        <div class="card shadow-sm mb-4" id="summaryCard" style="display: none;">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">📊 Resumen del Entrenamiento</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <p class="text-muted mb-1">Distancia Total</p>
+                        <h4 id="totalDistance">-</h4>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="text-muted mb-1">Tiempo Total</p>
+                        <h4 id="totalTime">-</h4>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="text-muted mb-1">Ritmo Medio</p>
+                        <h4 id="avgPace">-</h4>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="text-muted mb-1">FC Media</p>
+                        <h4 id="avgHR">-</h4>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-3">
+                        <p class="text-muted mb-1">FC Máxima</p>
+                        <h4 id="maxHR">-</h4>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="text-muted mb-1">Calorías</p>
+                        <h4 id="totalCalories">-</h4>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="text-muted mb-1">Nº de Splits</p>
+                        <h4 id="numLaps">-</h4>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="text-muted mb-1">Hora del Entrenamiento</p>
+                        <h4 id="trainingTime">-</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GRÁFICAS -->
+        <div class="card shadow-sm mb-4" id="chartsCard" style="display: none;">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0">📈 Evolución por Split</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h6 class="mb-3 fw-bold">⏱️ Ritmo por Split</h6>
+                        <div style="position: relative; height: 280px;">
+                            <canvas id="paceProgressChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <h6 class="mb-3 fw-bold">❤️ FC por Split</h6>
+                        <div style="position: relative; height: 280px;">
+                            <canvas id="hrProgressChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-lg-6">
+                        <h6 class="mb-3 fw-bold">🔥 Calorías por Split</h6>
+                        <div style="position: relative; height: 280px;">
+                            <canvas id="caloriesProgressChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <h6 class="mb-3 fw-bold">⚡ Tiempo por Split</h6>
+                        <div style="position: relative; height: 280px;">
+                            <canvas id="timeProgressChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TABLA DE SPLITS -->
+        <div class="card shadow-sm mb-4" id="splitsCard" style="display: none;">
+            <div class="card-header bg-warning text-dark">
+                <h5 class="mb-0">🏁 Desglose de Splits</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-sm table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Distancia</th>
+                                <th>Tiempo</th>
+                                <th>Ritmo</th>
+                                <th>FC Media</th>
+                                <th>FC Máxima</th>
+                                <th>Calorías</th>
+                                <th>Velocidad</th>
+                            </tr>
+                        </thead>
+                        <tbody id="splitsTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ESTADÍSTICAS AVANZADAS -->
+        <div class="card shadow-sm mb-4" id="statsCard" style="display: none;">
+            <div class="card-header bg-secondary text-white">
+                <h5 class="mb-0">📉 Estadísticas</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <p class="text-muted mb-1">Ritmo Más Rápido</p>
+                        <h5 id="fastestPace">-</h5>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="text-muted mb-1">Ritmo Más Lento</p>
+                        <h5 id="slowestPace">-</h5>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="text-muted mb-1">Variabilidad de Ritmo</p>
+                        <h5 id="paceVariability">-</h5>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="text-muted mb-1">Variabilidad de FC</p>
+                        <h5 id="hrVariability">-</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script src="app-training-analysis.js"></script>
+</body>
+</html>

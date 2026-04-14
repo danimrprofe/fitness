@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Running</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-dark bg-dark sticky-top">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">🏃 Gestor de Running</span>
+            <div>
+                <a href="index.html" class="btn btn-sm btn-outline-light">← Gym</a>
+                <a href="analisis-entrenamiento.html" class="btn btn-sm btn-outline-light ms-2">🔬 Analizar TCX</a>
+                <button class="btn btn-sm btn-outline-light ms-2" id="exportRunningBtn">📥 Exportar</button>
+                <button class="btn btn-sm btn-outline-light ms-2" id="importRunningBtn">📤 Importar</button>
+                <input type="file" id="importRunningFile" accept=".json" style="display: none;">
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-4">
+        <div class="row g-4">
+            <div class="col-12">
+                <!-- RESUMEN -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="mb-0">📊 Resumen de Running</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row text-center">
+                            <div class="col-md-3">
+                                <div class="card bg-light border-0">
+                                    <div class="card-body">
+                                        <h6 class="text-muted mb-2">Total Entrenamientos</h6>
+                                        <h3 id="totalRuns" class="text-info fw-bold">-</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-light border-0">
+                                    <div class="card-body">
+                                        <h6 class="text-muted mb-2">Distancia Total</h6>
+                                        <h3 id="totalDistance" class="text-success fw-bold">-</h3>
+                                        <small class="text-muted">km</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-light border-0">
+                                    <div class="card-body">
+                                        <h6 class="text-muted mb-2">Ritmo Promedio</h6>
+                                        <h3 id="avgPace" class="text-warning fw-bold">-</h3>
+                                        <small class="text-muted">min/km</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-light border-0">
+                                    <div class="card-body">
+                                        <h6 class="text-muted mb-2">FC Promedio</h6>
+                                        <h3 id="avgHR" class="text-danger fw-bold">-</h3>
+                                        <small class="text-muted">bpm</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GRÁFICAS -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0">📈 Evolución</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <h6 class="mb-3 fw-bold">📏 Distancia por Entrenamiento</h6>
+                                <div style="position: relative; height: 280px;">
+                                    <canvas id="distanceChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <h6 class="mb-3 fw-bold">⏱️ Ritmo Promedio</h6>
+                                <div style="position: relative; height: 280px;">
+                                    <canvas id="paceChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-lg-6">
+                                <h6 class="mb-3 fw-bold">❤️ FC Promedio</h6>
+                                <div style="position: relative; height: 280px;">
+                                    <canvas id="hrChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <h6 class="mb-3 fw-bold">🔥 Calorías Quemadas</h6>
+                                <div style="position: relative; height: 280px;">
+                                    <canvas id="caloriesChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <h6 class="mb-3 fw-bold">📅 Kilómetros por Mes</h6>
+                                <div style="position: relative; height: 280px;">
+                                    <canvas id="monthlyKmChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- FC por Tipo de Entrenamiento (Combinado) -->
+                        <div class="row mt-4">
+                            <div class="col-lg-12">
+                                <h6 class="mb-3 fw-bold">❤️ FC Promedio por Tipo de Entrenamiento</h6>
+                                <div style="position: relative; height: 320px;">
+                                    <canvas id="hrByTypeChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ANÁLISIS DE PATRÓN -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">📅 Adherencia al Patrón</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="patternAnalysisContainer"></div>
+                    </div>
+                </div>
+
+                <!-- ANÁLISIS POR TIPO -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-warning text-dark">
+                        <h5 class="mb-0">🎯 Análisis por Tipo de Entrenamiento</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-sm table-hover compact-table">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Tipo</th>
+                                        <th class="text-center">Entrenamientos</th>
+                                        <th class="text-center">Dist Promedio</th>
+                                        <th class="text-center">Ritmo Promedio</th>
+                                        <th class="text-center">FC Promedio</th>
+                                        <th class="text-center">Calorías Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="trainingTypeTable">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FILTROS Y TABLA -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-secondary text-white">
+                        <h5 class="mb-0">🔍 Histórico de Entrenamientos</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-2 mb-3">
+                            <div class="col-md-4">
+                                <label for="filterRunningType" class="form-label">Tipo de Actividad</label>
+                                <select class="form-select form-select-sm" id="filterRunningType">
+                                    <option value="">Todos</option>
+                                    <option value="Carrera">Carrera</option>
+                                    <option value="Entrenamiento en cinta">Entrenamiento en cinta</option>
+                                    <option value="Remo indoor">Remo indoor</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="filterRunningTitle" class="form-label">Tipo de Entrenamiento</label>
+                                <input type="text" class="form-control form-control-sm" id="filterRunningTitle" placeholder="Tirada larga, Tempo, etc...">
+                            </div>
+                            <div class="col-md-4">
+                                <label>&nbsp;</label>
+                                <button class="btn btn-sm btn-outline-danger w-100" id="clearRunningBtn">🔄 Limpiar Filtros</button>
+                            </div>
+                        </div>
+
+                        <div style="max-height: 600px; overflow-y: auto;">
+                            <table class="table table-striped table-hover table-sm compact-table" id="runningTable">
+                                <thead class="table-dark position-sticky" style="top: 0;">
+                                    <tr>
+                                        <th style="width: 12%;">Fecha</th>
+                                        <th style="width: 14%;">Tipo</th>
+                                        <th style="width: 16%;">Entrenamiento</th>
+                                        <th style="width: 8%;">Distancia</th>
+                                        <th style="width: 8%;">Tiempo</th>
+                                        <th style="width: 8%;">Ritmo</th>
+                                        <th style="width: 6%;">FC</th>
+                                        <th style="width: 8%;">Cal</th>
+                                        <th style="width: 8%;">Elevación</th>
+                                        <th style="width: 4%;">📝</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="runningTableBody">
+                                </tbody>
+                            </table>
+                            <p id="emptyRunningMessage" class="text-muted text-center">No hay entrenamientos registrados aún.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DETALLES -->
+    <div class="modal fade" id="detailsRunningModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title" id="modalRunningTitle">-</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="modalRunningBody">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app-running.js"></script>
+</body>
+</html>
