@@ -1,230 +1,599 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gestor de Running</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body class="bg-light">
+  </head>
+  <body class="bg-light">
     <nav class="navbar navbar-dark bg-dark sticky-top">
-        <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1">🏃 Gestor de Running</span>
-            <div>
-                <a href="index.html" class="btn btn-sm btn-outline-light">← Gym</a>
-                <a href="analisis-entrenamiento.html" class="btn btn-sm btn-outline-light ms-2">🔬 Analizar TCX</a>
-                <button class="btn btn-sm btn-outline-light ms-2" id="exportRunningBtn">📥 Exportar</button>
-                <button class="btn btn-sm btn-outline-light ms-2" id="importRunningBtn">📤 Importar</button>
-                <input type="file" id="importRunningFile" accept=".json" style="display: none;">
-            </div>
+      <div class="container-fluid">
+        <span class="navbar-brand mb-0 h1">🏃 Gestor de Running</span>
+        <div>
+          <a href="index.html" class="btn btn-sm btn-outline-light">← Gym</a>
+          <a
+            href="analisis-entrenamiento.html"
+            class="btn btn-sm btn-outline-light ms-2"
+            >🔬 Analizar TCX</a
+          >
+          <button
+            class="btn btn-sm btn-outline-light ms-2"
+            id="exportRunningBtn"
+          >
+            📥 Exportar
+          </button>
+          <button
+            class="btn btn-sm btn-outline-light ms-2"
+            id="importRunningBtn"
+          >
+            📤 Importar
+          </button>
+          <input
+            type="file"
+            id="importRunningFile"
+            accept=".json,.csv"
+            style="display: none"
+          />
         </div>
+      </div>
     </nav>
 
     <div class="container-fluid mt-4">
-        <div class="row g-4">
-            <div class="col-12">
-                <!-- RESUMEN -->
-                <div class="card shadow-sm mb-4">
-                    <div class="card-header bg-info text-white">
-                        <h5 class="mb-0">📊 Resumen de Running</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row text-center">
-                            <div class="col-md-3">
-                                <div class="card bg-light border-0">
-                                    <div class="card-body">
-                                        <h6 class="text-muted mb-2">Total Entrenamientos</h6>
-                                        <h3 id="totalRuns" class="text-info fw-bold">-</h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="card bg-light border-0">
-                                    <div class="card-body">
-                                        <h6 class="text-muted mb-2">Distancia Total</h6>
-                                        <h3 id="totalDistance" class="text-success fw-bold">-</h3>
-                                        <small class="text-muted">km</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="card bg-light border-0">
-                                    <div class="card-body">
-                                        <h6 class="text-muted mb-2">Ritmo Promedio</h6>
-                                        <h3 id="avgPace" class="text-warning fw-bold">-</h3>
-                                        <small class="text-muted">min/km</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="card bg-light border-0">
-                                    <div class="card-body">
-                                        <h6 class="text-muted mb-2">FC Promedio</h6>
-                                        <h3 id="avgHR" class="text-danger fw-bold">-</h3>
-                                        <small class="text-muted">bpm</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- GRÁFICAS -->
-                <div class="card shadow-sm mb-4">
-                    <div class="card-header bg-success text-white">
-                        <h5 class="mb-0">📈 Evolución</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <h6 class="mb-3 fw-bold">📏 Distancia por Entrenamiento</h6>
-                                <div style="position: relative; height: 280px;">
-                                    <canvas id="distanceChart"></canvas>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <h6 class="mb-3 fw-bold">⏱️ Ritmo Promedio</h6>
-                                <div style="position: relative; height: 280px;">
-                                    <canvas id="paceChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col-lg-6">
-                                <h6 class="mb-3 fw-bold">❤️ FC Promedio</h6>
-                                <div style="position: relative; height: 280px;">
-                                    <canvas id="hrChart"></canvas>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <h6 class="mb-3 fw-bold">🔥 Calorías Quemadas</h6>
-                                <div style="position: relative; height: 280px;">
-                                    <canvas id="caloriesChart"></canvas>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <h6 class="mb-3 fw-bold">📅 Kilómetros por Mes</h6>
-                                <div style="position: relative; height: 280px;">
-                                    <canvas id="monthlyKmChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- FC por Tipo de Entrenamiento (Combinado) -->
-                        <div class="row mt-4">
-                            <div class="col-lg-12">
-                                <h6 class="mb-3 fw-bold">❤️ FC Promedio por Tipo de Entrenamiento</h6>
-                                <div style="position: relative; height: 320px;">
-                                    <canvas id="hrByTypeChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ANÁLISIS DE PATRÓN -->
-                <div class="card shadow-sm mb-4">
-                    <div class="card-header bg-primary text-white">
-                        <h5 class="mb-0">📅 Adherencia al Patrón</h5>
-                    </div>
-                    <div class="card-body">
-                        <div id="patternAnalysisContainer"></div>
-                    </div>
-                </div>
-
-                <!-- ANÁLISIS POR TIPO -->
-                <div class="card shadow-sm mb-4">
-                    <div class="card-header bg-warning text-dark">
-                        <h5 class="mb-0">🎯 Análisis por Tipo de Entrenamiento</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-sm table-hover compact-table">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th>Tipo</th>
-                                        <th class="text-center">Entrenamientos</th>
-                                        <th class="text-center">Dist Promedio</th>
-                                        <th class="text-center">Ritmo Promedio</th>
-                                        <th class="text-center">FC Promedio</th>
-                                        <th class="text-center">Calorías Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="trainingTypeTable">
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- FILTROS Y TABLA -->
-                <div class="card shadow-sm mb-4">
-                    <div class="card-header bg-secondary text-white">
-                        <h5 class="mb-0">🔍 Histórico de Entrenamientos</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row g-2 mb-3">
-                            <div class="col-md-4">
-                                <label for="filterRunningType" class="form-label">Tipo de Actividad</label>
-                                <select class="form-select form-select-sm" id="filterRunningType">
-                                    <option value="">Todos</option>
-                                    <option value="Carrera">Carrera</option>
-                                    <option value="Entrenamiento en cinta">Entrenamiento en cinta</option>
-                                    <option value="Remo indoor">Remo indoor</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="filterRunningTitle" class="form-label">Tipo de Entrenamiento</label>
-                                <input type="text" class="form-control form-control-sm" id="filterRunningTitle" placeholder="Tirada larga, Tempo, etc...">
-                            </div>
-                            <div class="col-md-4">
-                                <label>&nbsp;</label>
-                                <button class="btn btn-sm btn-outline-danger w-100" id="clearRunningBtn">🔄 Limpiar Filtros</button>
-                            </div>
-                        </div>
-
-                        <div style="max-height: 600px; overflow-y: auto;">
-                            <table class="table table-striped table-hover table-sm compact-table" id="runningTable">
-                                <thead class="table-dark position-sticky" style="top: 0;">
-                                    <tr>
-                                        <th style="width: 12%;">Fecha</th>
-                                        <th style="width: 14%;">Tipo</th>
-                                        <th style="width: 16%;">Entrenamiento</th>
-                                        <th style="width: 8%;">Distancia</th>
-                                        <th style="width: 8%;">Tiempo</th>
-                                        <th style="width: 8%;">Ritmo</th>
-                                        <th style="width: 6%;">FC</th>
-                                        <th style="width: 8%;">Cal</th>
-                                        <th style="width: 8%;">Elevación</th>
-                                        <th style="width: 4%;">📝</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="runningTableBody">
-                                </tbody>
-                            </table>
-                            <p id="emptyRunningMessage" class="text-muted text-center">No hay entrenamientos registrados aún.</p>
-                        </div>
-                    </div>
-                </div>
+      <div class="row g-4">
+        <div class="col-12">
+          <section class="mb-2" aria-labelledby="dashboardTitle">
+            <div
+              class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-3 px-1"
+            >
+              <div>
+                <h2 id="dashboardTitle" class="h4 fw-bold mb-1">
+                  Dashboard de Running
+                </h2>
+                <p id="dashboardPeriodRange" class="text-secondary mb-0">
+                  Cargando histórico...
+                </p>
+              </div>
+              <div>
+                <label for="dashboardPeriod" class="form-label small mb-1"
+                  >Periodo</label
+                >
+                <select id="dashboardPeriod" class="form-select">
+                  <option value="week" selected>Semana</option>
+                  <option value="30days">Últimos 30 días</option>
+                  <option value="month">Mes</option>
+                  <option value="year">Año</option>
+                </select>
+              </div>
             </div>
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-4 g-3 mb-3">
+              <div class="col">
+                <div class="card h-100 shadow-sm kpi-card">
+                  <div class="card-body p-3 p-lg-4">
+                    <div
+                      class="small text-secondary text-uppercase fw-semibold"
+                    >
+                      Kilómetros del periodo
+                    </div>
+                    <div class="mt-2 fw-bold fs-2 text-success">
+                      <span id="dashboardDistance">-</span>
+                      <small class="fs-6 fw-normal text-muted">km</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card h-100 shadow-sm kpi-card">
+                  <div class="card-body p-3 p-lg-4">
+                    <div
+                      class="small text-secondary text-uppercase fw-semibold"
+                    >
+                      Tiempo corriendo
+                    </div>
+                    <div
+                      id="dashboardTime"
+                      class="mt-2 fw-bold fs-2 text-primary"
+                    >
+                      -
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card h-100 shadow-sm kpi-card">
+                  <div class="card-body p-3 p-lg-4">
+                    <div
+                      class="small text-secondary text-uppercase fw-semibold"
+                    >
+                      Entrenamientos
+                    </div>
+                    <div id="dashboardRuns" class="mt-2 fw-bold fs-2 text-dark">
+                      -
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card h-100 shadow-sm kpi-card">
+                  <div class="card-body p-3 p-lg-4">
+                    <div
+                      class="small text-secondary text-uppercase fw-semibold"
+                    >
+                      Desnivel positivo
+                    </div>
+                    <div class="mt-2 fw-bold fs-2 text-warning-emphasis">
+                      <span id="dashboardElevation">-</span>
+                      <small class="fs-6 fw-normal text-muted">m</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3 mb-3">
+              <div class="col-lg-7">
+                <div class="card h-100 shadow-sm">
+                  <div class="card-body p-3 p-lg-4">
+                    <div
+                      class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-3"
+                    >
+                      <div>
+                        <h3 class="h6 fw-bold mb-1">
+                          Kilómetros frente al periodo anterior
+                        </h3>
+                        <p
+                          id="dashboardComparisonDates"
+                          class="small text-secondary mb-0"
+                        >
+                          -
+                        </p>
+                      </div>
+                      <strong
+                        id="dashboardComparisonChange"
+                        class="text-secondary"
+                      >
+                        -
+                      </strong>
+                    </div>
+                    <div
+                      class="small d-flex justify-content-between gap-3 mb-1"
+                    >
+                      <span>Periodo actual</span>
+                      <strong id="dashboardCurrentKm">-</strong>
+                    </div>
+                    <div class="progress mb-3" style="height: 10px">
+                      <div
+                        id="dashboardCurrentBar"
+                        class="progress-bar bg-success"
+                        role="progressbar"
+                        aria-label="Kilómetros del periodo actual"
+                        style="width: 0%"
+                      ></div>
+                    </div>
+                    <div
+                      class="small d-flex justify-content-between gap-3 mb-1"
+                    >
+                      <span>Periodo anterior</span>
+                      <strong id="dashboardPreviousKm">-</strong>
+                    </div>
+                    <div class="progress" style="height: 10px">
+                      <div
+                        id="dashboardPreviousBar"
+                        class="progress-bar bg-secondary"
+                        role="progressbar"
+                        aria-label="Kilómetros del periodo anterior"
+                        style="width: 0%"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-5">
+                <div class="card h-100 shadow-sm">
+                  <div class="card-body p-3 p-lg-4">
+                    <div
+                      class="small text-secondary text-uppercase fw-semibold"
+                    >
+                      Último entrenamiento
+                    </div>
+                    <div
+                      id="dashboardLastRunTitle"
+                      class="mt-2 fw-bold fs-5 text-break"
+                    >
+                      -
+                    </div>
+                    <p id="dashboardLastRunDetails" class="text-secondary mb-0">
+                      -
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-lg-4">
+                <div class="card h-100 shadow-sm">
+                  <div class="card-body p-3 p-lg-4">
+                    <div
+                      class="small text-secondary text-uppercase fw-semibold"
+                    >
+                      Tirada más larga · últimos 30 días
+                    </div>
+                    <div
+                      id="dashboardLongestTitle"
+                      class="mt-2 fw-bold fs-5 text-break"
+                    >
+                      -
+                    </div>
+                    <p id="dashboardLongestDetails" class="text-secondary mb-0">
+                      -
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-8">
+                <div class="card h-100 shadow-sm">
+                  <div class="card-body p-3 p-lg-4">
+                    <div
+                      class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-3"
+                    >
+                      <h3 class="h6 fw-bold mb-0">
+                        Mejores marcas disponibles
+                      </h3>
+                      <small class="text-secondary">
+                        Estimadas según el ritmo medio de sesiones de distancia
+                        similar
+                      </small>
+                    </div>
+                    <div class="row g-3">
+                      <div class="col-4">
+                        <div class="small text-secondary">5K</div>
+                        <div id="dashboardBest5k" class="fw-bold fs-4">-</div>
+                        <div
+                          id="dashboardBest5kDetails"
+                          class="small text-secondary text-break"
+                        >
+                          -
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <div class="small text-secondary">10K</div>
+                        <div id="dashboardBest10k" class="fw-bold fs-4">-</div>
+                        <div
+                          id="dashboardBest10kDetails"
+                          class="small text-secondary text-break"
+                        >
+                          -
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <div class="small text-secondary">Media maratón</div>
+                        <div id="dashboardBestHalf" class="fw-bold fs-4">-</div>
+                        <div
+                          id="dashboardBestHalfDetails"
+                          class="small text-secondary text-break"
+                        >
+                          -
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
+
+        <div class="col-12">
+          <!-- RESUMEN -->
+          <div class="mb-4">
+            <div
+              class="d-flex align-items-center justify-content-between mb-3 px-1"
+            >
+              <h5 class="mb-0 fw-bold text-dark">📊 Resumen histórico</h5>
+            </div>
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-4 g-3 g-xl-4">
+              <div class="col">
+                <div
+                  class="card h-100 border-0 shadow-sm rounded-4 bg-white kpi-card"
+                >
+                  <div class="card-body p-3 p-lg-4">
+                    <div
+                      class="d-flex justify-content-between align-items-center mb-3"
+                    >
+                      <span
+                        class="badge rounded-pill bg-info-subtle text-info-emphasis px-2 py-1"
+                        >🏃</span
+                      >
+                    </div>
+                    <div
+                      class="text-uppercase text-secondary small fw-semibold letter-spacing-1"
+                    >
+                      Total Entrenamientos
+                    </div>
+                    <div
+                      id="totalRuns"
+                      class="mt-2 fw-bold display-6 fs-3 text-primary mb-0"
+                    >
+                      -
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col">
+                <div
+                  class="card h-100 border-0 shadow-sm rounded-4 bg-white kpi-card"
+                >
+                  <div class="card-body p-3 p-lg-4">
+                    <div
+                      class="d-flex justify-content-between align-items-center mb-3"
+                    >
+                      <span
+                        class="badge rounded-pill bg-success-subtle text-success-emphasis px-2 py-1"
+                        >📏</span
+                      >
+                    </div>
+                    <div
+                      class="text-uppercase text-secondary small fw-semibold letter-spacing-1"
+                    >
+                      Distancia Total
+                    </div>
+                    <div class="d-flex align-items-baseline gap-2 mt-2">
+                      <div
+                        id="totalDistance"
+                        class="fw-bold display-6 fs-3 text-success mb-0"
+                      >
+                        -
+                      </div>
+                      <small class="text-muted">km</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col">
+                <div
+                  class="card h-100 border-0 shadow-sm rounded-4 bg-white kpi-card"
+                >
+                  <div class="card-body p-3 p-lg-4">
+                    <div
+                      class="d-flex justify-content-between align-items-center mb-3"
+                    >
+                      <span
+                        class="badge rounded-pill bg-warning-subtle text-warning-emphasis px-2 py-1"
+                        >⏱️</span
+                      >
+                    </div>
+                    <div
+                      class="text-uppercase text-secondary small fw-semibold letter-spacing-1"
+                    >
+                      Ritmo Promedio
+                    </div>
+                    <div class="d-flex align-items-baseline gap-2 mt-2">
+                      <div
+                        id="avgPace"
+                        class="fw-bold display-6 fs-3 text-warning mb-0"
+                      >
+                        -
+                      </div>
+                      <small class="text-muted">min/km</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col">
+                <div
+                  class="card h-100 border-0 shadow-sm rounded-4 bg-white kpi-card"
+                >
+                  <div class="card-body p-3 p-lg-4">
+                    <div
+                      class="d-flex justify-content-between align-items-center mb-3"
+                    >
+                      <span
+                        class="badge rounded-pill bg-danger-subtle text-danger-emphasis px-2 py-1"
+                        >❤️</span
+                      >
+                    </div>
+                    <div
+                      class="text-uppercase text-secondary small fw-semibold letter-spacing-1"
+                    >
+                      FC Promedio
+                    </div>
+                    <div class="d-flex align-items-baseline gap-2 mt-2">
+                      <div
+                        id="avgHR"
+                        class="fw-bold display-6 fs-3 text-danger mb-0"
+                      >
+                        -
+                      </div>
+                      <small class="text-muted">bpm</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- GRÁFICAS -->
+          <div class="card shadow-sm mb-4">
+            <div class="card-header bg-success text-white">
+              <h5 class="mb-0">📈 Evolución</h5>
+            </div>
+            <div class="card-body">
+              <div class="row g-4">
+                <div class="col-lg-6">
+                  <div class="chart-panel h-100">
+                    <h6 class="mb-3 fw-bold">📏 Distancia por Entrenamiento</h6>
+                    <div style="position: relative; height: 280px">
+                      <canvas id="distanceChart"></canvas>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-6">
+                  <div class="chart-panel h-100">
+                    <h6 class="mb-3 fw-bold">🔥 Calorías Quemadas</h6>
+                    <div style="position: relative; height: 280px">
+                      <canvas id="caloriesChart"></canvas>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-6">
+                  <div class="chart-panel h-100">
+                    <h6 class="mb-3 fw-bold">📅 Kilómetros por Mes</h6>
+                    <div style="position: relative; height: 280px">
+                      <canvas id="monthlyKmChart"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ANÁLISIS DE PATRÓN -->
+          <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white">
+              <h5 class="mb-0">📅 Adherencia al Patrón</h5>
+            </div>
+            <div class="card-body">
+              <div id="patternAnalysisContainer"></div>
+            </div>
+          </div>
+
+          <!-- ANÁLISIS POR TIPO -->
+          <div class="card shadow-sm mb-4">
+            <div class="card-header bg-warning text-dark">
+              <h5 class="mb-0">🎯 Análisis por Tipo de Entrenamiento</h5>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-sm table-hover compact-table">
+                  <thead class="table-light">
+                    <tr>
+                      <th>Tipo</th>
+                      <th class="text-center">Entrenamientos</th>
+                      <th class="text-center">Dist Promedio</th>
+                      <th class="text-center">Ritmo Promedio</th>
+                      <th class="text-center">FC Promedio</th>
+                      <th class="text-center">Calorías Total</th>
+                    </tr>
+                  </thead>
+                  <tbody id="trainingTypeTable"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- FILTROS Y TABLA -->
+          <div class="card shadow-sm mb-4">
+            <div class="card-header bg-secondary text-white">
+              <h5 class="mb-0">🔍 Histórico de Entrenamientos</h5>
+            </div>
+            <div class="card-body">
+              <div class="row g-3 mb-3 align-items-end">
+                <div class="col-md-4">
+                  <label
+                    for="filterRunningType"
+                    class="form-label small fw-semibold mb-2"
+                    >Tipo de Actividad</label
+                  >
+                  <select
+                    class="form-select form-select-sm rounded-3 border-1 shadow-sm"
+                    id="filterRunningType"
+                    style="height: 38px"
+                  >
+                    <option value="">Todos</option>
+                    <option value="Carrera">Carrera</option>
+                    <option value="Entrenamiento en cinta">
+                      Entrenamiento en cinta
+                    </option>
+                    <option value="Remo indoor">Remo indoor</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label
+                    for="filterRunningTitle"
+                    class="form-label small fw-semibold mb-2"
+                    >Tipo de Entrenamiento</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control form-control-sm rounded-3 border-1 shadow-sm"
+                    id="filterRunningTitle"
+                    style="height: 38px"
+                    placeholder="Tirada larga, Tempo, etc..."
+                  />
+                </div>
+                <div class="col-md-4">
+                  <button
+                    class="btn btn-sm btn-outline-danger w-100 rounded-3 shadow-sm"
+                    id="clearRunningBtn"
+                    style="height: 38px"
+                  >
+                    🔄 Limpiar Filtros
+                  </button>
+                </div>
+              </div>
+
+              <div style="max-height: 600px; overflow-y: auto">
+                <table
+                  class="table table-striped table-hover table-sm compact-table"
+                  id="runningTable"
+                >
+                  <thead class="table-dark position-sticky" style="top: 0">
+                    <tr>
+                      <th style="width: 12%">Fecha</th>
+                      <th style="width: 14%">Tipo</th>
+                      <th style="width: 16%">Entrenamiento</th>
+                      <th style="width: 8%">Distancia</th>
+                      <th style="width: 8%">Tiempo</th>
+                      <th style="width: 8%">Ritmo</th>
+                      <th style="width: 6%">FC</th>
+                      <th style="width: 8%">Cal</th>
+                      <th style="width: 8%">Elevación</th>
+                      <th style="width: 4%">📝</th>
+                    </tr>
+                  </thead>
+                  <tbody id="runningTableBody"></tbody>
+                </table>
+                <div id="runningPagination"></div>
+                <p id="emptyRunningMessage" class="text-muted text-center">
+                  No hay entrenamientos registrados aún.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- MODAL DETALLES -->
     <div class="modal fade" id="detailsRunningModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header bg-dark text-white">
-                    <h5 class="modal-title" id="modalRunningTitle">-</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body" id="modalRunningBody">
-                </div>
-            </div>
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-dark text-white">
+            <h5 class="modal-title" id="modalRunningTitle">-</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body" id="modalRunningBody"></div>
         </div>
+      </div>
     </div>
 
     <script src="app-running.js"></script>
-</body>
+  </body>
 </html>

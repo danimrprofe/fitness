@@ -1,210 +1,281 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gráficos - Gestor de Entrenamientos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body class="bg-light">
+  </head>
+  <body class="bg-light">
     <nav class="navbar navbar-dark bg-dark sticky-top">
-        <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1">📊 Gráficos de Entrenamientos</span>
-            <div id="unsavedIndicator" style="display: none; color: #ffc107; font-weight: bold; margin-right: 20px;">
-                ⚠️ Cambios sin guardar
-            </div>
-            <div>
-                <a href="index.html" class="btn btn-sm btn-outline-light">← Histórico</a>
-                <a href="entrenamiento-dia.html" class="btn btn-sm btn-outline-light ms-2">🎯 Hoy</a>
-                <a href="running.html" class="btn btn-sm btn-outline-light ms-2">🏃 Running</a>
-                <a href="pierna.html" class="btn btn-sm btn-outline-light ms-2">🦵 Pierna</a>
-                <a href="pesado-vs-hipertrofia.html" class="btn btn-sm btn-outline-light ms-2">💪 Pesado vs Hipertrofia</a>
-                <a href="plan-semanal.html" class="btn btn-sm btn-outline-light ms-2">📋 Plan</a>
-                <a href="periodizacion-analisis.html" class="btn btn-sm btn-outline-light ms-2">🎯 Periodización</a>
-                <button class="btn btn-sm btn-outline-light ms-2" id="exportBtn">📥 Exportar</button>
-                <button class="btn btn-sm btn-outline-light ms-2" id="importBtn">📤 Importar</button>
-                <input type="file" id="importFile" accept=".json" style="display: none;">
-            </div>
+      <div class="container-fluid">
+        <span class="navbar-brand mb-0 h1">📊 Gráficos de Entrenamientos</span>
+        <div
+          id="unsavedIndicator"
+          style="
+            display: none;
+            color: #ffc107;
+            font-weight: bold;
+            margin-right: 20px;
+          "
+        >
+          ⚠️ Cambios sin guardar
         </div>
+        <div>
+          <a href="index.html" class="btn btn-sm btn-outline-light"
+            >← Histórico</a
+          >
+          <a href="running.html" class="btn btn-sm btn-outline-light ms-2"
+            >🏃 Running</a
+          >
+          <a href="pierna.html" class="btn btn-sm btn-outline-light ms-2"
+            >🦵 Pierna</a
+          >
+          <a
+            href="periodizacion-analisis.html"
+            class="btn btn-sm btn-outline-light ms-2"
+            >🎯 Periodización</a
+          >
+          <button class="btn btn-sm btn-outline-light ms-2" id="exportBtn">
+            📥 Exportar
+          </button>
+          <button class="btn btn-sm btn-outline-light ms-2" id="importBtn">
+            📤 Importar
+          </button>
+          <input
+            type="file"
+            id="importFile"
+            accept=".json"
+            style="display: none"
+          />
+        </div>
+      </div>
     </nav>
 
     <div class="container-fluid mt-4">
-        <!-- Mensaje de diagnóstico -->
-        <div id="diagnosticMessage" style="display: none;" class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>⚠️ Diagnóstico:</strong> <span id="diagnosticText"></span>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+      <!-- Mensaje de diagnóstico -->
+      <div
+        id="diagnosticMessage"
+        style="display: none"
+        class="alert alert-warning alert-dismissible fade show"
+        role="alert"
+      >
+        <strong>⚠️ Diagnóstico:</strong> <span id="diagnosticText"></span>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
 
-        <div class="row g-4">
-            <div class="col-lg-12">
-                <!-- Estadísticas Principales -->
-                <div class="card shadow-sm mb-4">
-                    <div class="card-header bg-success text-white">
-                        <h5 class="mb-0">📈 Progreso General</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row mb-4">
-                            <div class="col-md-3">
-                                <div class="stat-card bg-danger text-white">
-                                    <h6>Mejor Levantamiento</h6>
-                                    <h3 id="bestLift" class="fw-bold">-</h3>
-                                    <small id="bestLiftExercise">-</small>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="stat-card bg-primary text-white">
-                                    <h6>Volumen Promedio</h6>
-                                    <h3 id="avgVolume" class="fw-bold">-</h3>
-                                    <small class="text-muted">por sesión</small>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="stat-card bg-info text-white">
-                                    <h6>Comparación</h6>
-                                    <h3 id="trainingComparison" class="fw-bold" style="font-size: 1rem;">-</h3>
-                                    <small class="text-muted">Pesado vs Hipertrofia</small>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="stat-card bg-warning text-dark">
-                                    <h6>Ejercicios Únicos</h6>
-                                    <h3 id="totalExercises" class="text-warning fw-bold">-</h3>
-                                    <small class="text-muted">tipos únicos</small>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Gráficas de Evolución -->
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <h6 class="mb-3 fw-bold">📈 1RM Máximo (Entrenamientos Pesado)</h6>
-                                <div style="position: relative; height: 280px;">
-                                    <canvas id="oneRmChart"></canvas>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <h6 class="mb-3 fw-bold">📊 Volumen Total (Entrenamientos Hipertrofia)</h6>
-                                <div style="position: relative; height: 280px;">
-                                    <canvas id="volumeChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Top Ejercicios -->
-                        <div class="row mt-4">
-                            <div class="col-12">
-                                <h6 class="mb-3 fw-bold">Top Ejercicios por 1RM</h6>
-                                <div id="topExercises" class="row">
-                                    <!-- Se rellena dinámicamente -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- EVOLUCIÓN POR EJERCICIO -->
-                <div class="card shadow-sm mb-4">
-                    <div class="card-header bg-warning text-dark">
-                        <h5 class="mb-0">📉 Evolución por Ejercicio</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="exerciseSelector" class="form-label">Selecciona un ejercicio</label>
-                                <select class="form-select" id="exerciseSelector">
-                                    <option value="">Cargando ejercicios...</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <h6 class="mb-3 fw-bold">💪 Peso / Volumen</h6>
-                                <div style="position: relative; height: 280px;">
-                                    <canvas id="exerciseWeightChart"></canvas>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <h6 class="mb-3 fw-bold">🎯 1RM Estimado</h6>
-                                <div style="position: relative; height: 280px;">
-                                    <canvas id="exercise1RMChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mt-4">
-                            <div class="col-lg-6">
-                                <h6 class="mb-3 fw-bold">🔢 Reps Totales</h6>
-                                <div style="position: relative; height: 280px;">
-                                    <canvas id="exerciseRepsChart"></canvas>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <h6 class="mb-3 fw-bold">� Volumen Total</h6>
-                                <div style="position: relative; height: 280px;">
-                                    <canvas id="exerciseTotalVolumeChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mt-4">
-                            <div class="col-lg-12">
-                                <h6 class="mb-3 fw-bold">�📊 Series / Tipo</h6>
-                                <div id="exerciseStats" class="row">
-                                    <!-- Se rellena dinámicamente -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      <div class="row g-4">
+        <div class="col-lg-12">
+          <!-- Estadísticas Principales -->
+          <div class="card shadow-sm mb-4">
+            <div class="card-header bg-success text-white">
+              <h5 class="mb-0">📈 Progreso General</h5>
             </div>
+            <div class="card-body">
+              <div class="row mb-4">
+                <div class="col-md-3">
+                  <div class="stat-card bg-danger text-white">
+                    <h6>Mejor Levantamiento</h6>
+                    <h3 id="bestLift" class="fw-bold">-</h3>
+                    <small id="bestLiftExercise">-</small>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="stat-card bg-primary text-white">
+                    <h6>Volumen Promedio</h6>
+                    <h3 id="avgVolume" class="fw-bold">-</h3>
+                    <small class="text-muted">por sesión</small>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="stat-card bg-info text-white">
+                    <h6>Comparación</h6>
+                    <h3
+                      id="trainingComparison"
+                      class="fw-bold"
+                      style="font-size: 1rem"
+                    >
+                      -
+                    </h3>
+                    <small class="text-muted">Pesado vs Hipertrofia</small>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="stat-card bg-warning text-dark">
+                    <h6>Ejercicios Únicos</h6>
+                    <h3 id="totalExercises" class="text-warning fw-bold">-</h3>
+                    <small class="text-muted">tipos únicos</small>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Gráficas de Evolución -->
+              <div class="row">
+                <div class="col-lg-6">
+                  <h6 class="mb-3 fw-bold">
+                    📈 1RM Máximo (Entrenamientos Pesado)
+                  </h6>
+                  <div style="position: relative; height: 280px">
+                    <canvas id="oneRmChart"></canvas>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <h6 class="mb-3 fw-bold">
+                    📊 Volumen Total (Entrenamientos Hipertrofia)
+                  </h6>
+                  <div style="position: relative; height: 280px">
+                    <canvas id="volumeChart"></canvas>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Top Ejercicios -->
+              <div class="row mt-4">
+                <div class="col-12">
+                  <h6 class="mb-3 fw-bold">Top Ejercicios por 1RM</h6>
+                  <div id="topExercises" class="row">
+                    <!-- Se rellena dinámicamente -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- EVOLUCIÓN POR EJERCICIO -->
+          <div class="card shadow-sm mb-4">
+            <div class="card-header bg-warning text-dark">
+              <h5 class="mb-0">📉 Evolución por Ejercicio</h5>
+            </div>
+            <div class="card-body">
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="exerciseSelector" class="form-label"
+                    >Selecciona un ejercicio</label
+                  >
+                  <select class="form-select" id="exerciseSelector">
+                    <option value="">Cargando ejercicios...</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-6">
+                  <h6 class="mb-3 fw-bold">💪 Peso / Volumen</h6>
+                  <div style="position: relative; height: 280px">
+                    <canvas id="exerciseWeightChart"></canvas>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <h6 class="mb-3 fw-bold">🎯 1RM Estimado</h6>
+                  <div style="position: relative; height: 280px">
+                    <canvas id="exercise1RMChart"></canvas>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mt-4">
+                <div class="col-lg-6">
+                  <h6 class="mb-3 fw-bold">🔢 Reps Totales</h6>
+                  <div style="position: relative; height: 280px">
+                    <canvas id="exerciseRepsChart"></canvas>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <h6 class="mb-3 fw-bold">� Volumen Total</h6>
+                  <div style="position: relative; height: 280px">
+                    <canvas id="exerciseTotalVolumeChart"></canvas>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mt-4">
+                <div class="col-lg-12">
+                  <h6 class="mb-3 fw-bold">�📊 Series / Tipo</h6>
+                  <div id="exerciseStats" class="row">
+                    <!-- Se rellena dinámicamente -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Modal de Detalles -->
     <div class="modal-container">
-        <div class="modal fade" id="detailsModal" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header bg-dark text-white">
-                        <h5 class="modal-title" id="modalTitle">Detalles del Entrenamiento</h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body" id="modalBody">
-                    </div>
-                </div>
+      <div class="modal fade" id="detailsModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+              <h5 class="modal-title" id="modalTitle">
+                Detalles del Entrenamiento
+              </h5>
+              <button
+                type="button"
+                class="btn-close btn-close-white"
+                data-bs-dismiss="modal"
+              ></button>
             </div>
+            <div class="modal-body" id="modalBody"></div>
+          </div>
         </div>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="app.js"></script>
-    
+
     <script>
-        // Diagnóstico: verificar si hay datos
-        setTimeout(() => {
-            const diagnosticDiv = document.getElementById('diagnosticMessage');
-            const diagnosticText = document.getElementById('diagnosticText');
-            
-            if (!window.trainings || window.trainings.length === 0) {
-                diagnosticDiv.style.display = 'block';
-                diagnosticText.textContent = 'No se encontraron datos de entrenamientos. Abre la consola (F12) para ver detalles y asegúrate de que data.json está disponible.';
-                console.error('❌ PROBLEMA: No hay datos cargados. trainings.length =', trainings ? trainings.length : 'undefined');
-            } else {
-                const pesado = trainings.filter(t => t.trainingType === 'Torso Pesado').length;
-                const hipertrofia = trainings.filter(t => t.trainingType === 'Torso Hipertrofia').length;
-                
-                if (pesado === 0 && hipertrofia === 0) {
-                    diagnosticDiv.style.display = 'block';
-                    diagnosticText.textContent = `Se cargaron ${trainings.length} registros pero NINGUNO es de tipo "Torso Pesado" ni "Torso Hipertrofia". Abre la consola (F12) para ver tipos de entrenamiento disponibles.`;
-                    console.warn('⚠️ PROBLEMA: Datos sin categorizar. Tipos:', [...new Set(trainings.map(t => t.trainingType))].join(', '));
-                } else {
-                    console.log('✅ DATOS CARGADOS:', pesado, 'Pesado,', hipertrofia, 'Hipertrofia');
-                }
-            }
-        }, 2000); // Esperar 2s para que app.js termine de cargar
+      // Diagnóstico: verificar si hay datos
+      setTimeout(() => {
+        const diagnosticDiv = document.getElementById("diagnosticMessage");
+        const diagnosticText = document.getElementById("diagnosticText");
+
+        if (!window.trainings || window.trainings.length === 0) {
+          diagnosticDiv.style.display = "block";
+          diagnosticText.textContent =
+            "No se encontraron datos de entrenamientos. Abre la consola (F12) para ver detalles y asegúrate de que data.json está disponible.";
+          console.error(
+            "❌ PROBLEMA: No hay datos cargados. trainings.length =",
+            trainings ? trainings.length : "undefined",
+          );
+        } else {
+          const pesado = trainings.filter(
+            (t) => t.trainingType === "Torso Pesado",
+          ).length;
+          const hipertrofia = trainings.filter(
+            (t) => t.trainingType === "Torso Hipertrofia",
+          ).length;
+
+          if (pesado === 0 && hipertrofia === 0) {
+            diagnosticDiv.style.display = "block";
+            diagnosticText.textContent = `Se cargaron ${trainings.length} registros pero NINGUNO es de tipo "Torso Pesado" ni "Torso Hipertrofia". Abre la consola (F12) para ver tipos de entrenamiento disponibles.`;
+            console.warn(
+              "⚠️ PROBLEMA: Datos sin categorizar. Tipos:",
+              [...new Set(trainings.map((t) => t.trainingType))].join(", "),
+            );
+          } else {
+            console.log(
+              "✅ DATOS CARGADOS:",
+              pesado,
+              "Pesado,",
+              hipertrofia,
+              "Hipertrofia",
+            );
+          }
+        }
+      }, 2000); // Esperar 2s para que app.js termine de cargar
     </script>
-</body>
+  </body>
 </html>
