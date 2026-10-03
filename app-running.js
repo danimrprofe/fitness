@@ -48,6 +48,16 @@ function getExpectedTrainingType(dayOfWeek) {
 }
 
 function categorizeWorkout(activity) {
+  if (activity.isRace) {
+    const raceInfo = { type: "Carrera", icon: "🏁", color: "#dc3545" };
+    return {
+      expected: "Carrera",
+      actual: "Carrera",
+      followsPattern: true,
+      expected_info: raceInfo,
+    };
+  }
+
   const expected = getExpectedTrainingType(activity.dayOfWeek);
   const title = (activity.title || "").toLowerCase();
 
@@ -330,14 +340,17 @@ function renderRunning() {
   );
 
   const withProgress = sorted.map((activity, idx) => {
-    const previous = sorted
-      .slice(idx + 1)
-      .find(
-        (a) =>
-          a.activityType === activity.activityType &&
-          a.distance > 0 &&
-          activity.distance > 0,
-      );
+    const previous = activity.isRace
+      ? null
+      : sorted
+          .slice(idx + 1)
+          .find(
+            (a) =>
+              !a.isRace &&
+              a.activityType === activity.activityType &&
+              a.distance > 0 &&
+              activity.distance > 0,
+          );
 
     let progress = null;
     if (previous) {
@@ -385,8 +398,19 @@ function renderRunning() {
         : "";
 
       const workout = categorizeWorkout(activity);
-      const patternBg = workout.followsPattern ? "bg-light" : "table-warning";
+      const patternBg = activity.isRace
+        ? "table-primary"
+        : workout.followsPattern
+          ? "bg-light"
+          : "table-warning";
       const patternIcon = workout.followsPattern ? "✅" : "⚠️";
+      const workoutLabel = activity.isRace
+        ? '<span class="badge bg-danger-subtle text-danger-emphasis">🏁 Carrera</span>'
+        : `<small style="color: gray;">${patternIcon} ${workout.actual}</small>`;
+      const raceResultMarkup =
+        activity.isRace && (activity.raceDistance || activity.raceTime)
+          ? `<small class="d-block text-secondary">Resultado oficial: ${activity.raceDistance ? `${formatActivityDistance(activity.raceDistance)} km` : ""}${activity.raceDistance && activity.raceTime ? " · " : ""}${activity.raceTime || ""}</small>`
+          : "";
 
       const variationMarkup = activity.progress
         ? `<span class="${progressClass}" style="font-size: 0.7rem; opacity: 0.65;">${progressSign + activity.progress + "%"}</span>`
@@ -396,10 +420,10 @@ function renderRunning() {
             <tr class="${patternBg}">
                 <td><small>${new Date(activity.date).toLocaleDateString("es-ES")}</small></td>
                 <td><small>${activity.activityType}</small></td>
-                <td><strong>${activity.title}</strong> <small style="color: gray;">${patternIcon} ${workout.actual}</small></td>
-                <td><strong>${activity.distance.toFixed(2)}</strong> ${variationMarkup}</td>
-                <td><small>${activity.time}</small></td>
-                <td><small>${activity.paceAvg}</small></td>
+                <td><strong>${activity.title}</strong> ${workoutLabel}${raceResultMarkup}</td>
+                <td><strong>${formatActivityDistance(activity.distance)}</strong> ${variationMarkup}</td>
+                <td><small>${activity.time && activity.time !== "00:00:00" ? activity.time : "--"}</small></td>
+                <td><small>${activity.paceAvg && activity.paceAvg !== "--" ? activity.paceAvg : "--"}</small></td>
                 <td><small>${activity.hrAvg > 0 ? activity.hrAvg : "--"}</small></td>
                 <td><small>${activity.calories}</small></td>
                 <td><small>${activity.elevation}m</small></td>
@@ -470,18 +494,20 @@ function showRunningDetails(idx) {
             <strong>Tipo:</strong>
             <span>${activity.activityType}</span>
         </div>
+        ${activity.isRace ? '<div class="detail-row"><strong>Sesión:</strong><span>🏁 Carrera</span></div>' : ""}
         <div class="detail-row">
             <strong>Título:</strong>
             <span>${activity.title}</span>
         </div>
         <div class="detail-row">
             <strong>Distancia:</strong>
-            <span>${activity.distance.toFixed(2)} km</span>
+          <span>${formatActivityDistance(activity.distance)}${Number(activity.distance) > 0 ? " km" : ""}</span>
         </div>
         <div class="detail-row">
             <strong>Tiempo:</strong>
-            <span>${activity.time}</span>
+          <span>${activity.time && activity.time !== "00:00:00" ? activity.time : "--"}</span>
         </div>
+        ${activity.raceDistance || activity.raceTime ? `<div class="detail-row"><strong>Resultado oficial:</strong><span>${activity.raceDistance ? `${formatActivityDistance(activity.raceDistance)} km` : ""}${activity.raceDistance && activity.raceTime ? " · " : ""}${activity.raceTime || ""}</span></div>` : ""}
         <div class="detail-row">
             <strong>Ritmo Promedio:</strong>
             <span>${activity.paceAvg} /km</span>
@@ -695,12 +721,27 @@ function formatDashboardDistance(distance) {
   });
 }
 
+function formatActivityDistance(distance) {
+  const kilometers = Number(distance);
+  return Number.isFinite(kilometers) && kilometers > 0
+    ? kilometers.toFixed(2)
+    : "--";
+}
+
 function updateDashboardRecord(targetKm, valueId, detailsId) {
   const tolerance = targetKm * 0.03;
   const candidates = runningActivities
     .map((activity) => {
-      const distance = Number(activity.distance);
-      const duration = parseRunningDuration(activity.time);
+      const officialDistance = Number(activity.raceDistance);
+      const distance =
+        activity.isRace && officialDistance > 0
+          ? officialDistance
+          : Number(activity.distance);
+      const officialDuration = parseRunningDuration(activity.raceTime);
+      const duration =
+        activity.isRace && officialDuration > 0
+          ? officialDuration
+          : parseRunningDuration(activity.time);
       const date = parseRunningDate(activity.date);
       if (
         !Number.isFinite(distance) ||
@@ -715,13 +756,24 @@ function updateDashboardRecord(targetKm, valueId, detailsId) {
         activity,
         date,
         distance,
+        duration,
+        isExactRaceResult:
+          activity.isRace &&
+          duration > 0 &&
+          (officialDuration > 0 || !activity.raceDistance) &&
+          Math.abs(distance - targetKm) <= targetKm * 0.01,
         estimatedTime: (duration * targetKm) / distance,
       };
     })
     .filter(Boolean)
     .sort((a, b) => a.estimatedTime - b.estimatedTime);
 
-  const best = candidates[0];
+  const exactRaceResults = candidates.filter(
+    (candidate) => candidate.isExactRaceResult,
+  );
+  const best = exactRaceResults.length
+    ? exactRaceResults.sort((a, b) => a.duration - b.duration)[0]
+    : candidates[0];
   if (!best) {
     setDashboardText(valueId, "Sin marca");
     setDashboardText(
@@ -731,7 +783,9 @@ function updateDashboardRecord(targetKm, valueId, detailsId) {
     return;
   }
 
-  setDashboardText(valueId, `~${formatRunningTime(best.estimatedTime)}`);
+  const bestTime = best.isExactRaceResult ? best.duration : best.estimatedTime;
+  const estimatePrefix = best.isExactRaceResult ? "" : "~";
+  setDashboardText(valueId, `${estimatePrefix}${formatRunningTime(bestTime)}`);
   setDashboardText(
     detailsId,
     `${formatDashboardDate(best.date)} · ${formatDashboardDistance(best.distance)} km · ${best.activity.title || "Carrera"}`,
@@ -876,6 +930,69 @@ function renderRunningDashboard() {
     "dashboardBestHalf",
     "dashboardBestHalfDetails",
   );
+  renderRaceTimeTable(10, "dashboard10kRaceTimes");
+  renderRaceTimeTable(21.0975, "dashboardHalfRaceTimes");
+}
+
+function renderRaceTimeTable(targetKm, tableBodyId) {
+  const tableBody = document.getElementById(tableBodyId);
+  if (!tableBody) return;
+
+  const tolerance = targetKm === 10 ? 0.3 : 0.35;
+  const races = runningActivities
+    .filter((activity) => activity.isRace)
+    .map((activity) => {
+      const officialDistance = Number(activity.raceDistance);
+      const distance =
+        officialDistance > 0 ? officialDistance : Number(activity.distance);
+      if (
+        !Number.isFinite(distance) ||
+        Math.abs(distance - targetKm) > tolerance
+      ) {
+        return null;
+      }
+
+      const duration =
+        parseRunningDuration(activity.raceTime) ||
+        parseRunningDuration(activity.time);
+      const date = parseRunningDate(activity.date);
+      if (!date) return null;
+
+      return { activity, date, distance, duration };
+    })
+    .filter(Boolean)
+    .sort((a, b) => {
+      if (a.duration && b.duration && a.duration !== b.duration) {
+        return a.duration - b.duration;
+      }
+      if (a.duration !== b.duration) return a.duration ? -1 : 1;
+      return b.date - a.date;
+    });
+
+  if (races.length === 0) {
+    tableBody.innerHTML =
+      '<tr><td colspan="4" class="text-center text-secondary">Sin carreras registradas</td></tr>';
+    return;
+  }
+
+  tableBody.innerHTML = races
+    .map((race, index) => {
+      const time = race.duration ? formatRunningTime(race.duration) : "--";
+      const pace = race.duration
+        ? minutesToPace(race.duration / 60 / race.distance)
+        : "--";
+      const bestClass = index === 0 && race.duration ? "table-success" : "";
+
+      return `
+        <tr class="${bestClass}">
+          <td class="text-nowrap">${formatDashboardDate(race.date)}</td>
+          <td>${race.activity.title || "Carrera"}</td>
+          <td class="text-end text-nowrap">${time}</td>
+          <td class="text-end text-nowrap">${pace}</td>
+        </tr>
+      `;
+    })
+    .join("");
 }
 
 // ==================== ANÁLISIS DE PATRONES ====================
@@ -907,6 +1024,7 @@ function renderPatternAnalysis() {
     };
 
     runningActivities.forEach((activity) => {
+      if (activity.isRace) return;
       const day = activity.dayOfWeek.toLowerCase();
       if (byDay[day]) {
         const workout = categorizeWorkout(activity);
@@ -977,6 +1095,8 @@ function renderPatternAnalysis() {
 // ==================== ANÁLISIS POR TIPO ====================
 
 function classifyTrainingType(activity) {
+  if (activity.isRace) return "Carrera";
+
   const title = (activity.title || "").toLowerCase();
 
   if (title.includes("tempo")) {
