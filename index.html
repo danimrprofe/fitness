@@ -333,6 +333,87 @@
             </div>
           </div>
 
+          <div class="card shadow-sm mb-4">
+            <div class="card-header bg-purple text-white">
+              <h5 class="mb-0">📊 Análisis del progreso</h5>
+            </div>
+            <div class="card-body">
+              <div class="row g-3 mb-4 align-items-end">
+                <div class="col-md-3">
+                  <label for="progressTypeFilter" class="form-label"
+                    >Tipo de sesión</label
+                  >
+                  <select
+                    id="progressTypeFilter"
+                    class="form-select form-select-sm"
+                  >
+                    <option value="all">Todos</option>
+                    <option value="Torso Pesado">Torso Pesado</option>
+                    <option value="Torso Hipertrofia">Torso Hipertrofia</option>
+                    <option value="Pierna">Pierna</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <label for="progressMuscleFilter" class="form-label"
+                    >Grupo muscular</label
+                  >
+                  <select
+                    id="progressMuscleFilter"
+                    class="form-select form-select-sm"
+                  >
+                    <option value="all">Todos</option>
+                    <option value="Pecho">Pecho</option>
+                    <option value="Espalda">Espalda</option>
+                    <option value="Hombros">Hombros</option>
+                    <option value="Tríceps">Tríceps</option>
+                    <option value="Bíceps">Bíceps</option>
+                    <option value="Pierna">Pierna</option>
+                    <option value="Glúteos">Glúteos</option>
+                    <option value="Core">Core</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <label for="progressExerciseSelector" class="form-label"
+                    >Ejercicio</label
+                  >
+                  <select
+                    id="progressExerciseSelector"
+                    class="form-select form-select-sm"
+                  >
+                    <option value="">Selecciona un ejercicio</option>
+                  </select>
+                </div>
+                <div class="col-md-3 text-md-end">
+                  <div class="small text-muted">
+                    No se mezclan automáticamente tipos de sesión distintos.
+                  </div>
+                </div>
+              </div>
+
+              <div id="progressExerciseSummary" class="row g-3"></div>
+
+              <div class="row mt-4">
+                <div class="col-12">
+                  <div class="progress-chart-panel">
+                    <h6 class="fw-bold mb-3">
+                      Evolución del ejercicio seleccionado
+                    </h6>
+                    <div style="position: relative; height: 320px; width: 100%">
+                      <canvas id="progressExerciseChart"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mt-4">
+                <div class="col-12">
+                  <h6 class="fw-bold mb-3">Resumen por grupo muscular</h6>
+                  <div id="progressMuscleGroupSummary" class="row g-3"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <!-- MODAL DETALLES -->
           <div class="modal fade" id="detailsModal" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">

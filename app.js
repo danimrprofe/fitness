@@ -337,6 +337,26 @@ function setupEventListeners() {
   if (filterMuscle) filterMuscle.addEventListener("change", renderTrainings);
   if (filterType) filterType.addEventListener("change", renderTrainings);
 
+  const progressTypeFilter = document.getElementById("progressTypeFilter");
+  const progressMuscleFilter = document.getElementById("progressMuscleFilter");
+  const progressExerciseSelector = document.getElementById(
+    "progressExerciseSelector",
+  );
+
+  if (progressTypeFilter) {
+    progressTypeFilter.addEventListener("change", renderProgressAnalysisSection);
+  }
+  if (progressMuscleFilter) {
+    progressMuscleFilter.addEventListener("change", renderProgressAnalysisSection);
+  }
+  if (progressExerciseSelector) {
+    progressExerciseSelector.addEventListener("change", (e) => {
+      if (e.target.value) {
+        renderProgressExerciseChart(e.target.value);
+      }
+    });
+  }
+
   // Selector de ejercicio para gráfica de evolución
   const exerciseSelector = document.getElementById("exerciseSelector");
   if (exerciseSelector) {
@@ -882,21 +902,36 @@ function renderTrainings() {
               : training.series.join("-");
           const oneRMDisplay =
             training.trainingType === "Torso Pesado"
-              ? `<br><small class="text-success">1RM: ${training.oneRM.toFixed(1)}kg</small>`
+              ? `<small class="text-success">1RM: ${training.oneRM.toFixed(1)}kg</small>`
               : "";
           const width = Math.max(150, exercise.length * 10);
           const equipmentDisplay = training.equipment
-            ? `<br><small class="badge bg-secondary">${training.equipment}</small>`
+            ? `<small class="badge bg-secondary">${training.equipment}</small>`
             : "";
+          const miniRows = [
+            { label: "Series", value: `<span class="series-badge">${seriesStr}</span>${equipmentDisplay}` },
+            { label: "Peso", value: `<strong>${training.weight}kg</strong>` },
+            { label: "Volumen", value: `<small class="text-muted">${training.volume}</small>` },
+            { label: "Progreso", value: progressDisplay || "—" },
+          ];
+          if (oneRMDisplay) {
+            miniRows.push({ label: "1RM", value: oneRMDisplay });
+          }
 
           rowHTML += `
-                    <td style="width: ${width}px; min-width: ${width}px;">
-                        <div class="series-badge" style="margin-bottom: 5px;">${seriesStr}</div>
-                        ${equipmentDisplay}
-                        <strong>${training.weight}kg</strong>
-                        ${progressDisplay}
-                        ${oneRMDisplay}
-                        <br><small class="text-muted">Vol: ${training.volume}</small>
+                    <td style="width: ${width}px; min-width: ${width}px; vertical-align: top; padding: 0.35rem 0.25rem;">
+                        <div class="exercise-mini-table">
+                            ${miniRows
+                              .map(
+                                (row) => `
+                                  <div class="exercise-mini-row">
+                                    <span class="exercise-mini-label">${row.label}</span>
+                                    <span class="exercise-mini-value">${row.value}</span>
+                                  </div>
+                                `,
+                              )
+                              .join("")}
+                        </div>
                     </td>
                 `;
         } else {
@@ -1128,17 +1163,33 @@ function renderTrainingsByType(
               : training.series.join("-");
           const oneRMDisplay =
             training.trainingType === "Torso Pesado"
-              ? `<br><small class="text-success">1RM: ${training.oneRM.toFixed(1)}kg</small>`
+              ? `<small class="text-success">1RM: ${training.oneRM.toFixed(1)}kg</small>`
               : "";
           const width = Math.max(150, exercise.length * 10);
+          const miniRows = [
+            { label: "Series", value: `<span class="series-badge">${seriesStr}</span>` },
+            { label: "Peso", value: `<strong>${training.weight}kg</strong>` },
+            { label: "Volumen", value: `<small class="text-muted">${training.volume}</small>` },
+            { label: "Progreso", value: progressDisplay || "—" },
+          ];
+          if (oneRMDisplay) {
+            miniRows.push({ label: "1RM", value: oneRMDisplay });
+          }
 
           rowHTML += `
-                    <td style="width: ${width}px; min-width: ${width}px;">
-                        <div class="series-badge" style="margin-bottom: 5px;">${seriesStr}</div>
-                        <strong>${training.weight}kg</strong>
-                        ${progressDisplay}
-                        ${oneRMDisplay}
-                        <br><small class="text-muted">Vol: ${training.volume}</small>
+                    <td style="width: ${width}px; min-width: ${width}px; vertical-align: top; padding: 0.35rem 0.25rem;">
+                        <div class="exercise-mini-table">
+                            ${miniRows
+                              .map(
+                                (row) => `
+                                  <div class="exercise-mini-row">
+                                    <span class="exercise-mini-label">${row.label}</span>
+                                    <span class="exercise-mini-value">${row.value}</span>
+                                  </div>
+                                `,
+                              )
+                              .join("")}
+                        </div>
                     </td>
                 `;
         } else {
@@ -1556,6 +1607,13 @@ function updateProgressSection() {
     console.log("✅ Plan semanal renderizado");
   } catch (err) {
     console.error("❌ Error renderizando plan semanal:", err);
+  }
+
+  try {
+    renderProgressAnalysisSection();
+    console.log("✅ Análisis del progreso actualizado");
+  } catch (err) {
+    console.error("❌ Error en análisis del progreso:", err);
   }
 
   // Inicializar selector de ejercicios y gráficas de evolución
@@ -2606,6 +2664,363 @@ function renderRecommendations(pesado, hipertrofia, pesadoStats, hiperStats) {
   html += "</div></div>";
 
   container.innerHTML = html;
+}
+
+// ==================== ANÁLISIS DEL PROGRESO ====================
+
+function getProgressExerciseRecords(selectedType = "all", selectedMuscle = "all") {
+  const typeFilter = selectedType === "all" ? null : selectedType;
+  const muscleFilter = selectedMuscle === "all" ? null : selectedMuscle;
+
+  return trainings.filter((training) => {
+    const matchType = !typeFilter || training.trainingType === typeFilter;
+    const matchMuscle = !muscleFilter || training.muscleGroup === muscleFilter;
+    return matchType && matchMuscle;
+  });
+}
+
+function getProgressExerciseComparison(previous, current) {
+  const previousWeight = Number(previous?.weight || 0);
+  const currentWeight = Number(current?.weight || 0);
+  const previousVolume = Number(previous?.volume || 0);
+  const currentVolume = Number(current?.volume || 0);
+  const previousReps = Number(previous?.totalReps || 0);
+  const currentReps = Number(current?.totalReps || 0);
+
+  if (!previous || previousWeight === 0) {
+    return { kind: "neutral", label: "Primer registro", delta: 0 };
+  }
+
+  const weightDeltaPct = ((currentWeight - previousWeight) / previousWeight) * 100;
+  const repsDeltaPct = ((currentReps - previousReps) / previousReps) * 100;
+  const volumeDeltaPct = ((currentVolume - previousVolume) / previousVolume) * 100;
+
+  if (current.trainingType === "Torso Pesado") {
+    if (weightDeltaPct > 2 && Math.abs(repsDeltaPct) < 15) {
+      return { kind: "good", label: "Más peso y reps estables", delta: weightDeltaPct };
+    }
+    if (repsDeltaPct > 10 && Math.abs(weightDeltaPct) < 8) {
+      return { kind: "warning", label: "Más reps con mismo peso", delta: repsDeltaPct };
+    }
+    if (volumeDeltaPct > 5) {
+      return { kind: "warning", label: "Volumen subió, no necesariamente progreso", delta: volumeDeltaPct };
+    }
+    if (weightDeltaPct < -5 || repsDeltaPct < -10) {
+      return { kind: "danger", label: "Rendimiento descendido", delta: Math.min(weightDeltaPct, repsDeltaPct) };
+    }
+    return { kind: "neutral", label: "Rendimiento mantenido", delta: 0 };
+  }
+
+  if (current.trainingType === "Torso Hipertrofia" || current.trainingType === "Torso") {
+    if (volumeDeltaPct > 8 && Math.abs(weightDeltaPct) < 10) {
+      return { kind: "warning", label: "Volumen subió sin ganar fuerza", delta: volumeDeltaPct };
+    }
+    if (repsDeltaPct > 10 && volumeDeltaPct > 0) {
+      return { kind: "good", label: "Reps y volumen mejoran", delta: repsDeltaPct };
+    }
+    if (volumeDeltaPct < -10 || repsDeltaPct < -12) {
+      return { kind: "danger", label: "Desgaste / pérdida de rendimiento", delta: Math.min(volumeDeltaPct, repsDeltaPct) };
+    }
+    return { kind: "neutral", label: "Mantenimiento de rendimiento", delta: 0 };
+  }
+
+  return { kind: "neutral", label: "Sesión sin comparación directa", delta: 0 };
+}
+
+function getExerciseProgressSummary(exerciseName, typeFilter, muscleFilter) {
+  const records = getProgressExerciseRecords(typeFilter, muscleFilter)
+    .filter((training) => training.exercise === exerciseName)
+    .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+  if (records.length === 0) {
+    return null;
+  }
+
+  const latest = records[records.length - 1];
+  const previous = records.length > 1 ? records[records.length - 2] : null;
+  const earliest = records[0];
+
+  const weightTrend = latest.weight - earliest.weight;
+  const repsTrend = latest.totalReps - earliest.totalReps;
+  const volumeTrend = latest.volume - earliest.volume;
+  const setsTrend = latest.series.length - earliest.series.length;
+
+  const recentWindow = records.slice(-Math.min(4, records.length));
+  const recentDelta = recentWindow.length > 1
+    ? recentWindow[recentWindow.length - 1].weight - recentWindow[0].weight
+    : 0;
+
+  const bestRecent = [...records]
+    .sort((a, b) => {
+      const aScore = a.trainingType === "Torso Pesado" ? Number(a.oneRM || 0) : Number(a.volume || 0);
+      const bScore = b.trainingType === "Torso Pesado" ? Number(b.oneRM || 0) : Number(b.volume || 0);
+      return bScore - aScore;
+    })[0];
+
+  const comparison = getProgressExerciseComparison(previous, latest);
+  const statusClass = comparison.kind === "good" ? "good" : comparison.kind === "warning" ? "warning" : comparison.kind === "danger" ? "danger" : "neutral";
+
+  return {
+    exercise: exerciseName,
+    latest,
+    previous,
+    earliest,
+    weightTrend,
+    repsTrend,
+    volumeTrend,
+    setsTrend,
+    recentDelta,
+    bestRecent,
+    comparison,
+    statusClass,
+    sessions: records.length,
+    date: latest.date,
+    muscleGroup: latest.muscleGroup,
+  };
+}
+
+function populateProgressSelectors() {
+  const selector = document.getElementById("progressExerciseSelector");
+  if (!selector) return;
+
+  const typeFilter = document.getElementById("progressTypeFilter")?.value || "all";
+  const muscleFilter = document.getElementById("progressMuscleFilter")?.value || "all";
+  const filtered = getProgressExerciseRecords(typeFilter, muscleFilter);
+  const uniqueExercises = [...new Set(filtered.map((training) => training.exercise))].sort();
+
+  selector.innerHTML = '<option value="">Selecciona un ejercicio</option>';
+  uniqueExercises.forEach((exercise) => {
+    const option = document.createElement("option");
+    option.value = exercise;
+    option.textContent = exercise;
+    selector.appendChild(option);
+  });
+
+  if (uniqueExercises.length > 0 && !selector.value) {
+    selector.value = uniqueExercises[0];
+    renderProgressExerciseChart(uniqueExercises[0]);
+  }
+}
+
+function renderProgressAnalysisSection() {
+  const section = document.getElementById("progressExerciseSummary");
+  const muscleSummary = document.getElementById("progressMuscleGroupSummary");
+  if (!section || !muscleSummary) return;
+
+  const typeFilter = document.getElementById("progressTypeFilter")?.value || "all";
+  const muscleFilter = document.getElementById("progressMuscleFilter")?.value || "all";
+  const records = getProgressExerciseRecords(typeFilter, muscleFilter);
+
+  populateProgressSelectors();
+
+  if (records.length === 0) {
+    section.innerHTML = '<div class="progress-empty">No hay datos para los filtros aplicados.</div>';
+    muscleSummary.innerHTML = '<div class="progress-empty">Sin grupos musculares con datos.</div>';
+    return;
+  }
+
+  const uniqueExercises = [...new Set(records.map((training) => training.exercise))];
+  const summaries = uniqueExercises
+    .map((exerciseName) => getExerciseProgressSummary(exerciseName, typeFilter, muscleFilter))
+    .filter(Boolean)
+    .sort((a, b) => b.latest.volume - a.latest.volume);
+
+  const exerciseCards = summaries
+    .map((summary) => {
+      const statusLabel = summary.comparison.label;
+      const changeLabel = summary.recentDelta > 0 ? `+${summary.recentDelta.toFixed(1)} kg` : summary.recentDelta < 0 ? `${summary.recentDelta.toFixed(1)} kg` : "0.0 kg";
+      const bestRecentScore = summary.bestRecent.trainingType === "Torso Pesado"
+        ? `${Number(summary.bestRecent.oneRM || 0).toFixed(1)} kg`
+        : `${Number(summary.bestRecent.volume || 0).toFixed(0)} vol`;
+
+      return `
+        <div class="col-lg-6 col-xl-4">
+          <div class="progress-summary-card">
+            <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+              <div>
+                <div class="label">Ejercicio</div>
+                <div class="fw-bold fs-5">${summary.exercise}</div>
+              </div>
+              <span class="progress-pill ${summary.statusClass}">${summary.comparison.kind === "good" ? "Progresando" : summary.comparison.kind === "warning" ? "Atención" : summary.comparison.kind === "danger" ? "Descenso" : "Estable"}</span>
+            </div>
+            <div class="progress-metric-row">
+              <span class="text-muted">Estado actual</span>
+              <strong>${summary.latest.weight} kg · ${summary.latest.totalReps} reps</strong>
+            </div>
+            <div class="progress-metric-row">
+              <span class="text-muted">Tendencia</span>
+              <strong>${statusLabel}</strong>
+            </div>
+            <div class="progress-metric-row">
+              <span class="text-muted">Últimas semanas</span>
+              <strong>${changeLabel}</strong>
+            </div>
+            <div class="progress-metric-row">
+              <span class="text-muted">Mejor reciente</span>
+              <strong>${bestRecentScore}</strong>
+            </div>
+            <div class="progress-metric-row">
+              <span class="text-muted">Último entrenamiento</span>
+              <strong>${formatDate(summary.date)}</strong>
+            </div>
+            <div class="progress-metric-row">
+              <span class="text-muted">Sesiones</span>
+              <strong>${summary.sessions}</strong>
+            </div>
+          </div>
+        </div>
+      `;
+    })
+    .join("");
+
+  section.innerHTML = exerciseCards || '<div class="progress-empty">No hay ejercicios con datos para estos filtros.</div>';
+
+  const groupMap = new Map();
+  records.forEach((training) => {
+    if (!groupMap.has(training.muscleGroup)) {
+      groupMap.set(training.muscleGroup, { muscle: training.muscleGroup, totalVolume: 0, totalSessions: 0, exercises: new Set() });
+    }
+    const group = groupMap.get(training.muscleGroup);
+    group.totalVolume += Number(training.volume || 0);
+    group.totalSessions += 1;
+    group.exercises.add(training.exercise);
+  });
+
+  const groupCards = [...groupMap.values()]
+    .map((group) => {
+      const exerciseCount = group.exercises.size;
+      const avgVolume = group.totalVolume / Math.max(group.totalSessions, 1);
+      const progression = [...group.exercises]
+        .map((exerciseName) => getExerciseProgressSummary(exerciseName, typeFilter, muscleFilter))
+        .filter(Boolean)
+        .map((summary) => summary.comparison.kind)
+        .reduce((acc, kind) => {
+          acc[kind] = (acc[kind] || 0) + 1;
+          return acc;
+        }, {});
+
+      const dominant = Object.entries(progression || {}).sort((a, b) => b[1] - a[1])[0];
+      const dominantText = dominant ? `${dominant[0]} (${dominant[1]})` : "Sin datos";
+
+      return `
+        <div class="col-md-4">
+          <div class="progress-summary-card">
+            <div class="label">Grupo muscular</div>
+            <div class="fw-bold fs-5 mb-2">${group.muscle}</div>
+            <ul class="progress-mini-list">
+              <li><span>Volumen total</span><strong>${Math.round(group.totalVolume)}</strong></li>
+              <li><span>Volumen medio</span><strong>${Math.round(avgVolume)}</strong></li>
+              <li><span>Ejercicios</span><strong>${exerciseCount}</strong></li>
+              <li><span>Tendencia</span><strong>${dominantText}</strong></li>
+            </ul>
+          </div>
+        </div>
+      `;
+    })
+    .join("");
+
+  muscleSummary.innerHTML = groupCards || '<div class="progress-empty">No hay resumen por grupo muscular.</div>';
+
+  const selector = document.getElementById("progressExerciseSelector");
+  if (selector && selector.value) {
+    renderProgressExerciseChart(selector.value);
+  }
+}
+
+function renderProgressExerciseChart(exerciseName) {
+  const canvas = document.getElementById("progressExerciseChart");
+  if (!canvas) return;
+
+  const typeFilter = document.getElementById("progressTypeFilter")?.value || "all";
+  const muscleFilter = document.getElementById("progressMuscleFilter")?.value || "all";
+  const records = getProgressExerciseRecords(typeFilter, muscleFilter)
+    .filter((training) => training.exercise === exerciseName)
+    .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+  if (!records.length) {
+    return;
+  }
+
+  if (window.progressExerciseChartInstance) {
+    window.progressExerciseChartInstance.destroy();
+  }
+
+  const ctx = canvas.getContext("2d");
+  const labels = records.map((record) => formatDate(record.date));
+  const weightData = records.map((record) => record.weight);
+  const volumeData = records.map((record) => record.volume);
+  const repsData = records.map((record) => record.totalReps);
+
+  window.progressExerciseChartInstance = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels,
+      datasets: [
+        {
+          label: "Peso (kg)",
+          data: weightData,
+          borderColor: "#7c3aed",
+          backgroundColor: "rgba(124, 58, 237, 0.15)",
+          yAxisID: "y",
+          tension: 0.25,
+          pointRadius: 3,
+        },
+        {
+          label: "Volumen",
+          data: volumeData,
+          borderColor: "#10b981",
+          backgroundColor: "rgba(16, 185, 129, 0.12)",
+          yAxisID: "y1",
+          tension: 0.25,
+          pointRadius: 3,
+        },
+        {
+          label: "Reps",
+          data: repsData,
+          borderColor: "#f59e0b",
+          backgroundColor: "rgba(245, 158, 11, 0.12)",
+          yAxisID: "y2",
+          tension: 0.25,
+          pointRadius: 3,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: "index", intersect: false },
+      plugins: {
+        legend: { position: "top" },
+        tooltip: {
+          callbacks: {
+            title: (items) => items[0]?.label || "",
+            label: (context) => `${context.dataset.label}: ${context.parsed.y}`,
+          },
+        },
+      },
+      scales: {
+        y: {
+          position: "left",
+          beginAtZero: false,
+          title: { display: true, text: "Peso (kg)" },
+        },
+        y1: {
+          position: "right",
+          beginAtZero: false,
+          grid: { drawOnChartArea: false },
+          title: { display: true, text: "Volumen" },
+        },
+        y2: {
+          position: "right",
+          beginAtZero: false,
+          display: false,
+        },
+        x: {
+          title: { display: true, text: "Entrenamientos" },
+        },
+      },
+    },
+  });
 }
 
 // ==================== EVOLUCIÓN POR EJERCICIO ====================

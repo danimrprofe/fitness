@@ -248,6 +248,37 @@ body {
   color: #6c757d;
 }
 
+.exercise-mini-table {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.76rem;
+}
+
+.exercise-mini-row {
+  display: table-row;
+}
+
+.exercise-mini-label,
+.exercise-mini-value {
+  display: table-cell;
+  padding: 2px 4px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  vertical-align: middle;
+}
+
+.exercise-mini-label {
+  color: #6c757d;
+  font-weight: 600;
+  width: 38%;
+  white-space: nowrap;
+}
+
+.exercise-mini-value {
+  width: 62%;
+  text-align: left;
+}
+
 /* Indicadores de reps en hipertrofia */
 .reps-good {
   color: #155724;
@@ -387,7 +418,116 @@ body {
   box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
 }
 
+.bg-purple {
+  background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%) !important;
+}
+
+.progress-chart-panel {
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 0.75rem;
+  padding: 1rem;
+}
+
+.progress-summary-card {
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 0.75rem;
+  padding: 0.9rem 1rem;
+  height: 100%;
+}
+
+.progress-summary-card .label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #64748b;
+}
+
+.progress-summary-card .value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.progress-summary-card .muted {
+  color: #64748b;
+  font-size: 0.8rem;
+}
+
+.progress-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 110px;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.progress-pill.good {
+  background: rgba(34, 197, 94, 0.12);
+  color: #166534;
+}
+
+.progress-pill.warning {
+  background: rgba(245, 158, 11, 0.12);
+  color: #92400e;
+}
+
+.progress-pill.danger {
+  background: rgba(239, 68, 68, 0.12);
+  color: #991b1b;
+}
+
+.progress-pill.neutral {
+  background: rgba(148, 163, 184, 0.12);
+  color: #334155;
+}
+
+.progress-metric-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.progress-metric-row:last-child {
+  border-bottom: none;
+}
+
+.progress-mini-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.progress-mini-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.25rem 0;
+  border-bottom: 1px dashed rgba(148, 163, 184, 0.35);
+}
+
+.progress-mini-list li:last-child {
+  border-bottom: none;
+}
+
+.progress-empty {
+  padding: 1rem;
+  text-align: center;
+  color: #64748b;
+}
+
 /* Canvas responsivos */
 canvas {
   max-height: 300px;
+}
+
+#paceHrScatterChart {
+  max-height: 840px !important;
+  height: 840px !important;
 }
