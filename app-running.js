@@ -2,6 +2,8 @@
 let runningActivities = [];
 const RUNNING_PAGE_SIZE = 15;
 let runningCurrentPage = 1;
+let paceHrScatterChartInstance = null;
+let performanceEvolutionChartInstance = null;
 
 // Inicialización
 document.addEventListener("DOMContentLoaded", () => {
@@ -110,10 +112,51 @@ function setupRunningEventListeners() {
   const importFile = document.getElementById("importRunningFile");
   const paginationContainer = document.getElementById("runningPagination");
   const dashboardPeriod = document.getElementById("dashboardPeriod");
+  const performanceDistanceSelect = document.getElementById(
+    "performanceDistanceSelect",
+  );
+  const performanceActivityTypeFilter = document.getElementById(
+    "performanceActivityTypeFilter",
+  );
+  const paceHrTypeFilter = document.getElementById("paceHrTypeFilter");
+  const paceHrYearFilter = document.getElementById("paceHrYearFilter");
+  const paceHrInputs = [
+    "paceHrDistanceMin",
+    "paceHrDistanceMax",
+    "paceHrPaceMin",
+    "paceHrPaceMax",
+    "paceHrHrMin",
+    "paceHrHrMax",
+    "paceHrElevationMin",
+    "paceHrElevationMax",
+  ].map((id) => document.getElementById(id));
 
   if (dashboardPeriod) {
     dashboardPeriod.addEventListener("change", renderRunningDashboard);
   }
+
+  if (performanceDistanceSelect) {
+    performanceDistanceSelect.addEventListener(
+      "change",
+      renderPerformanceEvolution,
+    );
+  }
+  if (performanceActivityTypeFilter) {
+    performanceActivityTypeFilter.addEventListener(
+      "change",
+      renderPerformanceEvolution,
+    );
+  }
+
+  if (paceHrTypeFilter) {
+    paceHrTypeFilter.addEventListener("change", renderPaceHrScatterChart);
+  }
+  if (paceHrYearFilter) {
+    paceHrYearFilter.addEventListener("change", renderPaceHrScatterChart);
+  }
+  paceHrInputs.forEach((input) => {
+    if (input) input.addEventListener("input", renderPaceHrScatterChart);
+  });
 
   if (filterType)
     filterType.addEventListener("change", () => {
@@ -549,8 +592,11 @@ function updateRunningStats() {
     document.getElementById("totalDistance").textContent = "-";
     document.getElementById("avgPace").textContent = "-";
     document.getElementById("avgHR").textContent = "-";
+    populatePaceHrYearFilter();
     renderTrainingTypeAnalysis();
     renderRunningCharts();
+    renderPaceHrScatterChart();
+    renderPerformanceEvolution();
     return;
   }
 
@@ -580,9 +626,593 @@ function updateRunningStats() {
     : 0;
   document.getElementById("avgHR").textContent = avgHR > 0 ? avgHR : "-";
 
+  populatePaceHrYearFilter();
   renderTrainingTypeAnalysis();
   renderRunningCharts();
+  renderPaceHrScatterChart();
+  renderPerformanceEvolution();
   renderPatternAnalysis();
+}
+
+function getWorkoutFamily(activity) {
+  if (activity.isRace) return "carrera";
+
+  const title = (activity.title || "").toLowerCase();
+  const distance = Number(activity.distance) || 0;
+
+  if (
+    title.includes("serie") ||
+    title.includes("interval") ||
+    title.includes("tempo") ||
+    title.includes("fartlek") ||
+    title.includes("repet") ||
+    /\b\d+x\d*\b/.test(title) ||
+    /\b\d{2,4}m\b/.test(title)
+  ) {
+    return "calidad";
+  }
+
+  if (
+    title.includes("larga") ||
+    title.includes("tirada") ||
+    title.includes("long run") ||
+    distance >= 14
+  ) {
+    return "tirada-larga";
+  }
+
+  return "rodaje";
+}
+
+function parseNumberOrNull(value) {
+  if (value === null || value === undefined || value === "") return null;
+  const normalized = String(value).trim().replace(/\s/g, "");
+  if (!normalized || normalized === "--" || normalized === "-") return null;
+  const parsed = Number(normalized.replace(",", "."));
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
+function populatePaceHrYearFilter() {
+  const select = document.getElementById("paceHrYearFilter");
+  if (!select) return;
+
+  const years = [...new Set(
+    runningActivities
+      .map((activity) => parseRunningDate(activity.date)?.getFullYear())
+      .filter((year) => Number.isFinite(year)),
+  )].sort((a, b) => b - a);
+
+  if (years.length === 0) {
+    select.innerHTML = "";
+    return;
+  }
+
+  const current = new Set(
+    Array.from(select.selectedOptions).map((option) => option.value),
+  );
+  const selectedYears = current.size ? current : new Set(years.map(String));
+
+  select.innerHTML = years
+    .map(
+      (year) =>
+        `<option value="${year}" ${selectedYears.has(String(year)) ? "selected" : ""}>${year}</option>`,
+    )
+    .join("");
+}
+
+function getSelectedPaceHrYears() {
+  const select = document.getElementById("paceHrYearFilter");
+  if (!select) return [];
+
+  const selected = Array.from(select.selectedOptions).map((option) => option.value);
+  return selected.length ? selected : [];
+}
+
+function formatPerformanceDistanceLabel(targetKm) {
+  const value = Number(targetKm);
+  if (!Number.isFinite(value)) return "Distancia";
+  if (Math.abs(value - 21.0975) < 0.01) return "Media maratón";
+  return `${value % 1 === 0 ? value.toFixed(0) : value.toFixed(1)} km`;
+}
+
+function formatPerformancePaceFromDuration(durationSeconds, distanceKm) {
+  if (!(durationSeconds > 0) || !(distanceKm > 0)) return "Sin datos";
+  const minutesPerKm = (durationSeconds / distanceKm) / 60;
+  return `${minutesToPace(minutesPerKm)} /km`;
+}
+
+function getPerformanceCandidates(targetKm, activityTypeFilter) {
+  const tolerance = Math.max(0.5, targetKm * 0.15);
+  const selectedType = activityTypeFilter || "all";
+
+  return runningActivities
+    .map((activity) => {
+      const date = parseRunningDate(activity.date);
+      if (!date) return null;
+
+      const activityType = activity.isRace ? "Carrera" : "Entrenamiento";
+      if (selectedType !== "all" && activityType !== selectedType) return null;
+
+      const distance =
+        activity.isRace && Number(activity.raceDistance) > 0
+          ? Number(activity.raceDistance)
+          : Number(activity.distance) || 0;
+      const duration =
+        activity.isRace && parseRunningDuration(activity.raceTime) > 0
+          ? parseRunningDuration(activity.raceTime)
+          : parseRunningDuration(activity.time);
+
+      if (!(distance > 0) || !(duration > 0)) return null;
+      if (Math.abs(distance - targetKm) > tolerance) return null;
+
+      return {
+        activity,
+        date,
+        distance,
+        duration,
+        activityType,
+        paceText: formatPerformancePaceFromDuration(duration, distance),
+        title: activity.title || activity.activityType || "Entrenamiento",
+      };
+    })
+    .filter(Boolean)
+    .sort((a, b) => a.duration - b.duration);
+}
+
+function renderPerformanceEvolution() {
+  const distanceSelect = document.getElementById("performanceDistanceSelect");
+  const typeFilter = document.getElementById("performanceActivityTypeFilter");
+  const targetKm = Number(distanceSelect?.value || 5);
+  const activityTypeFilter = typeFilter?.value || "all";
+
+  const candidates = getPerformanceCandidates(targetKm, activityTypeFilter);
+  const bestEntry = candidates[0] || null;
+
+  const summaryCards = document.getElementById("performanceSummaryCards");
+  if (summaryCards) {
+    summaryCards.innerHTML = `
+      <div class="col-md-3">
+        <div class="border rounded-3 p-3 h-100 bg-light-subtle">
+          <div class="text-muted small">Mejor marca</div>
+          <div class="fs-4 fw-bold mt-1">${bestEntry ? formatRunningTime(bestEntry.duration) : "Sin datos"}</div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="border rounded-3 p-3 h-100 bg-light-subtle">
+          <div class="text-muted small">Ritmo</div>
+          <div class="fs-5 fw-semibold mt-1">${bestEntry ? bestEntry.paceText : "—"}</div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="border rounded-3 p-3 h-100 bg-light-subtle">
+          <div class="text-muted small">Fecha</div>
+          <div class="fs-6 fw-semibold mt-1">${bestEntry ? formatDashboardDate(bestEntry.date) : "Sin datos"}</div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="border rounded-3 p-3 h-100 bg-light-subtle">
+          <div class="text-muted small">Tipo</div>
+          <div class="fs-6 fw-semibold mt-1">${bestEntry ? bestEntry.activityType : "Sin datos"}</div>
+        </div>
+      </div>
+    `;
+  }
+
+  const yearlyBest = {};
+  candidates.forEach((entry) => {
+    const year = entry.date.getFullYear();
+    const currentBest = yearlyBest[year];
+    if (!currentBest || entry.duration < currentBest.duration) {
+      yearlyBest[year] = entry;
+    }
+  });
+
+  const chartEntries = Object.entries(yearlyBest)
+    .sort(([a], [b]) => Number(a) - Number(b))
+    .map(([year, entry]) => ({
+      x: Number(year),
+      y: entry.duration,
+      date: entry.date,
+      bestTime: entry.duration,
+      pace: entry.paceText,
+      activityType: entry.activityType,
+      title: entry.title,
+      distance: entry.distance,
+    }));
+
+  const tableBody = document.getElementById("performanceEvolutionTable");
+  if (!tableBody) return;
+
+  const emptyTableRows = `<tr><td colspan="5" class="text-muted fst-italic">No hay suficientes datos para calcular una marca en ${formatPerformanceDistanceLabel(targetKm)}.</td></tr>`;
+  if (chartEntries.length === 0) {
+    tableBody.innerHTML = emptyTableRows;
+
+    const chartCanvas = document.getElementById("performanceEvolutionChart");
+    if (!chartCanvas) return;
+
+    if (performanceEvolutionChartInstance) {
+      performanceEvolutionChartInstance.destroy();
+      performanceEvolutionChartInstance = null;
+    }
+
+    const ctx = chartCanvas.getContext("2d");
+    if (!ctx) return;
+
+    ctx.clearRect(0, 0, chartCanvas.width, chartCanvas.height);
+    ctx.fillStyle = "#6c757d";
+    ctx.font = "600 14px sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText(
+      `No hay suficientes datos para ${formatPerformanceDistanceLabel(targetKm)}`,
+      chartCanvas.width / 2,
+      chartCanvas.height / 2,
+    );
+    return;
+  }
+
+  const chartCanvas = document.getElementById("performanceEvolutionChart");
+  if (!chartCanvas) return;
+
+  if (performanceEvolutionChartInstance) {
+    performanceEvolutionChartInstance.destroy();
+    performanceEvolutionChartInstance = null;
+  }
+
+  const ctx = chartCanvas.getContext("2d");
+  if (!ctx) return;
+
+  const minYear = Math.min(...chartEntries.map((entry) => entry.x));
+  const maxYear = Math.max(...chartEntries.map((entry) => entry.x));
+
+  performanceEvolutionChartInstance = new Chart(ctx, {
+    type: "line",
+    data: {
+      datasets: [
+        {
+          label: `${formatPerformanceDistanceLabel(targetKm)} · mejor marca por año`,
+          data: chartEntries,
+          borderColor: "#0d6efd",
+          backgroundColor: "rgba(13, 110, 253, 0.16)",
+          borderWidth: 3,
+          pointRadius: 5,
+          pointHoverRadius: 8,
+          pointBackgroundColor: "#0d6efd",
+          pointBorderColor: "#ffffff",
+          pointBorderWidth: 2,
+          tension: 0.15,
+          fill: false,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: false,
+      plugins: {
+        legend: { display: true, position: "bottom" },
+        tooltip: {
+          callbacks: {
+            title: (items) => {
+              const item = items[0];
+              return item?.raw?.x ? `Año ${item.raw.x}` : "Marca";
+            },
+            label: (context) => {
+              const data = context.raw;
+              return [
+                `Tiempo: ${formatRunningTime(data.bestTime)}`,
+                `Ritmo: ${formatPerformancePaceFromDuration(data.bestTime, data.distance)}`,
+                `Fecha: ${formatDashboardDate(data.date)}`,
+                `Tipo: ${data.activityType}`,
+              ];
+            },
+          },
+        },
+      },
+      scales: {
+        x: {
+          type: "linear",
+          min: minYear - 0.5,
+          max: maxYear + 0.5,
+          ticks: {
+            stepSize: 1,
+            precision: 0,
+            callback: (value) => Number.isInteger(value) ? value : "",
+          },
+          title: {
+            display: true,
+            text: "Año",
+          },
+        },
+        y: {
+          title: {
+            display: true,
+            text: "Tiempo (mm:ss)",
+          },
+          ticks: {
+            callback: (value) => {
+              const seconds = Number(value);
+              if (!Number.isFinite(seconds)) return "";
+              return formatRunningTime(seconds).replace(/^0:/, "");
+            },
+          },
+        },
+      },
+    },
+  });
+
+  tableBody.innerHTML = chartEntries
+    .map(
+      (entry) => `
+        <tr>
+          <td>${formatPerformanceDistanceLabel(targetKm)}</td>
+          <td>${formatRunningTime(entry.bestTime)}</td>
+          <td>${formatPerformancePaceFromDuration(entry.bestTime, entry.distance)}</td>
+          <td>${formatDashboardDate(entry.date)}</td>
+          <td>${entry.activityType}</td>
+        </tr>
+      `,
+    )
+    .join("");
+}
+
+function renderPaceHrScatterChart() {
+  const canvas = document.getElementById("paceHrScatterChart");
+  if (!canvas) return;
+
+  const typeFilter = document.getElementById("paceHrTypeFilter")?.value || "all";
+  const yearFilter = getSelectedPaceHrYears();
+  const distanceMin = parseNumberOrNull(document.getElementById("paceHrDistanceMin")?.value);
+  const distanceMax = parseNumberOrNull(document.getElementById("paceHrDistanceMax")?.value);
+  const paceMin = parseNumberOrNull(document.getElementById("paceHrPaceMin")?.value) ?? 4.4;
+  const paceMax = parseNumberOrNull(document.getElementById("paceHrPaceMax")?.value) ?? 7;
+  const hrMin = parseNumberOrNull(document.getElementById("paceHrHrMin")?.value) ?? 140;
+  const hrMax = parseNumberOrNull(document.getElementById("paceHrHrMax")?.value) ?? 210;
+  const elevationMin = parseNumberOrNull(document.getElementById("paceHrElevationMin")?.value);
+  const elevationMax = parseNumberOrNull(document.getElementById("paceHrElevationMax")?.value);
+
+  const filtered = runningActivities.filter((activity) => {
+    const date = parseRunningDate(activity.date);
+    const year = date ? String(date.getFullYear()) : "";
+    if (yearFilter.length > 0 && !yearFilter.includes(year)) return false;
+
+    const family = getWorkoutFamily(activity);
+    if (typeFilter !== "all" && family !== typeFilter) return false;
+
+    const distance = Number(activity.distance) || 0;
+    if (distance <= 0) return false;
+    if (distanceMin !== null && distance < distanceMin) return false;
+    if (distanceMax !== null && distance > distanceMax) return false;
+
+    const pace = paceToMinutes(activity.paceAvg);
+    if (!pace) return false;
+    if (pace <= 0 || pace > 7) return false;
+    if (pace < paceMin) return false;
+    if (pace > paceMax) return false;
+
+    const hr = Number(activity.hrAvg) || 0;
+    if (hr <= 0) return false;
+    if (hr < hrMin) return false;
+    if (hr > hrMax) return false;
+
+    const elevation = Number(activity.elevation) || 0;
+    if (elevationMin !== null && elevation < elevationMin) return false;
+    if (elevationMax !== null && elevation > elevationMax) return false;
+
+    return true;
+  });
+
+  if (paceHrScatterChartInstance) {
+    paceHrScatterChartInstance.destroy();
+    paceHrScatterChartInstance = null;
+  }
+
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  if (filtered.length === 0) {
+    const emptyLabel = "No hay entrenamientos con estos filtros";
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#6c757d";
+    ctx.font = "600 14px sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText(emptyLabel, canvas.width / 2, canvas.height / 2);
+    return;
+  }
+
+  const grouped = filtered.reduce((acc, activity) => {
+    const date = parseRunningDate(activity.date);
+    const year = date ? String(date.getFullYear()) : "Sin año";
+    if (!acc[year]) acc[year] = [];
+
+    const pace = paceToMinutes(activity.paceAvg);
+    const hr = Number(activity.hrAvg) || 0;
+    const distance = Number(activity.distance) || 0;
+    const elevation = Number(activity.elevation) || 0;
+
+    acc[year].push({
+      x: Number(pace.toFixed(2)),
+      y: hr,
+      date: date ? formatDashboardDate(date) : "Fecha no disponible",
+      distance,
+      pace: activity.paceAvg || "--",
+      hr,
+      elevation,
+      type: getWorkoutFamily(activity),
+      title: activity.title || activity.activityType || "Entrenamiento",
+    });
+    return acc;
+  }, {});
+
+  const palette = [
+    "#0d6efd",
+    "#198754",
+    "#fd7e14",
+    "#dc3545",
+    "#6f42c1",
+    "#20c997",
+    "#ffc107",
+  ];
+
+  // Helper: compute linear regression (y = m*x + b)
+  function linearRegression(points) {
+    if (!points || points.length < 2) return null;
+    const xs = points.map((p) => p.x);
+    const ys = points.map((p) => p.y);
+    const n = xs.length;
+    const meanX = xs.reduce((s, v) => s + v, 0) / n;
+    const meanY = ys.reduce((s, v) => s + v, 0) / n;
+    let num = 0,
+      den = 0;
+    for (let i = 0; i < n; i++) {
+      num += (xs[i] - meanX) * (ys[i] - meanY);
+      den += (xs[i] - meanX) * (xs[i] - meanX);
+    }
+    if (den === 0) return null;
+    const m = num / den;
+    const b = meanY - m * meanX;
+    // r2
+    let ssTot = 0,
+      ssRes = 0;
+    for (let i = 0; i < n; i++) {
+      const yPred = m * xs[i] + b;
+      ssRes += (ys[i] - yPred) * (ys[i] - yPred);
+      ssTot += (ys[i] - meanY) * (ys[i] - meanY);
+    }
+    const r2 = ssTot === 0 ? 1 : 1 - ssRes / ssTot;
+    return { m, b, r2 };
+  }
+
+  // Prepare point datasets (one per year)
+  const yearEntries = Object.entries(grouped).sort(([a], [b]) => Number(a) - Number(b));
+  const pointDatasets = yearEntries.map(([year, points], index) => ({
+    label: year,
+    data: points,
+    backgroundColor: palette[index % palette.length],
+    borderColor: palette[index % palette.length],
+    pointRadius: 5,
+    pointHoverRadius: 8,
+    pointBorderWidth: 1,
+    pointBorderColor: "#ffffff",
+  }));
+
+  // Compute overall regression and per-year regressions (if enough points)
+  const allPoints = Object.values(grouped).flat();
+  const globalReg = linearRegression(allPoints);
+
+  const lineDatasets = [];
+  if (globalReg) {
+    const xs = allPoints.map((p) => p.x);
+    const xMin = Math.min(...xs);
+    const xMax = Math.max(...xs);
+    const yMin = globalReg.m * xMin + globalReg.b;
+    const yMax = globalReg.m * xMax + globalReg.b;
+    lineDatasets.push({
+      type: "line",
+      label: "Regresión (global)",
+      data: [
+        { x: xMin, y: yMin },
+        { x: xMax, y: yMax },
+      ],
+      borderColor: "rgba(33,37,41,0.85)",
+      borderWidth: 2,
+      fill: false,
+      pointRadius: 0,
+      borderDash: [],
+      tension: 0,
+      order: 0,
+    });
+  }
+
+  // Per-year regression (dashed lines) for groups with >=2 points
+  yearEntries.forEach(([year, points], index) => {
+    const reg = linearRegression(points);
+    if (!reg) return;
+    const xs = points.map((p) => p.x);
+    const xMin = Math.min(...xs);
+    const xMax = Math.max(...xs);
+    const yMin = reg.m * xMin + reg.b;
+    const yMax = reg.m * xMax + reg.b;
+    lineDatasets.push({
+      type: "line",
+      label: `Regresión ${year}`,
+      data: [
+        { x: xMin, y: yMin },
+        { x: xMax, y: yMax },
+      ],
+      borderColor: palette[index % palette.length],
+      borderWidth: 1.5,
+      fill: false,
+      pointRadius: 0,
+      borderDash: [6, 6],
+      tension: 0,
+      order: 0,
+    });
+  });
+
+  const datasets = [...lineDatasets, ...pointDatasets];
+
+  paceHrScatterChartInstance = new Chart(ctx, {
+    type: "scatter",
+    data: { datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: false,
+      plugins: {
+        legend: {
+          position: "bottom",
+        },
+        tooltip: {
+          callbacks: {
+            title: (items) => items[0]?.raw?.date || "Entrenamiento",
+            label: (context) => {
+              // avoid tooltips for line datasets (regression)
+              if (context.dataset && context.dataset.type === 'line') return [];
+              return [
+                `Distancia: ${context.raw.distance.toFixed(2)} km`,
+                `Ritmo: ${minutesToPace(context.raw.x)} /km`,
+                `FC media: ${context.raw.y} bpm`,
+                `Desnivel: ${context.raw.elevation} m`,
+                `Tipo: ${context.raw.type}`,
+              ];
+            },
+          },
+        },
+      },
+      scales: {
+        x: {
+          min: 4.4,
+          max: 7,
+          reverse: true,
+          title: {
+            display: true,
+            text: "Ritmo medio (min/km)",
+          },
+          ticks: {
+            stepSize: 0.2,
+            callback: (value) => minutesToPace(Number(value)),
+          },
+        },
+        y: {
+          min: 140,
+          max: 190,
+          title: {
+            display: true,
+            text: "FC media (bpm)",
+          },
+          ticks: {
+            autoSkip: false,
+            stepSize: 2,
+            precision: 0,
+            callback: (value) => {
+              const num = Number(value);
+              return Number.isInteger(num) && num % 2 === 0 ? num : "";
+            },
+          },
+        },
+      },
+    },
+  });
 }
 
 function paceToMinutes(paceStr) {
