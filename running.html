@@ -64,9 +64,9 @@
                   >Periodo</label
                 >
                 <select id="dashboardPeriod" class="form-select">
-                  <option value="week" selected>Semana</option>
+                  <option value="week">Semana</option>
                   <option value="30days">Últimos 30 días</option>
-                  <option value="month">Mes</option>
+                  <option value="month" selected>Mes</option>
                   <option value="year">Año</option>
                 </select>
               </div>
@@ -696,8 +696,15 @@
             <div class="card-body">
               <div class="row g-3 mb-3 align-items-end">
                 <div class="col-md-4 col-xl-3">
-                  <label for="performanceDistanceSelect" class="form-label small fw-semibold mb-1">Distancia</label>
-                  <select id="performanceDistanceSelect" class="form-select form-select-sm">
+                  <label
+                    for="performanceDistanceSelect"
+                    class="form-label small fw-semibold mb-1"
+                    >Distancia</label
+                  >
+                  <select
+                    id="performanceDistanceSelect"
+                    class="form-select form-select-sm"
+                  >
                     <option value="1">1 km</option>
                     <option value="5" selected>5 km</option>
                     <option value="10">10 km</option>
@@ -706,8 +713,15 @@
                   </select>
                 </div>
                 <div class="col-md-4 col-xl-3">
-                  <label for="performanceActivityTypeFilter" class="form-label small fw-semibold mb-1">Tipo de actividad</label>
-                  <select id="performanceActivityTypeFilter" class="form-select form-select-sm">
+                  <label
+                    for="performanceActivityTypeFilter"
+                    class="form-label small fw-semibold mb-1"
+                    >Tipo de actividad</label
+                  >
+                  <select
+                    id="performanceActivityTypeFilter"
+                    class="form-select form-select-sm"
+                  >
                     <option value="all">Todas</option>
                     <option value="Carrera">Carrera</option>
                     <option value="Entrenamiento">Entrenamiento</option>
@@ -717,14 +731,16 @@
 
               <div id="performanceSummaryCards" class="row g-3 mb-3"></div>
 
-              <div style="position: relative; height: 420px;">
+              <div style="position: relative; height: 420px">
                 <canvas id="performanceEvolutionChart"></canvas>
               </div>
 
               <div class="mt-4">
                 <h6 class="fw-bold mb-3">Mejores marcas por año</h6>
                 <div class="table-responsive">
-                  <table class="table table-sm table-hover compact-table align-middle mb-0">
+                  <table
+                    class="table table-sm table-hover compact-table align-middle mb-0"
+                  >
                     <thead class="table-light">
                       <tr>
                         <th>Distancia</th>

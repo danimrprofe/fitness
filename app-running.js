@@ -676,11 +676,13 @@ function populatePaceHrYearFilter() {
   const select = document.getElementById("paceHrYearFilter");
   if (!select) return;
 
-  const years = [...new Set(
-    runningActivities
-      .map((activity) => parseRunningDate(activity.date)?.getFullYear())
-      .filter((year) => Number.isFinite(year)),
-  )].sort((a, b) => b - a);
+  const years = [
+    ...new Set(
+      runningActivities
+        .map((activity) => parseRunningDate(activity.date)?.getFullYear())
+        .filter((year) => Number.isFinite(year)),
+    ),
+  ].sort((a, b) => b - a);
 
   if (years.length === 0) {
     select.innerHTML = "";
@@ -704,7 +706,9 @@ function getSelectedPaceHrYears() {
   const select = document.getElementById("paceHrYearFilter");
   if (!select) return [];
 
-  const selected = Array.from(select.selectedOptions).map((option) => option.value);
+  const selected = Array.from(select.selectedOptions).map(
+    (option) => option.value,
+  );
   return selected.length ? selected : [];
 }
 
@@ -717,7 +721,7 @@ function formatPerformanceDistanceLabel(targetKm) {
 
 function formatPerformancePaceFromDuration(durationSeconds, distanceKm) {
   if (!(durationSeconds > 0) || !(distanceKm > 0)) return "Sin datos";
-  const minutesPerKm = (durationSeconds / distanceKm) / 60;
+  const minutesPerKm = durationSeconds / distanceKm / 60;
   return `${minutesToPace(minutesPerKm)} /km`;
 }
 
@@ -916,7 +920,7 @@ function renderPerformanceEvolution() {
           ticks: {
             stepSize: 1,
             precision: 0,
-            callback: (value) => Number.isInteger(value) ? value : "",
+            callback: (value) => (Number.isInteger(value) ? value : ""),
           },
           title: {
             display: true,
@@ -959,16 +963,29 @@ function renderPaceHrScatterChart() {
   const canvas = document.getElementById("paceHrScatterChart");
   if (!canvas) return;
 
-  const typeFilter = document.getElementById("paceHrTypeFilter")?.value || "all";
+  const typeFilter =
+    document.getElementById("paceHrTypeFilter")?.value || "all";
   const yearFilter = getSelectedPaceHrYears();
-  const distanceMin = parseNumberOrNull(document.getElementById("paceHrDistanceMin")?.value);
-  const distanceMax = parseNumberOrNull(document.getElementById("paceHrDistanceMax")?.value);
-  const paceMin = parseNumberOrNull(document.getElementById("paceHrPaceMin")?.value) ?? 4.4;
-  const paceMax = parseNumberOrNull(document.getElementById("paceHrPaceMax")?.value) ?? 7;
-  const hrMin = parseNumberOrNull(document.getElementById("paceHrHrMin")?.value) ?? 140;
-  const hrMax = parseNumberOrNull(document.getElementById("paceHrHrMax")?.value) ?? 210;
-  const elevationMin = parseNumberOrNull(document.getElementById("paceHrElevationMin")?.value);
-  const elevationMax = parseNumberOrNull(document.getElementById("paceHrElevationMax")?.value);
+  const distanceMin = parseNumberOrNull(
+    document.getElementById("paceHrDistanceMin")?.value,
+  );
+  const distanceMax = parseNumberOrNull(
+    document.getElementById("paceHrDistanceMax")?.value,
+  );
+  const paceMin =
+    parseNumberOrNull(document.getElementById("paceHrPaceMin")?.value) ?? 4.4;
+  const paceMax =
+    parseNumberOrNull(document.getElementById("paceHrPaceMax")?.value) ?? 7;
+  const hrMin =
+    parseNumberOrNull(document.getElementById("paceHrHrMin")?.value) ?? 140;
+  const hrMax =
+    parseNumberOrNull(document.getElementById("paceHrHrMax")?.value) ?? 210;
+  const elevationMin = parseNumberOrNull(
+    document.getElementById("paceHrElevationMin")?.value,
+  );
+  const elevationMax = parseNumberOrNull(
+    document.getElementById("paceHrElevationMax")?.value,
+  );
 
   const filtered = runningActivities.filter((activity) => {
     const date = parseRunningDate(activity.date);
@@ -1083,7 +1100,9 @@ function renderPaceHrScatterChart() {
   }
 
   // Prepare point datasets (one per year)
-  const yearEntries = Object.entries(grouped).sort(([a], [b]) => Number(a) - Number(b));
+  const yearEntries = Object.entries(grouped).sort(
+    ([a], [b]) => Number(a) - Number(b),
+  );
   const pointDatasets = yearEntries.map(([year, points], index) => ({
     label: year,
     data: points,
@@ -1167,7 +1186,7 @@ function renderPaceHrScatterChart() {
             title: (items) => items[0]?.raw?.date || "Entrenamiento",
             label: (context) => {
               // avoid tooltips for line datasets (regression)
-              if (context.dataset && context.dataset.type === 'line') return [];
+              if (context.dataset && context.dataset.type === "line") return [];
               return [
                 `Distancia: ${context.raw.distance.toFixed(2)} km`,
                 `Ritmo: ${minutesToPace(context.raw.x)} /km`,
@@ -1424,11 +1443,11 @@ function updateDashboardRecord(targetKm, valueId, detailsId) {
 
 function renderRunningDashboard() {
   const periodSelect = document.getElementById("dashboardPeriod");
-  const period = periodSelect?.value || "week";
+  const period = periodSelect?.value || "month";
   const periodNames = {
     week: "Semana en curso",
     "30days": "Últimos 30 días",
-    month: "Mes en curso",
+    month: "Todo el mes actual",
     year: "Año en curso",
   };
   const now = new Date();
