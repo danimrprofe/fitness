@@ -1,195 +1,224 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gestor de Pierna</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body class="bg-light">
+  </head>
+  <body class="bg-light">
     <nav class="navbar navbar-dark bg-dark sticky-top">
-        <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1">🦵 Gestor de Pierna</span>
-            <div>
-                <a href="index.html" class="btn btn-sm btn-outline-light">← Gym</a>
-                <a href="running.html" class="btn btn-sm btn-outline-light ms-2">🏃 Running</a>
-                <button class="btn btn-sm btn-outline-light ms-2" id="exportLegBtn">📥 Exportar</button>
-                <button class="btn btn-sm btn-outline-light ms-2" id="importLegBtn">📤 Importar</button>
-                <input type="file" id="importLegFile" accept=".json" style="display: none;">
-            </div>
+      <div class="container-fluid">
+        <span class="navbar-brand mb-0 h1">🦵 Gestor de Pierna</span>
+        <div>
+          <a href="index.html" class="btn btn-sm btn-outline-light">← Gym</a>
+          <a href="running.html" class="btn btn-sm btn-outline-light ms-2"
+            >🏃 Running</a
+          >
+          <button class="btn btn-sm btn-outline-light ms-2" id="exportLegBtn">
+            📥 Exportar
+          </button>
+          <button class="btn btn-sm btn-outline-light ms-2" id="importLegBtn">
+            📤 Importar
+          </button>
+          <input
+            type="file"
+            id="importLegFile"
+            accept=".json"
+            style="display: none"
+          />
         </div>
+      </div>
     </nav>
 
     <div class="container-fluid mt-4">
-        <div class="row g-4">
-            <div class="col-12">
-                <!-- RESUMEN -->
-                <div class="card shadow-sm mb-4">
-                    <div class="card-header bg-info text-white">
-                        <h5 class="mb-0">📊 Resumen de Pierna</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row text-center">
-                            <div class="col-md-3">
-                                <div class="card bg-light border-0">
-                                    <div class="card-body">
-                                        <h6 class="text-muted mb-2">Total Entrenamientos</h6>
-                                        <h3 id="totalLegWorkouts" class="text-info fw-bold">-</h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="card bg-light border-0">
-                                    <div class="card-body">
-                                        <h6 class="text-muted mb-2">Volumen Total</h6>
-                                        <h3 id="totalLegVolume" class="text-success fw-bold">-</h3>
-                                        <small class="text-muted">kg×reps</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="card bg-light border-0">
-                                    <div class="card-body">
-                                        <h6 class="text-muted mb-2">1RM Máximo</h6>
-                                        <h3 id="maxLeg1RM" class="text-warning fw-bold">-</h3>
-                                        <small id="maxLeg1RMExercise" class="text-muted">kg</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="card bg-light border-0">
-                                    <div class="card-body">
-                                        <h6 class="text-muted mb-2">Ejercicios Diferentes</h6>
-                                        <h3 id="totalLegExercises" class="text-danger fw-bold">-</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- GRÁFICAS -->
-                <div class="card shadow-sm mb-4">
-                    <div class="card-header bg-success text-white">
-                        <h5 class="mb-0">📈 Evolución</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <h6 class="mb-3 fw-bold">📊 Volumen por Entrenamiento</h6>
-                                <div style="position: relative; height: 280px;">
-                                    <canvas id="legVolumeChart"></canvas>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <h6 class="mb-3 fw-bold">💪 1RM Máximo</h6>
-                                <div style="position: relative; height: 280px;">
-                                    <canvas id="leg1RMChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col-lg-6">
-                                <h6 class="mb-3 fw-bold">⏋️ Peso Promedio Usado</h6>
-                                <div style="position: relative; height: 280px;">
-                                    <canvas id="legWeightChart"></canvas>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <h6 class="mb-3 fw-bold">📅 Volumen por Mes</h6>
-                                <div style="position: relative; height: 280px;">
-                                    <canvas id="monthlyLegVolumeChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ANÁLISIS POR EJERCICIO -->
-                <div class="card shadow-sm mb-4">
-                    <div class="card-header bg-warning text-dark">
-                        <h5 class="mb-0">🎯 Análisis por Ejercicio</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-sm table-hover compact-table">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th>Ejercicio</th>
-                                        <th class="text-center">Entrenamientos</th>
-                                        <th class="text-center">Peso Prom</th>
-                                        <th class="text-center">1RM Máximo</th>
-                                        <th class="text-center">Vol Total</th>
-                                        <th class="text-center">Reps Prom</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="legExerciseTable">
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- FILTROS Y TABLA -->
-                <div class="card shadow-sm mb-4">
-                    <div class="card-header bg-secondary text-white">
-                        <h5 class="mb-0">🔍 Histórico de Entrenamientos</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row g-2 mb-3">
-                            <div class="col-md-6">
-                                <label for="filterLegExercise" class="form-label">Ejercicio</label>
-                                <input type="text" class="form-control form-control-sm" id="filterLegExercise" placeholder="Buscar ejercicio...">
-                            </div>
-                            <div class="col-md-6">
-                                <label>&nbsp;</label>
-                                <button class="btn btn-sm btn-outline-danger w-100" id="clearLegFiltersBtn">🔄 Limpiar Filtros</button>
-                            </div>
-                        </div>
-
-                        <div style="max-height: 600px; overflow-y: auto;">
-                            <table class="table table-striped table-hover table-sm compact-table">
-                                <thead class="table-dark position-sticky" style="top: 0;">
-                                    <tr>
-                                        <th style="width: 12%;">Fecha</th>
-                                        <th style="width: 12%;">Día</th>
-                                        <th style="width: 18%;">Ejercicio</th>
-                                        <th style="width: 8%;">Series</th>
-                                        <th style="width: 8%;">Reps/Serie</th>
-                                        <th style="width: 8%;">Peso (kg)</th>
-                                        <th style="width: 10%;">Volumen</th>
-                                        <th style="width: 8%;">1RM</th>
-                                        <th style="width: 4%;">📝</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="legTableBody">
-                                </tbody>
-                            </table>
-                            <p id="emptyLegMessage" class="text-muted text-center">No hay entrenamientos de pierna registrados aún.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- MODAL DETALLES -->
-                <div class="modal fade" id="detailsLegModal" tabindex="-1">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header bg-dark text-white">
-                                <h5 class="modal-title" id="modalLegTitle">Detalles del Entrenamiento</h5>
-                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                            </div>
-                            <div class="modal-body" id="modalLegBody">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      <div class="row g-4">
+        <div class="col-12">
+          <!-- RESUMEN -->
+          <div class="card shadow-sm mb-4">
+            <div class="card-header bg-info text-white">
+              <h5 class="mb-0">📊 Resumen de Pierna</h5>
             </div>
+            <div class="card-body">
+              <div class="row text-center">
+                <div class="col-md-3">
+                  <div class="card bg-light border-0">
+                    <div class="card-body">
+                      <h6 class="text-muted mb-2">Total Entrenamientos</h6>
+                      <h3 id="totalLegWorkouts" class="text-info fw-bold">-</h3>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="card bg-light border-0">
+                    <div class="card-body">
+                      <h6 class="text-muted mb-2">Volumen Total</h6>
+                      <h3 id="totalLegVolume" class="text-success fw-bold">
+                        -
+                      </h3>
+                      <small class="text-muted">kg×reps</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="card bg-light border-0">
+                    <div class="card-body">
+                      <h6 class="text-muted mb-2">1RM Máximo</h6>
+                      <h3 id="maxLeg1RM" class="text-warning fw-bold">-</h3>
+                      <small id="maxLeg1RMExercise" class="text-muted"
+                        >kg</small
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="card bg-light border-0">
+                    <div class="card-body">
+                      <h6 class="text-muted mb-2">Ejercicios Diferentes</h6>
+                      <h3 id="totalLegExercises" class="text-danger fw-bold">
+                        -
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- GRÁFICAS -->
+          <div class="card shadow-sm mb-4">
+            <div class="card-header bg-success text-white">
+              <h5 class="mb-0">📈 Evolución</h5>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-6">
+                  <h6 class="mb-3 fw-bold">📊 Volumen por Entrenamiento</h6>
+                  <div style="position: relative; height: 280px">
+                    <canvas id="legVolumeChart"></canvas>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <h6 class="mb-3 fw-bold">💪 1RM Máximo</h6>
+                  <div style="position: relative; height: 280px">
+                    <canvas id="leg1RMChart"></canvas>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-4">
+                <div class="col-lg-6">
+                  <h6 class="mb-3 fw-bold">⏋️ Peso Promedio Usado</h6>
+                  <div style="position: relative; height: 280px">
+                    <canvas id="legWeightChart"></canvas>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <h6 class="mb-3 fw-bold">📅 Volumen por Mes</h6>
+                  <div style="position: relative; height: 280px">
+                    <canvas id="monthlyLegVolumeChart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ANÁLISIS POR EJERCICIO -->
+          <div class="card shadow-sm mb-4">
+            <div class="card-header bg-warning text-dark">
+              <h5 class="mb-0">🎯 Análisis por Ejercicio</h5>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-sm table-hover compact-table">
+                  <thead class="table-light">
+                    <tr>
+                      <th>Ejercicio</th>
+                      <th class="text-center">Entrenamientos</th>
+                      <th class="text-center">Peso Prom</th>
+                      <th class="text-center">1RM Máximo</th>
+                      <th class="text-center">Vol Total</th>
+                      <th class="text-center">Reps Prom</th>
+                    </tr>
+                  </thead>
+                  <tbody id="legExerciseTable"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- FILTROS Y TABLA -->
+          <div class="card shadow-sm mb-4">
+            <div class="card-header bg-secondary text-white">
+              <h5 class="mb-0">🔍 Histórico de Entrenamientos</h5>
+            </div>
+            <div class="card-body">
+              <div class="row g-2 mb-3">
+                <div class="col-md-6">
+                  <label for="filterLegExercise" class="form-label"
+                    >Ejercicio</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    id="filterLegExercise"
+                    placeholder="Buscar ejercicio..."
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label>&nbsp;</label>
+                  <button
+                    class="btn btn-sm btn-outline-danger w-100"
+                    id="clearLegFiltersBtn"
+                  >
+                    🔄 Limpiar Filtros
+                  </button>
+                </div>
+              </div>
+
+              <div style="max-height: 600px; overflow-y: auto">
+                <table
+                  class="table table-striped table-hover table-sm compact-table"
+                >
+                  <thead class="table-dark position-sticky" style="top: 0">
+                    <tr id="legTableHeaderRow"></tr>
+                  </thead>
+                  <tbody id="legTableBody"></tbody>
+                </table>
+                <p id="emptyLegMessage" class="text-muted text-center">
+                  No hay entrenamientos de pierna registrados aún.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- MODAL DETALLES -->
+          <div class="modal fade" id="detailsLegModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header bg-dark text-white">
+                  <h5 class="modal-title" id="modalLegTitle">
+                    Detalles del Entrenamiento
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close btn-close-white"
+                    data-bs-dismiss="modal"
+                  ></button>
+                </div>
+                <div class="modal-body" id="modalLegBody"></div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="app-pierna.js"></script>
-</body>
+  </body>
 </html>

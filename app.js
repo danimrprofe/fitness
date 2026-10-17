@@ -878,6 +878,7 @@ function renderTrainings() {
 
           let progressDisplay = "";
           let progressClass = "";
+          let weightUpHighlight = false;
 
           if (previous) {
             let progress = null;
@@ -902,6 +903,7 @@ function renderTrainings() {
               const progressNum = parseFloat(progress);
               if (progressNum > 0) {
                 progressClass = "progress-up";
+                weightUpHighlight = true;
                 progressDisplay = `<small class="text-success" style="font-weight: bold;">${training.volume}↑ +${progress}%</small>`;
               } else if (progressNum < 0) {
                 progressClass = "progress-down";
@@ -931,8 +933,10 @@ function renderTrainings() {
             compactMetrics.push(oneRMDisplay);
           }
 
+          const weightUpClass = weightUpHighlight ? " exercise-cell-up" : "";
+
           rowHTML += `
-                    <td style="width: ${width}px; min-width: ${width}px; vertical-align: top; padding: 0.35rem 0.25rem;">
+                    <td class="${weightUpClass}" style="width: ${width}px; min-width: ${width}px; vertical-align: top; padding: 0.35rem 0.25rem;">
                         <div class="exercise-inline-metrics">
                             ${compactMetrics
                               .map(
@@ -1105,6 +1109,7 @@ function renderTrainingsByType(
               : null;
 
           let progressDisplay = "";
+          let weightUpHighlight = false;
 
           if (previous) {
             let progress = null;
@@ -1126,6 +1131,7 @@ function renderTrainingsByType(
             if (progress !== null) {
               const progressNum = parseFloat(progress);
               if (progressNum > 0) {
+                weightUpHighlight = true;
                 progressDisplay = `<small class="text-success" style="font-weight: bold;">${training.volume}↑ +${progress}%</small>`;
               } else if (progressNum < 0) {
                 progressDisplay = `<small class="text-danger" style="font-weight: bold;">${training.volume}↓ ${progress}%</small>`;
@@ -1151,8 +1157,10 @@ function renderTrainingsByType(
             compactMetrics.push(oneRMDisplay);
           }
 
+          const weightUpClass = weightUpHighlight ? " exercise-cell-up" : "";
+
           rowHTML += `
-                    <td style="width: ${width}px; min-width: ${width}px; vertical-align: top; padding: 0.35rem 0.25rem;">
+                    <td class="${weightUpClass}" style="width: ${width}px; min-width: ${width}px; vertical-align: top; padding: 0.35rem 0.25rem;">
                         <div class="exercise-inline-metrics">
                             ${compactMetrics
                               .map(
