@@ -248,35 +248,24 @@ body {
   color: #6c757d;
 }
 
-.exercise-mini-table {
-  display: table;
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.76rem;
+.exercise-inline-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.2rem 0.35rem;
+  line-height: 1.4;
+  font-size: 0.78rem;
 }
 
-.exercise-mini-row {
-  display: table-row;
-}
-
-.exercise-mini-label,
-.exercise-mini-value {
-  display: table-cell;
-  padding: 2px 4px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-  vertical-align: middle;
-}
-
-.exercise-mini-label {
-  color: #6c757d;
-  font-weight: 600;
-  width: 38%;
+.exercise-inline-metric {
+  display: inline-flex;
+  align-items: center;
   white-space: nowrap;
 }
 
-.exercise-mini-value {
-  width: 62%;
-  text-align: left;
+.exercise-inline-separator {
+  color: #6c757d;
+  user-select: none;
 }
 
 /* Indicadores de reps en hipertrofia */
