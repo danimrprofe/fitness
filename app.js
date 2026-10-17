@@ -208,8 +208,8 @@ function getRecommendedRange(exercise, trainingType) {
 }
 
 function evaluateHypertrophyReps(exercise, totalReps, trainingType) {
-  if (trainingType !== "Torso Hipertrofia") {
-    return null; // Solo evaluar en días de hipertrofia
+  if (!["Torso", "Torso Pesado", "Torso Hipertrofia"].includes(trainingType)) {
+    return null;
   }
 
   if (isMainExercise(exercise)) {
@@ -223,6 +223,33 @@ function evaluateHypertrophyReps(exercise, totalReps, trainingType) {
     if (totalReps > 40) return "too-many";
     return "good";
   }
+}
+
+function getRepsStatusMarkup(training) {
+  const trackedTypes = ["Torso", "Torso Pesado", "Torso Hipertrofia"];
+  const totalRepsText = `(${training.totalReps} reps)`;
+
+  if (!trackedTypes.includes(training.trainingType)) {
+    return totalRepsText;
+  }
+
+  const status = evaluateHypertrophyReps(
+    training.exercise,
+    training.totalReps,
+    training.trainingType,
+  );
+
+  if (status === "good") {
+    return `<span class="reps-status reps-good">${totalRepsText}</span>`;
+  }
+  if (status === "too-few") {
+    return `<span class="reps-status reps-too-few">${totalRepsText}</span>`;
+  }
+  if (status === "too-many") {
+    return `<span class="reps-status reps-too-many">${totalRepsText}</span>`;
+  }
+
+  return totalRepsText;
 }
 
 // ==================== FUNCIONES DE ALMACENAMIENTO ====================
@@ -803,7 +830,6 @@ function renderTrainings() {
     const width = Math.max(150, exercise.length * 10);
     headerHTML += `<th style="width: ${width}px; min-width: ${width}px;">${exercise}</th>`;
   });
-  headerHTML += `<th style="width: 60px; min-width: 60px;">Acciones</th>`;
   tableHeaderRow.innerHTML = headerHTML;
 
   // Generar filas por fecha
@@ -821,7 +847,12 @@ function renderTrainings() {
 
       let rowHTML = `
             <tr>
-                <td style="width: 120px; min-width: 120px;"><strong>${formatDate(date)}</strong><br><small>${dayOfWeek}</small></td>
+                <td style="width: 120px; min-width: 120px;">
+                    <div style="display: flex; align-items: center; gap: 0.4rem; white-space: nowrap;">
+                        <strong>${formatDate(date)}</strong>
+                        <small>${dayOfWeek}</small>
+                    </div>
+                </td>
                 <td style="width: 100px; min-width: 100px;"><small>${trainingTypeValue}</small></td>
         `;
 
@@ -871,41 +902,18 @@ function renderTrainings() {
               const progressNum = parseFloat(progress);
               if (progressNum > 0) {
                 progressClass = "progress-up";
-                progressDisplay = `<small class="text-success" style="font-weight: bold;">↑ +${progress}%</small>`;
+                progressDisplay = `<small class="text-success" style="font-weight: bold;">${training.volume}↑ +${progress}%</small>`;
               } else if (progressNum < 0) {
                 progressClass = "progress-down";
-                progressDisplay = `<small class="text-danger" style="font-weight: bold;">↓ ${progress}%</small>`;
-              } else {
-                progressClass = "progress-neutral";
-                progressDisplay = `<small class="text-warning" style="font-weight: bold;">→ Estable</small>`;
+                progressDisplay = `<small class="text-danger" style="font-weight: bold;">${training.volume}↓ ${progress}%</small>`;
               }
-            }
-          }
-
-          // Evaluar reps en hipertrofia
-          let repsEvalCircle = "";
-          if (training.trainingType === "Torso Hipertrofia") {
-            const repsEval = evaluateHypertrophyReps(
-              training.exercise,
-              training.totalReps,
-              training.trainingType,
-            );
-            if (repsEval === "good") {
-              repsEvalCircle =
-                '<span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background-color: #28a745; margin-left: 5px;" title="Reps óptimas"></span>';
-            } else if (repsEval === "too-few") {
-              repsEvalCircle =
-                '<span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background-color: #ffc107; margin-left: 5px;" title="Pocas reps"></span>';
-            } else if (repsEval === "too-many") {
-              repsEvalCircle =
-                '<span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background-color: #dc3545; margin-left: 5px;" title="Demasiadas reps"></span>';
             }
           }
 
           const seriesStr =
             training.trainingType === "Torso Hipertrofia"
-              ? `${training.series.join("-")} (${training.totalReps} reps) ${repsEvalCircle}`
-              : training.series.join("-");
+              ? `${training.series.join("-")} ${getRepsStatusMarkup(training)}`
+              : `${training.series.join("-")} ${getRepsStatusMarkup(training)}`;
           const oneRMDisplay =
             training.trainingType === "Torso Pesado"
               ? `<small class="text-success">1RM: ${training.oneRM.toFixed(1)}kg</small>`
@@ -917,7 +925,6 @@ function renderTrainings() {
           const compactMetrics = [
             `<span class="series-badge">${seriesStr}</span>${equipmentDisplay}`,
             `<strong>${training.weight}kg</strong>`,
-            `<small class="text-muted">${training.volume}</small>`,
             progressDisplay || "—",
           ];
           if (oneRMDisplay) {
@@ -945,26 +952,9 @@ function renderTrainings() {
         }
       });
 
-      // Botones de acción (solo para la primera celda de acciones)
-      const firstTraining = trainingsForDate[0];
       rowHTML += `
-            <td style="width: 60px; min-width: 60px;">
-                <div class="btn-group-vertical btn-group-sm" role="group">
-                    <button class="btn btn-primary btn-sm" onclick="showDateDetails('${date}')">📋</button>
-                    <button class="btn btn-danger btn-sm" onclick="deleteDateTrainings('${date}')">🗑</button>
-                </div>
-            </td>
             </tr>
         `;
-
-      const nextDate = dates[dateIndex + 1];
-      if (!nextDate || nextDate.slice(0, 7) !== date.slice(0, 7)) {
-        rowHTML += renderMonthlySummaryRow(
-          date.slice(0, 7),
-          exercisesArray,
-          filtered,
-        );
-      }
 
       return rowHTML;
     })
@@ -1051,7 +1041,6 @@ function renderTrainingsByType(
     const width = Math.max(150, exercise.length * 10);
     headerHTML += `<th style="width: ${width}px; min-width: ${width}px;">${exercise}</th>`;
   });
-  headerHTML += `<th style="width: 60px; min-width: 60px;">Acciones</th>`;
   tableHeaderRow.innerHTML = headerHTML;
 
   // Generar filas por fecha
@@ -1085,7 +1074,12 @@ function renderTrainingsByType(
 
       let rowHTML = `
             <tr>
-                <td style="width: 120px; min-width: 120px;"><strong>${formatDate(date)}</strong><br><small>${dayOfWeek}</small></td>
+                <td style="width: 120px; min-width: 120px;">
+                    <div style="display: flex; align-items: center; gap: 0.4rem; white-space: nowrap;">
+                        <strong>${formatDate(date)}</strong>
+                        <small>${dayOfWeek}</small>
+                    </div>
+                </td>
                 <td style="width: 140px; min-width: 140px;">${trainingTypeBadges}</td>
                 <td style="width: 80px; min-width: 80px;"><strong style="color: #007bff;">${totalVolume}</strong></td>
         `;
@@ -1132,39 +1126,17 @@ function renderTrainingsByType(
             if (progress !== null) {
               const progressNum = parseFloat(progress);
               if (progressNum > 0) {
-                progressDisplay = `<small class="text-success" style="font-weight: bold;">↑ +${progress}%</small>`;
+                progressDisplay = `<small class="text-success" style="font-weight: bold;">${training.volume}↑ +${progress}%</small>`;
               } else if (progressNum < 0) {
-                progressDisplay = `<small class="text-danger" style="font-weight: bold;">↓ ${progress}%</small>`;
-              } else {
-                progressDisplay = `<small class="text-warning" style="font-weight: bold;">→ Estable</small>`;
+                progressDisplay = `<small class="text-danger" style="font-weight: bold;">${training.volume}↓ ${progress}%</small>`;
               }
             }
           }
 
-          // Evaluar reps en hipertrofia
-          let repsEvalCircle = "";
-          if (training.trainingType === "Torso Hipertrofia") {
-            const repsEval = evaluateHypertrophyReps(
-              training.exercise,
-              training.totalReps,
-              training.trainingType,
-            );
-            if (repsEval === "good") {
-              repsEvalCircle =
-                '<span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background-color: #28a745; margin-left: 5px;" title="Reps óptimas"></span>';
-            } else if (repsEval === "too-few") {
-              repsEvalCircle =
-                '<span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background-color: #ffc107; margin-left: 5px;" title="Pocas reps"></span>';
-            } else if (repsEval === "too-many") {
-              repsEvalCircle =
-                '<span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background-color: #dc3545; margin-left: 5px;" title="Demasiadas reps"></span>';
-            }
-          }
-
           const seriesStr =
-            training.trainingType !== "Torso Pesado"
-              ? `${training.series.join("-")} (${training.totalReps} reps) ${repsEvalCircle}`
-              : training.series.join("-");
+            training.trainingType === "Torso Pesado"
+              ? `${training.series.join("-")} ${getRepsStatusMarkup(training)}`
+              : `${training.series.join("-")} ${getRepsStatusMarkup(training)}`;
           const oneRMDisplay =
             training.trainingType === "Torso Pesado"
               ? `<small class="text-success">1RM: ${training.oneRM.toFixed(1)}kg</small>`
@@ -1173,7 +1145,6 @@ function renderTrainingsByType(
           const compactMetrics = [
             `<span class="series-badge">${seriesStr}</span>`,
             `<strong>${training.weight}kg</strong>`,
-            `<small class="text-muted">${training.volume}</small>`,
             progressDisplay || "—",
           ];
           if (oneRMDisplay) {
@@ -1201,12 +1172,6 @@ function renderTrainingsByType(
       });
 
       rowHTML += `
-            <td style="width: 60px; min-width: 60px;">
-                <div class="btn-group-vertical btn-group-sm" role="group">
-                    <button class="btn btn-primary btn-sm" onclick="showDateDetails('${date}')">📋</button>
-                    <button class="btn btn-danger btn-sm" onclick="deleteDateTrainings('${date}')">🗑</button>
-                </div>
-            </td>
             </tr>
         `;
 
@@ -1471,8 +1436,30 @@ function getThisWeekTrainings() {
 // ==================== UTILIDADES ====================
 
 function formatDate(dateStr) {
-  const options = { year: "numeric", month: "short", day: "numeric" };
-  return new Date(dateStr).toLocaleDateString("es-ES", options);
+  if (!dateStr) return "-";
+
+  const date = new Date(`${dateStr}T00:00:00`);
+  if (Number.isNaN(date.getTime())) return "-";
+
+  const day = date.getDate();
+  const monthNames = [
+    "ene",
+    "feb",
+    "mar",
+    "abr",
+    "may",
+    "jun",
+    "jul",
+    "ago",
+    "sep",
+    "oct",
+    "nov",
+    "dic",
+  ];
+  const month = monthNames[date.getMonth()];
+  const year = date.getFullYear();
+
+  return `${day} de ${month} de ${year}`;
 }
 
 function getColorByMuscle(muscle) {
@@ -2910,7 +2897,7 @@ function renderProgressAnalysisSection() {
                 <div class="label">Ejercicio</div>
                 <div class="fw-bold fs-5">${summary.exercise}</div>
               </div>
-              <span class="progress-pill ${summary.statusClass}">${summary.comparison.kind === "good" ? "Progresando" : summary.comparison.kind === "warning" ? "Atención" : summary.comparison.kind === "danger" ? "Descenso" : "Estable"}</span>
+              <span class="progress-pill ${summary.statusClass}">${summary.comparison.kind === "good" ? "Progresando" : summary.comparison.kind === "warning" ? "Atención" : summary.comparison.kind === "danger" ? "Descenso" : "—"}</span>
             </div>
             <div class="progress-metric-row">
               <span class="text-muted">Estado actual</span>
