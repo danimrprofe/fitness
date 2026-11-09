@@ -12710,7 +12710,7 @@
     "date": "2026-11-09",
     "dayOfWeek": "Lunes",
     "trainingType": "Torso",
-    "exercise": "Press de Banca (Mancuerna)",
+    "exercise": "Press",
     "muscleGroup": "Pecho",
     "weight": 32.0,
     "series": [
@@ -12728,7 +12728,7 @@
     "date": "2026-11-09",
     "dayOfWeek": "Lunes",
     "trainingType": "Torso",
-    "exercise": "Press de Banca (Mancuerna)",
+    "exercise": "Press",
     "muscleGroup": "Pecho",
     "weight": 36.0,
     "series": [
@@ -12745,7 +12745,7 @@
     "date": "2026-11-09",
     "dayOfWeek": "Lunes",
     "trainingType": "Torso",
-    "exercise": "Jalón al Pecho a Un Brazo",
+    "exercise": "Jalón",
     "muscleGroup": "Espalda",
     "weight": 50.0,
     "series": [
@@ -12764,7 +12764,7 @@
     "date": "2026-11-09",
     "dayOfWeek": "Lunes",
     "trainingType": "Torso",
-    "exercise": "Press de Banca Inclinado (Mancuerna)",
+    "exercise": "Press Inclinado",
     "muscleGroup": "Pecho",
     "weight": 28.0,
     "series": [
@@ -12783,7 +12783,7 @@
     "date": "2026-11-09",
     "dayOfWeek": "Lunes",
     "trainingType": "Torso",
-    "exercise": "Remo Unilateral",
+    "exercise": "Remo",
     "muscleGroup": "Espalda",
     "weight": 55.0,
     "series": [
@@ -12802,7 +12802,7 @@
     "date": "2026-11-09",
     "dayOfWeek": "Lunes",
     "trainingType": "Torso",
-    "exercise": "Jalón de Tríceps en Polea",
+    "exercise": "Tríceps",
     "muscleGroup": "Tríceps",
     "weight": 25.6,
     "series": [
@@ -12821,7 +12821,7 @@
     "date": "2026-11-09",
     "dayOfWeek": "Lunes",
     "trainingType": "Torso",
-    "exercise": "Curl Martillo (Mancuerna)",
+    "exercise": "Bíceps",
     "muscleGroup": "Bíceps",
     "weight": 10.0,
     "series": [
@@ -12840,7 +12840,7 @@
     "date": "2026-11-09",
     "dayOfWeek": "Lunes",
     "trainingType": "Torso",
-    "exercise": "Elevación Lateral (Cable)",
+    "exercise": "Elevaciones",
     "muscleGroup": "Hombros",
     "weight": 9.0,
     "series": [

@@ -842,7 +842,10 @@ function renderTrainings() {
       // Crear objeto para búsqueda rápida de ejercicios por fecha
       const exerciseMap = {};
       trainingsForDate.forEach((t) => {
-        exerciseMap[t.exercise] = t;
+        if (!exerciseMap[t.exercise]) {
+          exerciseMap[t.exercise] = [];
+        }
+        exerciseMap[t.exercise].push(t);
       });
 
       let rowHTML = `
@@ -858,34 +861,42 @@ function renderTrainings() {
 
       // Agregar columnas para cada ejercicio
       exercisesArray.forEach((exercise) => {
-        const training = exerciseMap[exercise];
-        if (training) {
+        const exerciseTrainings = exerciseMap[exercise];
+        if (exerciseTrainings?.length) {
+          const training = exerciseTrainings[0];
           // Calcular progreso: buscar el entrenamiento anterior del mismo ejercicio y tipo
           const sorted = [...filtered]
             .filter(
               (t) =>
                 t.exercise === exercise &&
-                t.trainingType === training.trainingType,
+                t.trainingType === training.trainingType &&
+                t.date < date,
             )
             .sort((a, b) => new Date(b.date) - new Date(a.date));
-          const previousIndex = sorted.findIndex(
-            (t) => t.date === training.date,
-          );
-          const previous =
-            previousIndex >= 0 && previousIndex < sorted.length - 1
-              ? sorted[previousIndex + 1]
-              : null;
+          const previousDate = sorted[0]?.date;
+          const previousVolume = previousDate
+            ? filtered
+                .filter(
+                  (t) =>
+                    t.exercise === exercise &&
+                    t.trainingType === training.trainingType &&
+                    t.date === previousDate,
+                )
+                .reduce((sum, t) => sum + t.volume, 0)
+            : 0;
+          const currentVolume = exerciseTrainings
+            .filter((t) => t.trainingType === training.trainingType)
+            .reduce((sum, t) => sum + t.volume, 0);
 
           let progressDisplay = "";
-          let progressClass = "";
           let weightUpHighlight = false;
 
-          if (previous) {
+          if (previousDate) {
             let progress = null;
             if (training.trainingType === "Torso Pesado") {
               // En Pesado: comparar por kg
               progress = (
-                ((training.weight - previous.weight) / previous.weight) *
+                ((training.weight - sorted[0].weight) / sorted[0].weight) *
                 100
               ).toFixed(1);
             } else if (
@@ -894,7 +905,7 @@ function renderTrainings() {
             ) {
               // En Hipertrofia: comparar por volumen
               progress = (
-                ((training.volume - previous.volume) / previous.volume) *
+                ((currentVolume - previousVolume) / previousVolume) *
                 100
               ).toFixed(1);
             }
@@ -902,51 +913,52 @@ function renderTrainings() {
             if (progress !== null) {
               const progressNum = parseFloat(progress);
               if (progressNum > 0) {
-                progressClass = "progress-up";
                 weightUpHighlight = true;
-                progressDisplay = `<small class="text-success" style="font-weight: bold;">${training.volume}↑ +${progress}%</small>`;
+                progressDisplay = `<small class="text-success" style="font-weight: bold;">${currentVolume}↑ +${progress}%</small>`;
               } else if (progressNum < 0) {
-                progressClass = "progress-down";
-                progressDisplay = `<small class="text-danger" style="font-weight: bold;">${training.volume}↓ ${progress}%</small>`;
+                progressDisplay = `<small class="text-danger" style="font-weight: bold;">${currentVolume}↓ ${progress}%</small>`;
               }
             }
           }
 
-          const seriesStr =
-            training.trainingType === "Torso Hipertrofia"
-              ? `${training.series.join("-")} ${getRepsStatusMarkup(training)}`
-              : `${training.series.join("-")} ${getRepsStatusMarkup(training)}`;
-          const oneRMDisplay =
-            training.trainingType === "Torso Pesado"
-              ? `<small class="text-success">1RM: ${training.oneRM.toFixed(1)}kg</small>`
-              : "";
           const width = Math.max(150, exercise.length * 10);
-          const equipmentDisplay = training.equipment
-            ? `<small class="badge bg-secondary">${training.equipment}</small>`
-            : "";
-          const compactMetrics = [
-            `<span class="series-badge">${seriesStr}</span>${equipmentDisplay}`,
-            `<strong>${training.weight}kg</strong>`,
-            progressDisplay || "—",
-          ];
-          if (oneRMDisplay) {
-            compactMetrics.push(oneRMDisplay);
-          }
-
           const weightUpClass = weightUpHighlight ? " exercise-cell-up" : "";
+          const trainingRows = exerciseTrainings
+            .map((exerciseTraining, index) => {
+              const seriesStr = `${exerciseTraining.series.join("-")} ${getRepsStatusMarkup(exerciseTraining)}`;
+              const equipmentDisplay = exerciseTraining.equipment
+                ? `<small class="badge bg-secondary">${exerciseTraining.equipment}</small>`
+                : "";
+              const compactMetrics = [
+                `<span class="series-badge">${seriesStr}</span>${equipmentDisplay}`,
+                `<strong>${exerciseTraining.weight}kg</strong>`,
+                index === 0 ? progressDisplay || "—" : "",
+              ];
+              if (exerciseTraining.trainingType === "Torso Pesado") {
+                compactMetrics.push(
+                  `<small class="text-success">1RM: ${exerciseTraining.oneRM.toFixed(1)}kg</small>`,
+                );
+              }
+
+              return `
+                <div class="exercise-inline-metrics">
+                    ${compactMetrics
+                      .filter(Boolean)
+                      .map(
+                        (metric, metricIndex, metrics) => `
+                          <span class="exercise-inline-metric">${metric}</span>
+                          ${metricIndex < metrics.length - 1 ? '<span class="exercise-inline-separator">·</span>' : ""}
+                        `,
+                      )
+                      .join("")}
+                </div>
+              `;
+            })
+            .join("");
 
           rowHTML += `
                     <td class="${weightUpClass}" style="width: ${width}px; min-width: ${width}px; vertical-align: top; padding: 0.35rem 0.25rem;">
-                        <div class="exercise-inline-metrics">
-                            ${compactMetrics
-                              .map(
-                                (metric, index) => `
-                                  <span class="exercise-inline-metric">${metric}</span>
-                                  ${index < compactMetrics.length - 1 ? '<span class="exercise-inline-separator">·</span>' : ""}
-                                `,
-                              )
-                              .join("")}
-                        </div>
+                        ${trainingRows}
                     </td>
                 `;
         } else {
@@ -1073,7 +1085,10 @@ function renderTrainingsByType(
       // Crear objeto para búsqueda rápida de ejercicios por fecha
       const exerciseMap = {};
       trainingsForDate.forEach((t) => {
-        exerciseMap[t.exercise] = t;
+        if (!exerciseMap[t.exercise]) {
+          exerciseMap[t.exercise] = [];
+        }
+        exerciseMap[t.exercise].push(t);
       });
 
       let rowHTML = `
@@ -1090,32 +1105,41 @@ function renderTrainingsByType(
 
       // Agregar columnas para cada ejercicio
       exercisesArray.forEach((exercise) => {
-        const training = exerciseMap[exercise];
-        if (training) {
+        const exerciseTrainings = exerciseMap[exercise];
+        if (exerciseTrainings?.length) {
+          const training = exerciseTrainings[0];
           // Calcular progreso
           const sorted = [...filtered]
             .filter(
               (t) =>
                 t.exercise === exercise &&
-                t.trainingType === training.trainingType,
+                t.trainingType === training.trainingType &&
+                t.date < date,
             )
             .sort((a, b) => new Date(b.date) - new Date(a.date));
-          const previousIndex = sorted.findIndex(
-            (t) => t.date === training.date,
-          );
-          const previous =
-            previousIndex >= 0 && previousIndex < sorted.length - 1
-              ? sorted[previousIndex + 1]
-              : null;
+          const previousDate = sorted[0]?.date;
+          const previousVolume = previousDate
+            ? filtered
+                .filter(
+                  (t) =>
+                    t.exercise === exercise &&
+                    t.trainingType === training.trainingType &&
+                    t.date === previousDate,
+                )
+                .reduce((sum, t) => sum + t.volume, 0)
+            : 0;
+          const currentVolume = exerciseTrainings
+            .filter((t) => t.trainingType === training.trainingType)
+            .reduce((sum, t) => sum + t.volume, 0);
 
           let progressDisplay = "";
           let weightUpHighlight = false;
 
-          if (previous) {
+          if (previousDate) {
             let progress = null;
             if (training.trainingType === "Torso Pesado") {
               progress = (
-                ((training.weight - previous.weight) / previous.weight) *
+                ((training.weight - sorted[0].weight) / sorted[0].weight) *
                 100
               ).toFixed(1);
             } else if (
@@ -1123,7 +1147,7 @@ function renderTrainingsByType(
               training.trainingType === "Torso"
             ) {
               progress = (
-                ((training.volume - previous.volume) / previous.volume) *
+                ((currentVolume - previousVolume) / previousVolume) *
                 100
               ).toFixed(1);
             }
@@ -1132,45 +1156,47 @@ function renderTrainingsByType(
               const progressNum = parseFloat(progress);
               if (progressNum > 0) {
                 weightUpHighlight = true;
-                progressDisplay = `<small class="text-success" style="font-weight: bold;">${training.volume}↑ +${progress}%</small>`;
+                progressDisplay = `<small class="text-success" style="font-weight: bold;">${currentVolume}↑ +${progress}%</small>`;
               } else if (progressNum < 0) {
-                progressDisplay = `<small class="text-danger" style="font-weight: bold;">${training.volume}↓ ${progress}%</small>`;
+                progressDisplay = `<small class="text-danger" style="font-weight: bold;">${currentVolume}↓ ${progress}%</small>`;
               }
             }
           }
 
-          const seriesStr =
-            training.trainingType === "Torso Pesado"
-              ? `${training.series.join("-")} ${getRepsStatusMarkup(training)}`
-              : `${training.series.join("-")} ${getRepsStatusMarkup(training)}`;
-          const oneRMDisplay =
-            training.trainingType === "Torso Pesado"
-              ? `<small class="text-success">1RM: ${training.oneRM.toFixed(1)}kg</small>`
-              : "";
           const width = Math.max(150, exercise.length * 10);
-          const compactMetrics = [
-            `<span class="series-badge">${seriesStr}</span>`,
-            `<strong>${training.weight}kg</strong>`,
-            progressDisplay || "—",
-          ];
-          if (oneRMDisplay) {
-            compactMetrics.push(oneRMDisplay);
-          }
-
           const weightUpClass = weightUpHighlight ? " exercise-cell-up" : "";
+          const trainingRows = exerciseTrainings
+            .map((exerciseTraining, index) => {
+              const exerciseSeriesStr = `${exerciseTraining.series.join("-")} ${getRepsStatusMarkup(exerciseTraining)}`;
+              const compactMetrics = [
+                `<span class="series-badge">${exerciseSeriesStr}</span>`,
+                `<strong>${exerciseTraining.weight}kg</strong>`,
+                index === 0 ? progressDisplay || "—" : "",
+              ];
+              if (exerciseTraining.trainingType === "Torso Pesado") {
+                compactMetrics.push(
+                  `<small class="text-success">1RM: ${exerciseTraining.oneRM.toFixed(1)}kg</small>`,
+                );
+              }
+              return `
+                <div class="exercise-inline-metrics">
+                    ${compactMetrics
+                      .filter(Boolean)
+                      .map(
+                        (metric, metricIndex, metrics) => `
+                          <span class="exercise-inline-metric">${metric}</span>
+                          ${metricIndex < metrics.length - 1 ? '<span class="exercise-inline-separator">·</span>' : ""}
+                        `,
+                      )
+                      .join("")}
+                </div>
+              `;
+            })
+            .join("");
 
           rowHTML += `
                     <td class="${weightUpClass}" style="width: ${width}px; min-width: ${width}px; vertical-align: top; padding: 0.35rem 0.25rem;">
-                        <div class="exercise-inline-metrics">
-                            ${compactMetrics
-                              .map(
-                                (metric, index) => `
-                                  <span class="exercise-inline-metric">${metric}</span>
-                                  ${index < compactMetrics.length - 1 ? '<span class="exercise-inline-separator">·</span>' : ""}
-                                `,
-                              )
-                              .join("")}
-                        </div>
+                        ${trainingRows}
                     </td>
                 `;
         } else {
