@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TrainingCenterDatabase xmlns="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2">
+  <Activities>
+    <Activity Sport="Running">
+      <Id>2016-04-03T09:00:00Z</Id>
+      <Lap StartTime="2016-04-03T09:00:00Z">
+        <TotalTimeSeconds>7187</TotalTimeSeconds>
+        <DistanceMeters>21097.5</DistanceMeters>
+        <Intensity>Active</Intensity>
+        <TriggerMethod>Manual</TriggerMethod>
+      </Lap>
+      <Name>X Mitja Marató de Pollença 2016</Name>
+    </Activity>
+    <Activity Sport="Running">
+      <Id>2017-03-11T09:00:00Z</Id>
+      <Lap StartTime="2017-03-11T09:00:00Z">
+        <TotalTimeSeconds>7203</TotalTimeSeconds>
+        <DistanceMeters>21097.5</DistanceMeters>
+        <Intensity>Active</Intensity>
+        <TriggerMethod>Manual</TriggerMethod>
+      </Lap>
+      <Name>VI Mitja Marató Ciutat D'Alcúdia 2017</Name>
+    </Activity>
+    <Activity Sport="Running">
+      <Id>2016-02-07T09:00:00Z</Id>
+      <Lap StartTime="2016-02-07T09:00:00Z">
+        <TotalTimeSeconds>7269</TotalTimeSeconds>
+        <DistanceMeters>21097.5</DistanceMeters>
+        <Intensity>Active</Intensity>
+        <TriggerMethod>Manual</TriggerMethod>
+      </Lap>
+      <Name>IX Mitja Marató de Sa Pobla 2016</Name>
+    </Activity>
+    <Activity Sport="Running">
+      <Id>2016-11-13T09:00:00Z</Id>
+      <Lap StartTime="2016-11-13T09:00:00Z">
+        <TotalTimeSeconds>7273</TotalTimeSeconds>
+        <DistanceMeters>21097.5</DistanceMeters>
+        <Intensity>Active</Intensity>
+        <TriggerMethod>Manual</TriggerMethod>
+      </Lap>
+      <Name>V Mitja Marató Porreres 2016</Name>
+    </Activity>
+    <Activity Sport="Running">
+      <Id>2017-02-05T09:00:00Z</Id>
+      <Lap StartTime="2017-02-05T09:00:00Z">
+        <TotalTimeSeconds>7873</TotalTimeSeconds>
+        <DistanceMeters>21097.5</DistanceMeters>
+        <Intensity>Active</Intensity>
+        <TriggerMethod>Manual</TriggerMethod>
+      </Lap>
+      <Name>X Mitja Marató de Sa Pobla 2017</Name>
+    </Activity>
+    <Activity Sport="Running">
+      <Id>2015-11-15T09:00:00Z</Id>
+      <Lap StartTime="2015-11-15T09:00:00Z">
+        <TotalTimeSeconds>8108</TotalTimeSeconds>
+        <DistanceMeters>21097.5</DistanceMeters>
+        <Intensity>Active</Intensity>
+        <TriggerMethod>Manual</TriggerMethod>
+      </Lap>
+      <Name>IV Mitja Marato Porreres 2015</Name>
+    </Activity>
+  </Activities>
+</TrainingCenterDatabase>
