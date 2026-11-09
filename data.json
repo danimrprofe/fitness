@@ -12704,5 +12704,153 @@
     "oneRM": 0,
     "timestamp": "05/10/2026",
     "id": 1791151200700
+  },
+  {
+    "id": 1794243240000,
+    "date": "2026-11-09",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso",
+    "exercise": "Press de Banca (Mancuerna)",
+    "muscleGroup": "Pecho",
+    "weight": 32.0,
+    "series": [
+      13,
+      12
+    ],
+    "totalReps": 25,
+    "volume": 800.0,
+    "oneRM": 0,
+    "timestamp": "09/11/2026",
+    "equipment": null
+  },
+  {
+    "id": 1794243240001,
+    "date": "2026-11-09",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso",
+    "exercise": "Press de Banca (Mancuerna)",
+    "muscleGroup": "Pecho",
+    "weight": 36.0,
+    "series": [
+      10
+    ],
+    "totalReps": 10,
+    "volume": 360.0,
+    "oneRM": 0,
+    "timestamp": "09/11/2026",
+    "equipment": null
+  },
+  {
+    "id": 1794243240002,
+    "date": "2026-11-09",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso",
+    "exercise": "Jalón al Pecho a Un Brazo",
+    "muscleGroup": "Espalda",
+    "weight": 50.0,
+    "series": [
+      12,
+      12,
+      11
+    ],
+    "totalReps": 35,
+    "volume": 1750.0,
+    "oneRM": 0,
+    "timestamp": "09/11/2026",
+    "equipment": null
+  },
+  {
+    "id": 1794243240003,
+    "date": "2026-11-09",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso",
+    "exercise": "Press de Banca Inclinado (Mancuerna)",
+    "muscleGroup": "Pecho",
+    "weight": 28.0,
+    "series": [
+      11,
+      10,
+      8
+    ],
+    "totalReps": 29,
+    "volume": 812.0,
+    "oneRM": 0,
+    "timestamp": "09/11/2026",
+    "equipment": null
+  },
+  {
+    "id": 1794243240004,
+    "date": "2026-11-09",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso",
+    "exercise": "Remo Unilateral",
+    "muscleGroup": "Espalda",
+    "weight": 55.0,
+    "series": [
+      10,
+      10,
+      10
+    ],
+    "totalReps": 30,
+    "volume": 1650.0,
+    "oneRM": 0,
+    "timestamp": "09/11/2026",
+    "equipment": null
+  },
+  {
+    "id": 1794243240005,
+    "date": "2026-11-09",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso",
+    "exercise": "Jalón de Tríceps en Polea",
+    "muscleGroup": "Tríceps",
+    "weight": 25.6,
+    "series": [
+      12,
+      12,
+      11
+    ],
+    "totalReps": 35,
+    "volume": 896.0,
+    "oneRM": 0,
+    "timestamp": "09/11/2026",
+    "equipment": null
+  },
+  {
+    "id": 1794243240006,
+    "date": "2026-11-09",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso",
+    "exercise": "Curl Martillo (Mancuerna)",
+    "muscleGroup": "Bíceps",
+    "weight": 10.0,
+    "series": [
+      11,
+      11,
+      10
+    ],
+    "totalReps": 32,
+    "volume": 320.0,
+    "oneRM": 0,
+    "timestamp": "09/11/2026",
+    "equipment": null
+  },
+  {
+    "id": 1794243240007,
+    "date": "2026-11-09",
+    "dayOfWeek": "Lunes",
+    "trainingType": "Torso",
+    "exercise": "Elevación Lateral (Cable)",
+    "muscleGroup": "Hombros",
+    "weight": 9.0,
+    "series": [
+      10,
+      10
+    ],
+    "totalReps": 20,
+    "volume": 180.0,
+    "oneRM": 0,
+    "timestamp": "09/11/2026",
+    "equipment": null
   }
 ]
